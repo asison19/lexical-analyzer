@@ -1,5 +1,5 @@
 package lexicalAnalyzer;
 
 public class LexicalAnalyzer {
-	public int foo = 3;
+	public int foo = 1;
 }
