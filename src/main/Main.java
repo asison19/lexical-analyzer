@@ -21,7 +21,7 @@ import java.io.IOException;
  */
 public class Main {
 	public static void main(String[] args) {
-		String inFile = "C:\\Users\\Owner\\eclipse-workspace\\LexicalAnalyzer\\src\\Sample.in";
+		String inFile = "src/Sample.in";
 
 		if (args.length > 1) {
 			inFile = args[0];
