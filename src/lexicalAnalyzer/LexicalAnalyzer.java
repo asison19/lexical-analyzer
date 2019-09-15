@@ -9,17 +9,6 @@ import java.io.IOException;
 
 import token.Token;
 
-/*
- * Class Lexer
- * 
- * Update the method nextToken() such to the provided
- * specifications of the Decaf Programming Language.
- * 
- * You are not allowed to use any built it in tokenizer
- * in Java. You are only allowed to scan the input file
- * one character at a time.
- */
-
 public class LexicalAnalyzer {
 
 	private BufferedReader reader; // Reader
@@ -123,7 +112,6 @@ public class LexicalAnalyzer {
 					curr = read();
                                         state = 14;
                                         continue;
-					//return new Token("DO", "/");
 				case',':
 					curr=read();	
 					return new Token("comma",",");
@@ -257,7 +245,7 @@ public class LexicalAnalyzer {
                                     alphaBuffer = "";					
 				    alphaBuffer+=curr;
                                         curr=read();
-					return new Token("ERROR", "Invalid input:"+alphaBuffer);
+					return new Token("ERROR", "Invalid input:"+alphaBuffer); // reading string error ends up here
 				}
 				continue;	
 			
@@ -271,73 +259,73 @@ public class LexicalAnalyzer {
                                         
 				} else {
                                     
-                                    if( alphaBuffer.equals("class")){
-                                        return new Token("class", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("boolean")){
-                                        return new Token("boolean", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("break")){
-                                        return new Token("break", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("double")){
-                                        return new Token("double", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("else")){
-                                        return new Token("else", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("extends")){
-                                        return new Token("extends", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("for")){
-                                        return new Token("for", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("if")){
-                                        return new Token("if", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("implements")){
-                                        return new Token("implements", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("int")){
-                                        return new Token("int", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("interface")){
-                                        return new Token("interface", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("new")){
-                                        return new Token("new", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("newarray")){
-                                        return new Token("newarray", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("null")){
-                                        return new Token("null", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("println")){
-                                        return new Token("println", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("readln")){
-                                        return new Token("readln", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("return")){
-                                        return new Token("return", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("string")){
-                                        return new Token("string", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("this")){
-                                        return new Token("this", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("void")){
-                                        return new Token("void", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("while")){
-                                        return new Token("while", "" + alphaBuffer);
-                                    }
-                                    else if(alphaBuffer.equals("true")||alphaBuffer.equals("false"))
-                                    {
-                                        return new Token("booleanconstant", "" + alphaBuffer);
-                                    }
+                    if( alphaBuffer.equals("class")){
+                        return new Token("class", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("boolean")){
+                        return new Token("boolean", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("break")){
+                        return new Token("break", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("double")){
+                        return new Token("double", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("else")){
+                        return new Token("else", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("extends")){
+                        return new Token("extends", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("for")){
+                        return new Token("for", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("if")){
+                        return new Token("if", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("implements")){
+                        return new Token("implements", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("int")){
+                        return new Token("int", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("interface")){
+                        return new Token("interface", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("new")){
+                        return new Token("new", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("newarray")){
+                        return new Token("newarray", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("null")){
+                        return new Token("null", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("println")){
+                        return new Token("println", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("readln")){
+                        return new Token("readln", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("return")){
+                        return new Token("return", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("string")){
+                        return new Token("string", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("this")){
+                        return new Token("this", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("void")){
+                        return new Token("void", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("while")){
+                        return new Token("while", "" + alphaBuffer);
+                    }
+                    else if(alphaBuffer.equals("true")||alphaBuffer.equals("false"))
+                    {
+                        return new Token("booleanconstant", "" + alphaBuffer);
+                    }
                                     
                                     
 					return new Token("id", "" + alphaBuffer);
@@ -398,61 +386,64 @@ public class LexicalAnalyzer {
 				else {
 					return new Token("less", "<");
 				}
-                        case 13:
-                            if(curr=='"'){
-                                curr=read();
-                                return new Token("stringconstant","\""+alphaBuffer+"\"");
-                            }
-                            else if(curr=='\n' || curr==EOF){
-                                curr=read();
-                                return new Token("ERROR","Invalid string literal"); 
-                            }
-                            else{
-                                alphaBuffer += curr;
-                                curr = read();
-                            }
-                            continue;
-                            //alphaBuffer += curr;
-                            //curr = read();
-                         
-                        case 14:
-                            if(curr=='/'){
-                                 state = 15;
-                                 curr=read();
-                            }else if(curr=='*')
-                            {
-                                state = 16;
-                                curr=read();
-                            }
-                            else{
-                                return new Token("division", "/");
-                            }
-                            continue;
-                        case 15:
-                             if(curr=='\n'){
-                                 
-                                  state = 1;
-                             }
-                            curr=read();
-                            continue;
-                        case 16:
-                            if(curr=='*')
-                            {
-                                state = 17;
-                               
-                            }
-                             curr=read();
-                            continue;
-                        case 17:
-                            if(curr=='/'){
-                                curr=read();
-                                state = 1;
-                            }
-                            else{
-                                curr=read();
-                                state=16;
-                            }
-                            continue;
+            case 13:
+                if(curr=='"'){
+                    curr=read();
+                    return new Token("stringconstant","\""+alphaBuffer+"\"");
+                }
+                else if(curr=='\n' || curr==EOF){
+                    curr=read();
+                    return new Token("ERROR","Invalid string literal"); 
+                }
+                else{
+                	//curr = read();
+                	//while(curr != '"') {
+	                    alphaBuffer += curr;
+	                    curr = read();
+                	//}
+                }
+                //continue;
+                //alphaBuffer += curr;
+                //curr = read();
+             
+            case 14:
+                if(curr=='/'){
+                     state = 15;
+                     curr=read();
+                }else if(curr=='*')
+                {
+                    state = 16;
+                    curr=read();
+                }
+                else{
+                    return new Token("division", "/");
+                }
+                continue;
+            case 15:
+                 if(curr=='\n'){
+                     
+                      state = 1;
+                 }
+                curr=read();
+                continue;
+            case 16:
+                if(curr=='*')
+                {
+                    state = 17;
+                   
+                }
+                 curr=read();
+                continue;
+            case 17:
+                if(curr=='/'){
+                    curr=read();
+                    state = 1;
+                }
+                else{
+                    curr=read();
+                    state=16;
+                }
+                continue;
                        
 			}
 		}
