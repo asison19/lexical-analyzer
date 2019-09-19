@@ -9,6 +9,8 @@ import token.*;
 
 // trie table goes here; switch, symbol, and next
 
+TokenDefinitions t = new TokenDefinitions();
+
 int t_index = 0;
 int t_flag = 0;
 %}
@@ -26,14 +28,14 @@ ws = [ \t\n]
 // {ws}		;
 int 		{t_flag = INT; System.out.println(yytext + "\n"); return (t_INT);}
 float		{t_flag = FLOAT; System.out.println(yytext + "\n"); return (t_FLOAT);}
-"+"			{System.out.println(yytext + "\n"); return (t_PLUS);}
-"-"			{System.out.println(yytext + "\n"); return (t_MINUS);}
-"*"			{System.out.println(yytext + "\n"); return (t_MULTIPLICATION);}
+"+"			{System.out.println(yytext + "\n"); return (t.PLUS);}
+"-"			{System.out.println(yytext + "\n"); return (t.MINUS);}
+"*"			{System.out.println(yytext + "\n"); return (t.MULTIPLICATION);}
 // need to make sure this doesn't happen when using "//" as comments
-"/"			{System.out.println(yytext + "\n"); return (t_DIVISION);}
-","			{System.out.println(yytext + "\n"); return (t_COMMA);}
-";"			{System.out.println(yytext + "\n"); return (t_SEMICOLON);}
-"."			{System.out.println(yytext + "\n"); return (t_PERIOD);}
+"/"			{System.out.println(yytext + "\n"); return (t.DIVISION);}
+","			{System.out.println(yytext + "\n"); return (t.COMMA);}
+";"			{System.out.println(yytext + "\n"); return (t.SEMICOLON);}
+"."			{System.out.println(yytext + "\n"); return (t.PERIOD);}
 // TODO 
 
 // insert should go in here
