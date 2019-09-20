@@ -1,7 +1,9 @@
 package lexicalAnalyzer;
 
 import java.util.Arrays;
-
+/* TODO
+ * subsequent strings get written over
+ */
 public class TrieTable {
 	// length of the swtch int array, includes letters, [A-Za-z]
 	private static final int ALPHABET_LENGTH = 52;
@@ -20,29 +22,50 @@ public class TrieTable {
 	}
 	
 	public void insert(String str) {
+		
+		int n;
 		// check swtch if it contains a spot
-		// check is first character of the string is uppercase
-		if(Character.isUpperCase(str.charAt(0))) {
-			// if the swtch does not contain an index for the symbol array, add it in
-			if(swtch[((int)str.charAt(0)) - 65] < 0) {
-				swtch[((int)str.charAt(0)) - 65] = last;
-				
-			} else {
-				
-			}
+		// check if first character of the string is uppercase
+		if(Character.isUpperCase(str.charAt(0)))
+			n = 65;
+		else
+			n = 90;
+
+		// if the swtch does not contain an index for the symbol array, add it in
+		// else go to that index
+		if(swtch[((int)str.charAt(0)) - n] < 0) {
+			swtch[((int)str.charAt(0)) - n] = last;
 			
+			// add to the symbol array the rest of the characters should they exist
+			if(!str.substring(1).equals(""))
+				add(str.substring(1), last);
 		} else {
-			
+			if(!str.substring(1).equals(""))
+				add(str.substring(1), swtch[((int)str.charAt(0)) - n]);
 		}
 		
-		// add to the symbol array the rest of the characters
-		add(str.substring(1));
 	}
 	
-	private void add(String str) {
+	private void add(String str, int index) {
+		int i = 0;
+		// check the prefix first
+		while(symbol[index] == str.charAt(i) && i < str.length()) {
+			index++;
+			i++;
+		}
 		
+		// once we've past what's the same go to the next available spot
+		// and put the rest of the string's characters in.
+		index = last; // ?
+		next[index] = last;
+		while(i < str.length()) {
+			symbol[index] = str.charAt(i);
+			index++;
+			i++;
+		}
 		
-		// last = ;
+		// add end of string sign, @
+		symbol[index] = '@';
 	}
 	
 	// TODO 
