@@ -39,11 +39,10 @@ ws = [ \t\n]
 // Lexical Rules
 {comment}	{}
 {ws}		{}
-true		{t_flag = t.BOOLEAN; System.out.println(yytext + "\n"; return t.BOOLEAN;}
-false		{t_flag = t.BOOLEAN; System.out.println(yytext + "\n"; return t.BOOLEAN;}
-break		{t_flag = t.BREAK; System.out.println(yytext + "\n"; return t.BREAK;}
+true		{t_flag = t.BOOLEAN; System.out.println(yytext + "\n"); return t.BOOLEAN;}
+false		{t_flag = t.BOOLEAN; System.out.println(yytext + "\n"); return t.BOOLEAN;}
+break		{t_flag = t.BREAK; System.out.println(yytext + "\n"); return t.BREAK;}
 int 		{t_flag = t.INT; System.out.println(yytext + "\n"); return (t.INT);}
-float		{t_flag = t.FLOAT; System.out.println(yytext + "\n"); return (t.FLOAT);}
 "+"			{System.out.println(yytext + "\n"); return (t.PLUS);}
 "-"			{System.out.println(yytext + "\n"); return (t.MINUS);}
 "*"			{System.out.println(yytext + "\n"); return (t.MULTIPLICATION);}

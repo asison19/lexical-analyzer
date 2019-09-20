@@ -4,7 +4,7 @@
 */
 
 // User Code
-package LexicalAnalyzer;
+package lexicalAnalyzer;
 import token.*;
 
 
