@@ -1,14 +1,15 @@
 // token definitions for Toy programming language
+package token;
 
 public class TokenDefinitions {
 	public static final int BOOLEAN = 1000;
-	public static final int Break = 1001;
+	public static final int BREAK = 1001;
 	public static final int CLASS = 1002;
 	public static final int DOUBLE = 1003;
 	public static final int ELSE = 1004;
 	public static final int EXTENDS = 1005;
-	public static final int FOR= 1006;
-	public static final int IF= 1007;
+	public static final int FOR = 1006;
+	public static final int IF = 1007;
 	public static final int IMPLEMENTS = 1008;
 	public static final int INT = 1009;
 	public static final int INTERFACE = 1010;
@@ -40,7 +41,7 @@ public class TokenDefinitions {
 	public static final int SEMICOLON = 1036;
 	public static final int COMMA = 1037;
 	public static final int PERIOD = 1038;
-	public static final int leftparen = 1039;
+	public static final int LEFTPAREN = 1039;
 	public static final int RIGHTPAREN = 1040;
 	public static final int LEFTBRACKET = 1041;
 	public static final int RIGHTBRACKET = 1042;

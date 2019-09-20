@@ -1,6 +1,12 @@
+/* JFlex specification file for Toy Programming Language
+*/
+
+// User Code
+package lexicalAnalyzer;
 import token.*;
 
 %%
+// Options and Declarations
 
 %class ToyLexer
 
@@ -17,17 +23,27 @@ int t_flag = 0;
 // end of direct code entry
 
 // Pattern definitions
+line_terminator = \r|\n|\r\n
+input_character = [ˆ\r\n]
 letter = [a-zA-Z]
 digit = [0-9]
 id = {letter}({letter}|{digit})*
+int = {digit}*
+comment = {comment_multi} | {comment_line}
+comment_multi = "/*" [ˆ*] {comment_body} "*" + "/"
+comment_line = "//" {input_character}* {line_terminator}
+comment_body = ( [ˆ*] | \*+ [ˆ/*] )*
 ws = [ \t\n]
 
 %%
-
-
-// {ws}		;
-int 		{t_flag = INT; System.out.println(yytext + "\n"); return (t_INT);}
-float		{t_flag = FLOAT; System.out.println(yytext + "\n"); return (t_FLOAT);}
+// Lexical Rules
+{comment}	{}
+{ws}		{}
+true		{t_flag = t.BOOLEAN; System.out.println(yytext + "\n"; return t.BOOLEAN;}
+false		{t_flag = t.BOOLEAN; System.out.println(yytext + "\n"; return t.BOOLEAN;}
+break		{t_flag = t.BREAK; System.out.println(yytext + "\n"; return t.BREAK;}
+int 		{t_flag = t.INT; System.out.println(yytext + "\n"); return (t.INT);}
+float		{t_flag = t.FLOAT; System.out.println(yytext + "\n"); return (t.FLOAT);}
 "+"			{System.out.println(yytext + "\n"); return (t.PLUS);}
 "-"			{System.out.println(yytext + "\n"); return (t.MINUS);}
 "*"			{System.out.println(yytext + "\n"); return (t.MULTIPLICATION);}
