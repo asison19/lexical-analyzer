@@ -578,52 +578,52 @@ int t_flag = 0;
             // fall through
           case 12: break;
           case 2: 
-            { System.out.println(yytext() + "\n"); return (t.DIVISION);
+            { System.out.println(yytext + "\n"); return (t.DIVISION);
             } 
             // fall through
           case 13: break;
           case 3: 
-            { System.out.println(yytext() + "\n"); return (t.MULTIPLICATION);
+            { System.out.println(yytext + "\n"); return (t.MULTIPLICATION);
             } 
             // fall through
           case 14: break;
           case 4: 
-            { System.out.println(yytext() + "\n"); return (t.PLUS);
+            { System.out.println(yytext + "\n"); return (t.PLUS);
             } 
             // fall through
           case 15: break;
           case 5: 
-            { System.out.println(yytext() + "\n"); return (t.MINUS);
+            { System.out.println(yytext + "\n"); return (t.MINUS);
             } 
             // fall through
           case 16: break;
           case 6: 
-            { System.out.println(yytext() + "\n"); return (t.COMMA);
+            { System.out.println(yytext + "\n"); return (t.COMMA);
             } 
             // fall through
           case 17: break;
           case 7: 
-            { System.out.println(yytext() + "\n"); return (t.SEMICOLON);
+            { System.out.println(yytext + "\n"); return (t.SEMICOLON);
             } 
             // fall through
           case 18: break;
           case 8: 
-            { System.out.println(yytext() + "\n"); return (t.PERIOD);
+            { System.out.println(yytext + "\n"); return (t.PERIOD);
             } 
             // fall through
           case 19: break;
           case 9: 
-            { t_flag = t.INT; System.out.println(yytext() + "\n"); return (t.INT);
+            { t_flag = t.INT; System.out.println(yytext + "\n"); return (t.INT);
             } 
             // fall through
           case 20: break;
           case 10: 
-            { t_flag = t.BOOLEAN; System.out.println(yytext() + "\n"); return t.BOOLEAN;
+            { t_flag = t.BOOLEAN; System.out.println(yytext + "\n"); return t.BOOLEAN;
             } 
             // fall through
           case 21: break;
           case 11: 
-            { t_flag = t.BREAK; System.out.println(yytext() + "\n"); return t.BREAK;
+            { t_flag = t.BREAK; System.out.println(yytext + "\n"); return t.BREAK;
             } 
             // fall through
           case 22: break;
