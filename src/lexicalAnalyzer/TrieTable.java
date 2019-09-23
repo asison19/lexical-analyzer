@@ -46,14 +46,17 @@ public class TrieTable {
 		
 	}
 	
+	// check and add the remaining characters of the inputed string
+	// if they're the same, continue checking, if not go to the next free spots
 	private void add(String str, int index) {
-		int i = 0;
+		int i = 0; // index of the string, str, characters
 		// check the prefix first
 		while(symbol[index] == str.charAt(i) && i < str.length()) {
 			index++;
 			i++;
 		}
 		
+		// if () TODO check if
 		// once we've past what's the same go to the next available spot
 		// and put the rest of the string's characters in.
 		index = last; // ?
@@ -65,12 +68,17 @@ public class TrieTable {
 		}
 		
 		// add end of string sign, @
-		symbol[index] = '@';
+		symbol[index] = '@'; // TODO does not add on all strings, or gets overwritten
+		last = index;
 	}
 	
 	// TODO 
 	public String retrieve() {
 		return "";
+	}
+	
+	public void output() {
+		
 	}
 	
 }
