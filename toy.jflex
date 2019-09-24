@@ -1,4 +1,4 @@
-/* JFlex specification file for Toy Programming Language
+﻿/* JFlex specification file for Toy Programming Language
 */
 
 // User Code
@@ -39,18 +39,18 @@ ws = [ \t\n]
 // Lexical Rules
 {comment}	{}
 {ws}		{}
-true		{t_flag = t.BOOLEAN; System.out.println(yytext + "\n"); return t.BOOLEAN;}
-false		{t_flag = t.BOOLEAN; System.out.println(yytext + "\n"); return t.BOOLEAN;}
-break		{t_flag = t.BREAK; System.out.println(yytext + "\n"); return t.BREAK;}
-int 		{t_flag = t.INT; System.out.println(yytext + "\n"); return (t.INT);}
-"+"			{System.out.println(yytext + "\n"); return (t.PLUS);}
-"-"			{System.out.println(yytext + "\n"); return (t.MINUS);}
-"*"			{System.out.println(yytext + "\n"); return (t.MULTIPLICATION);}
+true		{t_flag = t.BOOLEAN; System.out.println(yytext() + "\n"); return t.BOOLEAN;}
+false		{t_flag = t.BOOLEAN; System.out.println(yytext() + "\n"); return t.BOOLEAN;}
+break		{t_flag = t.BREAK; System.out.println(yytext() + "\n"); return t.BREAK;}
+int 		{t_flag = t.INT; System.out.println(yytext() + "\n"); return (t.INT);}
+"+"			{System.out.println(yytext() + "\n"); return (t.PLUS);}
+"-"			{System.out.println(yytext() + "\n"); return (t.MINUS);}
+"*"			{System.out.println(yytext() + "\n"); return (t.MULTIPLICATION);}
 // need to make sure this doesn't happen when using "//" as comments
-"/"			{System.out.println(yytext + "\n"); return (t.DIVISION);}
-","			{System.out.println(yytext + "\n"); return (t.COMMA);}
-";"			{System.out.println(yytext + "\n"); return (t.SEMICOLON);}
-"."			{System.out.println(yytext + "\n"); return (t.PERIOD);}
+"/"			{System.out.println(yytext() + "\n"); return (t.DIVISION);}
+","			{System.out.println(yytext() + "\n"); return (t.COMMA);}
+";"			{System.out.println(yytext() + "\n"); return (t.SEMICOLON);}
+"."			{System.out.println(yytext() + "\n"); return (t.PERIOD);}
 // TODO 
 
 // insert should go in here
