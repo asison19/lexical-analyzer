@@ -1,9 +1,11 @@
 package lexicalAnalyzer;
 
 import java.util.Arrays;
+
 /* TODO
  * subsequent strings get written over
  */
+
 public class TrieTable {
 	// length of the swtch int array, includes letters, [A-Za-z]
 	private static final int ALPHABET_LENGTH = 52;
