@@ -12,6 +12,28 @@ import token.*;
 %type int
 // this gets turned to code directly
 %{
+static final int BOOLEANCONSTANT = 0;
+static final int BOOLEAN = 1;
+static final int CLASS = 2;
+static final int DOUBLE = 3;
+static final int ELSE = 4;
+static final int EXTENDS = 5;
+static final int FOR = 6;
+static final int IF = 7;
+static final int IMPLEMENTS = 8;
+static final int INTERFACE = 9;
+static final int NEW = 10;
+static final int NEWARRAY = 11;
+static final int PRINTLN = 12;
+static final int READLN = 13;
+static final int RETURN = 14;
+static final int STRING = 15;
+static final int THIS = 16;
+static final int VOID = 17;
+static final int WHILE = 18;
+static final int BREAK = 19;
+static final int NULL = 20;
+static final int INT = 21;
 
 // trie table goes here; switch, symbol, and next
 class entry{
@@ -23,6 +45,18 @@ TokenDefinitions t = new TokenDefinitions();
 
 int t_index = 0;
 int t_flag = 0;
+
+public int insert(char s){
+int i = 0;
+while(i < t_index){
+if(s.compareTo(table[i].name)==0) return i;
+i++;
+}
+table[t_index].name = s;
+table[t_index].type = t_flag;
+t_index++;
+return t_index-1;
+}
 %}
 // end of direct code entry
 
@@ -45,29 +79,29 @@ ws = [ \t\n]
 // Lexical Rules
 {comment}	{}
 {ws}		{}
-true		{t_flag = t.BOOLEANCONSTANT; System.out.println(yytext() + "\n"); return (t.BOOLEANCONSTANT);}
-false		{t_flag = t.BOOLEANCONSTANT; System.out.println(yytext() + "\n"); return (t.BOOLEANCONSTANT);}
-boolean	        {t_flag = t.BOOLEAN; System.out.println(yytext() + "\n"); return (t.BOOLEAN);}
-class	        {t_flag = t.CLASS; System.out.println(yytext() + "\n"); return (t.CLASS);}
-double        {t_flag = t.DOUBLE; System.out.println(yytext() + "\n"); return (t.DOUBLE);}
-else	        {t_flag = t.ELSE; System.out.println(yytext() + "\n"); return (t.ELSE);}
-extends        {t_flag = t.EXTENDS; System.out.println(yytext() + "\n"); return (t.EXTENDS);}
-for        {t_flag = t.FOR; System.out.println(yytext() + "\n"); return (t.FOR);}
-if        {t_flag = t.IF; System.out.println(yytext() + "\n"); return (t.IF);}
-implements	        {t_flag = t.IMPLEMENTS; System.out.println(yytext() + "\n"); return (t.IMPLEMENTS);}
-interface	        {t_flag = t.INTERFACE; System.out.println(yytext() + "\n"); return (t.INTERFACE);}
-new	        {t_flag = t.NEW; System.out.println(yytext() + "\n"); return (t.NEW);}
-newarray	        {t_flag = t.NEWARRAY; System.out.println(yytext() + "\n"); return (t.NEWARRAY);}
-println	        {t_flag = t.PRINTLN; System.out.println(yytext() + "\n"); return (t.PRINTLN);}
-readln	        {t_flag = t.READLN; System.out.println(yytext() + "\n"); return (t.READLN);}
-return	        {t_flag = t.RETURN; System.out.println(yytext() + "\n"); return (t.RETURN);}
-String	        {t_flag = t.STRING; System.out.println(yytext() + "\n"); return (t.STRING);}
-this	        {t_flag = t.THIS; System.out.println(yytext() + "\n"); return (t.THIS);}
-void	        {t_flag = t.VOID; System.out.println(yytext() + "\n"); return (t.VOID);}
-while	        {t_flag = t.WHILE; System.out.println(yytext() + "\n"); return (t.WHILE);}
-break		{t_flag = t.BREAK; System.out.println(yytext() + "\n"); return (t.BREAK);}
-null	        {t_flag = t.NULL; System.out.println(yytext() + "\n"); return (t.NULL);}
-int 		{t_flag = t.INT; System.out.println(yytext() + "\n"); return (t.INT);}
+true		{t_flag = BOOLEANCONSTANT; System.out.println(yytext() + "\n"); return (t.BOOLEANCONSTANT);}
+false		{t_flag = BOOLEANCONSTANT; System.out.println(yytext() + "\n"); return (t.BOOLEANCONSTANT);}
+boolean	        {t_flag = BOOLEAN; System.out.println(yytext() + "\n"); return (t.BOOLEAN);}
+class	        {t_flag = CLASS; System.out.println(yytext() + "\n"); return (t.CLASS);}
+double        {t_flag = DOUBLE; System.out.println(yytext() + "\n"); return (t.DOUBLE);}
+else	        {t_flag = ELSE; System.out.println(yytext() + "\n"); return (t.ELSE);}
+extends        {t_flag = EXTENDS; System.out.println(yytext() + "\n"); return (t.EXTENDS);}
+for        {t_flag = FOR; System.out.println(yytext() + "\n"); return (t.FOR);}
+if        {t_flag = IF; System.out.println(yytext() + "\n"); return (t.IF);}
+implements	        {t_flag = IMPLEMENTS; System.out.println(yytext() + "\n"); return (t.IMPLEMENTS);}
+interface	        {t_flag = INTERFACE; System.out.println(yytext() + "\n"); return (t.INTERFACE);}
+new	        {t_flag = NEW; System.out.println(yytext() + "\n"); return (t.NEW);}
+newarray	        {t_flag = NEWARRAY; System.out.println(yytext() + "\n"); return (t.NEWARRAY);}
+println	        {t_flag = PRINTLN; System.out.println(yytext() + "\n"); return (t.PRINTLN);}
+readln	        {t_flag = READLN; System.out.println(yytext() + "\n"); return (t.READLN);}
+return	        {t_flag = RETURN; System.out.println(yytext() + "\n"); return (t.RETURN);}
+String	        {t_flag = STRING; System.out.println(yytext() + "\n"); return (t.STRING);}
+this	        {t_flag = THIS; System.out.println(yytext() + "\n"); return (t.THIS);}
+void	        {t_flag = VOID; System.out.println(yytext() + "\n"); return (t.VOID);}
+while	        {t_flag = WHILE; System.out.println(yytext() + "\n"); return (t.WHILE);}
+break		{t_flag = BREAK; System.out.println(yytext() + "\n"); return (t.BREAK);}
+null	        {t_flag = NULL; System.out.println(yytext() + "\n"); return (t.NULL);}
+int 		{t_flag = INT; System.out.println(yytext() + "\n"); return (t.INT);}
 "+"			{System.out.println(yytext() + "\n"); return (t.PLUS);}
 "-"			{System.out.println(yytext() + "\n"); return (t.MINUS);}
 "*"			{System.out.println(yytext() + "\n"); return (t.MULTIPLICATION);}
@@ -97,6 +131,3 @@ int 		{t_flag = t.INT; System.out.println(yytext() + "\n"); return (t.INT);}
 {id}			{System.out.println(yytext() + "\n"); return (t.ID);}
 {str}			{System.out.println(yytext() + "\n"); return (t.STRINGCONSTANT);}
 {double}		{System.out.println(yytext() + "\n"); return (t.DOUBLECONSTANT);}
-// TODO 
-
-// insert should go in here
