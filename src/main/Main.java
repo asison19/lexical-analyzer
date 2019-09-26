@@ -3,24 +3,21 @@ import lexicalAnalyzer.*;
 import token.Token;
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		String inFile = "src/Sample.in";
-
-		if (args.length > 1) {
-			inFile = args[0];
-		}
-
-		LexicalAnalyzer lexer = new LexicalAnalyzer(inFile);
-
-		Token t;
-		System.out.println("Done tokenizing file: " + inFile + "\n");
-		
-		while ((t = lexer.nextToken()) != null) {
-			System.out.println(t.toString());
+		int x = 0;
+		Reader reader = new FileReader( inFile );
+		ToyLexer lexer = new ToyLexer(reader);
+		while(x < 10000) {
+		lexer.yylex();
+		x++;
 		}
 	}
 }

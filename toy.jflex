@@ -34,29 +34,11 @@ static final int WHILE = 18;
 static final int BREAK = 19;
 static final int NULL = 20;
 static final int INT = 21;
-
-// trie table goes here; switch, symbol, and next
-class entry{
- public char name[] = new char[10];
- public int type;
-}
-char table[] = new char[100];
-TokenDefinitions t = new TokenDefinitions();
-
-int t_index = 0;
+TokenDefinitions t;
 int t_flag = 0;
+int yylval;
+// trie table goes here; switch, symbol, and next
 
-public int insert(char s){
-int i = 0;
-while(i < t_index){
-if(s.compareTo(table[i].name)==0) return i;
-i++;
-}
-table[t_index].name = s;
-table[t_index].type = t_flag;
-t_index++;
-return t_index-1;
-}
 %}
 // end of direct code entry
 
@@ -102,32 +84,32 @@ while	        {t_flag = WHILE; System.out.println(yytext() + "\n"); return (t.WH
 break		{t_flag = BREAK; System.out.println(yytext() + "\n"); return (t.BREAK);}
 null	        {t_flag = NULL; System.out.println(yytext() + "\n"); return (t.NULL);}
 int 		{t_flag = INT; System.out.println(yytext() + "\n"); return (t.INT);}
-"+"			{System.out.println(yytext() + "\n"); return (t.PLUS);}
-"-"			{System.out.println(yytext() + "\n"); return (t.MINUS);}
-"*"			{System.out.println(yytext() + "\n"); return (t.MULTIPLICATION);}
+"+"			{System.out.println("plus"+yytext() + "\n"); return (t.PLUS);}
+"-"			{System.out.println("minus"+yytext() + "\n"); return (t.MINUS);}
+"*"			{System.out.println("multipication"+yytext() + "\n"); return (t.MULTIPLICATION);}
 // need to make sure this doesn't happen when using "//" as comments
-"/"			{System.out.println(yytext() + "\n"); return (t.DIVISION);}
-"%"			{System.out.println(yytext() + "\n"); return (t.MOD);}
-"<"			{System.out.println(yytext() + "\n"); return (t.LESS);}
-">"			{System.out.println(yytext() + "\n"); return (t.GREATER);}
-"<="			{System.out.println(yytext() + "\n"); return (t.LESSEQUAL);}
-">="			{System.out.println(yytext() + "\n"); return (t.GREATEREQUAL);}
-"=="			{System.out.println(yytext() + "\n"); return (t.EQUAL);}
-"!="			{System.out.println(yytext() + "\n"); return (t.NOTEQUAL);}
-"&&"			{System.out.println(yytext() + "\n"); return (t.AND);}
-"||"			{System.out.println(yytext() + "\n"); return (t.OR);}
-"!"			{System.out.println(yytext() + "\n"); return (t.NOT);}
-"="			{System.out.println(yytext() + "\n"); return (t.ASSIGNOP);}
-","			{System.out.println(yytext() + "\n"); return (t.COMMA);}
-";"			{System.out.println(yytext() + "\n"); return (t.SEMICOLON);}
-"."			{System.out.println(yytext() + "\n"); return (t.PERIOD);}
-"("			{System.out.println(yytext() + "\n"); return (t.LEFTPAREN);}
-")"			{System.out.println(yytext() + "\n"); return (t.RIGHTPAREN);}
-"["			{System.out.println(yytext() + "\n"); return (t.LEFTBRACKET);}
-"]"			{System.out.println(yytext() + "\n"); return (t.RIGHTBRACKET);}
-"{"			{System.out.println(yytext() + "\n"); return (t.LEFTBRACE);}
-"}"			{System.out.println(yytext() + "\n"); return (t.RIGHTBRACE);}
-{int}			{System.out.println(yytext() + "\n"); return (t.INTCONSTANT);}
-{id}			{System.out.println(yytext() + "\n"); return (t.ID);}
-{str}			{System.out.println(yytext() + "\n"); return (t.STRINGCONSTANT);}
-{double}		{System.out.println(yytext() + "\n"); return (t.DOUBLECONSTANT);}
+"/"			{System.out.println("division" + "\n"); return (t.DIVISION);}
+"%"			{System.out.println("mod" + "\n"); return (t.MOD);}
+"<"			{System.out.println("less" + "\n"); return (t.LESS);}
+">"			{System.out.println("greater" + "\n"); return (t.GREATER);}
+"<="			{System.out.println("lessequal" + "\n"); return (t.LESSEQUAL);}
+">="			{System.out.println("greaterequal" + "\n"); return (t.GREATEREQUAL);}
+"=="			{System.out.println("equal" + "\n"); return (t.EQUAL);}
+"!="			{System.out.println("notequal" + "\n"); return (t.NOTEQUAL);}
+"&&"			{System.out.println("and" + "\n"); return (t.AND);}
+"||"			{System.out.println("or" + "\n"); return (t.OR);}
+"!"			{System.out.println("not" + "\n"); return (t.NOT);}
+"="			{System.out.println("assignop" + "\n"); return (t.ASSIGNOP);}
+","			{System.out.println("comma" + "\n"); return (t.COMMA);}
+";"			{System.out.println("semicolon" + "\n"); return (t.SEMICOLON);}
+"."			{System.out.println("period" + "\n"); return (t.PERIOD);}
+"("			{System.out.println("leftparen" + "\n"); return (t.LEFTPAREN);}
+")"			{System.out.println("rightparen" + "\n"); return (t.RIGHTPAREN);}
+"["			{System.out.println("leftbracket" + "\n"); return (t.LEFTBRACKET);}
+"]"			{System.out.println("rightbracket" + "\n"); return (t.RIGHTBRACKET);}
+"{"			{System.out.println("leftbrace" + "\n"); return (t.LEFTBRACE);}
+"}"			{System.out.println("rightbrace" + "\n"); return (t.RIGHTBRACE);}
+{int}			{System.out.println("intconstant" + "\n"); return (t.INTCONSTANT);}
+{id}			{System.out.println("id" + "\n"); return(t_ID);}
+{str}			{System.out.println("stringconstant" + "\n"); return (t.STRINGCONSTANT);}
+{double}		{System.out.println("doubleconstant" + "\n"); return (t.DOUBLECONSTANT);}
