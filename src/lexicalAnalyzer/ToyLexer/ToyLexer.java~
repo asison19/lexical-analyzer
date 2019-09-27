@@ -691,7 +691,7 @@ int yylval;
             // fall through
           case 53: break;
           case 3: 
-            { System.out.println("id" + "\n"); return(t.ID);
+            { System.out.println("id" + "\n"); return(t_ID);
             } 
             // fall through
           case 54: break;

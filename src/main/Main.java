@@ -15,9 +15,9 @@ public class Main {
 		int x = 0;
 		Reader reader = new FileReader( inFile );
 		ToyLexer lexer = new ToyLexer(reader);
-		while(x < 10000) {
+		while(x  < 100) {
 		lexer.yylex();
-		x++;
+		x++;	
 		}
-	}
+		}
 }

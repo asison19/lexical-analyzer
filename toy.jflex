@@ -84,9 +84,9 @@ while	        {t_flag = WHILE; System.out.println(yytext() + "\n"); return (t.WH
 break		{t_flag = BREAK; System.out.println(yytext() + "\n"); return (t.BREAK);}
 null	        {t_flag = NULL; System.out.println(yytext() + "\n"); return (t.NULL);}
 int 		{t_flag = INT; System.out.println(yytext() + "\n"); return (t.INT);}
-"+"			{System.out.println("plus"+yytext() + "\n"); return (t.PLUS);}
-"-"			{System.out.println("minus"+yytext() + "\n"); return (t.MINUS);}
-"*"			{System.out.println("multipication"+yytext() + "\n"); return (t.MULTIPLICATION);}
+"+"			{System.out.println("plus" + "\n"); return (t.PLUS);}
+"-"			{System.out.println("minus" + "\n"); return (t.MINUS);}
+"*"			{System.out.println("multipication" + "\n"); return (t.MULTIPLICATION);}
 // need to make sure this doesn't happen when using "//" as comments
 "/"			{System.out.println("division" + "\n"); return (t.DIVISION);}
 "%"			{System.out.println("mod" + "\n"); return (t.MOD);}
@@ -110,6 +110,6 @@ int 		{t_flag = INT; System.out.println(yytext() + "\n"); return (t.INT);}
 "{"			{System.out.println("leftbrace" + "\n"); return (t.LEFTBRACE);}
 "}"			{System.out.println("rightbrace" + "\n"); return (t.RIGHTBRACE);}
 {int}			{System.out.println("intconstant" + "\n"); return (t.INTCONSTANT);}
-{id}			{System.out.println("id" + "\n"); return(t_ID);}
+{id}			{System.out.println("id" + "\n"); return(t.ID);}
 {str}			{System.out.println("stringconstant" + "\n"); return (t.STRINGCONSTANT);}
 {double}		{System.out.println("doubleconstant" + "\n"); return (t.DOUBLECONSTANT);}
