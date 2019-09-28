@@ -3,12 +3,30 @@
 package lexicalAnalyzer;
 import token.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Scanner;
+
 %%
 // Options and Declarations
 %public
 %class ToyLexer
-// %type int
 %type Integer
+
+// this gets added to the constructor of the created lexer class
+%init{
+// Add keyword identifiers to the trie table.
+Scanner s;
+try {
+	s = new Scanner(new FileReader("src/lexicalAnalyzer/keywords.txt"));
+	while (s.hasNext()) {
+		trie.insert(s.next());
+	}
+} catch (FileNotFoundException e) {
+	e.printStackTrace();
+}
+%init}
+
 // this gets turned to code directly
 %{
 static final int BOOLEANCONSTANT = 0;
@@ -35,9 +53,14 @@ static final int NULL = 20;
 static final int INT = 21;
 int t_flag = 0;
 int yylval;
-// trie table goes here; switch, symbol, and next
+// trie table that contains the identifiers and keywords
 TrieTable trie = new TrieTable();
 
+public void outputTrie() {
+	trie.output();
+}
+
+// end of user code
 %}
 // end of direct code entry
 

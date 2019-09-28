@@ -1,0 +1,3 @@
+boolean break class double else extends false for if
+implements int interface new newarray null println readln
+return string this true void while
