@@ -7,7 +7,8 @@ import token.*;
 // Options and Declarations
 %public
 %class ToyLexer
-%type int
+// %type int
+%type Integer
 // this gets turned to code directly
 %{
 static final int BOOLEANCONSTANT = 0;
@@ -32,24 +33,24 @@ static final int WHILE = 18;
 static final int BREAK = 19;
 static final int NULL = 20;
 static final int INT = 21;
-// TokenDefinitions t;
 int t_flag = 0;
 int yylval;
 // trie table goes here; switch, symbol, and next
+TrieTable trie = new TrieTable();
 
 %}
 // end of direct code entry
 
 // Pattern definitions
-line_terminator = \r|\n|\r\n
-input_character = [ˆ\r\n]
 letter = [a-zA-Z]
 digit = [0-9]
 double = [0-9]*\.[0-9]*
-str = [\"]([^\"])*[\"]
+// includes regular and both slanted quotation marks, char 84, 8220 and 8221
+// does NOT match a mixture of both
+str = \"([^\"\\\\]|\\\\.)*\" | \“([^\”\\\\]|\\\\.)*\”
 id = {letter}({letter}|{digit})*
 int = {digit}+
-comment = {comment_multi} | {comment_line}
+comment = {comment_multi}|{comment_line}
 comment_multi = [/][*][^*]*[*]+([^*/][^*]*[*]+)*[/]
 comment_line = "//".*  
 // comment_body = ( [ˆ*] | \*+ [ˆ/*] )*
@@ -87,7 +88,6 @@ int 			{t_flag = INT; System.out.print(yytext() + " "); return (TokenDefinitions
 "+"				{System.out.print("plus" + " "); return (TokenDefinitions.PLUS);}
 "-"				{System.out.print("minus" + " "); return (TokenDefinitions.MINUS);}
 "*"				{System.out.print("multipication" + " "); return (TokenDefinitions.MULTIPLICATION);}
-// need to make sure this doesn't happen when using "//" as comments
 "/"				{System.out.print("division" + " "); return (TokenDefinitions.DIVISION);}
 "%"				{System.out.print("mod" + " "); return (TokenDefinitions.MOD);}
 "<"				{System.out.print("less" + " "); return (TokenDefinitions.LESS);}
@@ -110,6 +110,6 @@ int 			{t_flag = INT; System.out.print(yytext() + " "); return (TokenDefinitions
 "{"				{System.out.print("leftbrace" + " "); return (TokenDefinitions.LEFTBRACE);}
 "}"				{System.out.print("rightbrace" + " "); return (TokenDefinitions.RIGHTBRACE);}
 {int}			{System.out.print("intconstant" + " "); return (TokenDefinitions.INTCONSTANT);}
-{id}			{System.out.print("id" + " "); return(TokenDefinitions.ID);}
+{id}			{System.out.print("id" + " "); trie.insert(yytext()); return(TokenDefinitions.ID);}
 {str}			{System.out.print("stringconstant" + " "); return (TokenDefinitions.STRINGCONSTANT);}
 {double}		{System.out.print("doubleconstant" + " "); return (TokenDefinitions.DOUBLECONSTANT);}
