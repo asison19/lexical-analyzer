@@ -1,6 +1,4 @@
-﻿/* JFlex specification file for Toy Programming Language
-*/
-
+/* JFlex specification file for Toy Programming Language*/
 // User Code
 package lexicalAnalyzer;
 import token.*;
@@ -50,30 +48,32 @@ digit = [0-9]
 double = [0-9]*\.[0-9]*
 str = [\"]([^\"])*[\"]
 id = {letter}({letter}|{digit})*
-int = {digit}*
+int = {digit}+
 comment = {comment_multi} | {comment_line}
 comment_multi = "/*" [ˆ*] {comment_body} "*" + "/"
 comment_line = "//" {input_character}* {line_terminator}
 comment_body = ( [ˆ*] | \*+ [ˆ/*] )*
-ws = [ \t\n]
+ws = [ \t\r\f]
+newline = [\n]
 
 %%
 // Lexical Rules
-{comment}	{}
-{ws}		{}
-true		{t_flag = BOOLEANCONSTANT; System.out.println(yytext() + "\n"); return (t.BOOLEANCONSTANT);}
-false		{t_flag = BOOLEANCONSTANT; System.out.println(yytext() + "\n"); return (t.BOOLEANCONSTANT);}
+{comment}		{}
+{ws}			{}
+{newline}		{System.out.println();}
+true			{t_flag = BOOLEANCONSTANT; System.out.println(yytext() + "\n"); return (t.BOOLEANCONSTANT);}
+false			{t_flag = BOOLEANCONSTANT; System.out.println(yytext() + "\n"); return (t.BOOLEANCONSTANT);}
 boolean	        {t_flag = BOOLEAN; System.out.println(yytext() + "\n"); return (t.BOOLEAN);}
 class	        {t_flag = CLASS; System.out.println(yytext() + "\n"); return (t.CLASS);}
-double        {t_flag = DOUBLE; System.out.println(yytext() + "\n"); return (t.DOUBLE);}
+double        	{t_flag = DOUBLE; System.out.println(yytext() + "\n"); return (t.DOUBLE);}
 else	        {t_flag = ELSE; System.out.println(yytext() + "\n"); return (t.ELSE);}
-extends        {t_flag = EXTENDS; System.out.println(yytext() + "\n"); return (t.EXTENDS);}
-for        {t_flag = FOR; System.out.println(yytext() + "\n"); return (t.FOR);}
-if        {t_flag = IF; System.out.println(yytext() + "\n"); return (t.IF);}
-implements	        {t_flag = IMPLEMENTS; System.out.println(yytext() + "\n"); return (t.IMPLEMENTS);}
-interface	        {t_flag = INTERFACE; System.out.println(yytext() + "\n"); return (t.INTERFACE);}
-new	        {t_flag = NEW; System.out.println(yytext() + "\n"); return (t.NEW);}
-newarray	        {t_flag = NEWARRAY; System.out.println(yytext() + "\n"); return (t.NEWARRAY);}
+extends        	{t_flag = EXTENDS; System.out.println(yytext() + "\n"); return (t.EXTENDS);}
+for        		{t_flag = FOR; System.out.println(yytext() + "\n"); return (t.FOR);}
+if        		{t_flag = IF; System.out.println(yytext() + "\n"); return (t.IF);}
+implements	    {t_flag = IMPLEMENTS; System.out.println(yytext() + "\n"); return (t.IMPLEMENTS);}
+interface	    {t_flag = INTERFACE; System.out.println(yytext() + "\n"); return (t.INTERFACE);}
+new	        	{t_flag = NEW; System.out.println(yytext() + "\n"); return (t.NEW);}
+newarray	    {t_flag = NEWARRAY; System.out.println(yytext() + "\n"); return (t.NEWARRAY);}
 println	        {t_flag = PRINTLN; System.out.println(yytext() + "\n"); return (t.PRINTLN);}
 readln	        {t_flag = READLN; System.out.println(yytext() + "\n"); return (t.READLN);}
 return	        {t_flag = RETURN; System.out.println(yytext() + "\n"); return (t.RETURN);}
@@ -81,34 +81,34 @@ String	        {t_flag = STRING; System.out.println(yytext() + "\n"); return (t.
 this	        {t_flag = THIS; System.out.println(yytext() + "\n"); return (t.THIS);}
 void	        {t_flag = VOID; System.out.println(yytext() + "\n"); return (t.VOID);}
 while	        {t_flag = WHILE; System.out.println(yytext() + "\n"); return (t.WHILE);}
-break		{t_flag = BREAK; System.out.println(yytext() + "\n"); return (t.BREAK);}
+break			{t_flag = BREAK; System.out.println(yytext() + "\n"); return (t.BREAK);}
 null	        {t_flag = NULL; System.out.println(yytext() + "\n"); return (t.NULL);}
-int 		{t_flag = INT; System.out.println(yytext() + "\n"); return (t.INT);}
-"+"			{System.out.println("plus" + "\n"); return (t.PLUS);}
-"-"			{System.out.println("minus" + "\n"); return (t.MINUS);}
-"*"			{System.out.println("multipication" + "\n"); return (t.MULTIPLICATION);}
+int 			{t_flag = INT; System.out.println(yytext() + "\n"); return (t.INT);}
+"+"				{System.out.println("plus" + "\n"); return (t.PLUS);}
+"-"				{System.out.println("minus" + "\n"); return (t.MINUS);}
+"*"				{System.out.println("multipication" + "\n"); return (t.MULTIPLICATION);}
 // need to make sure this doesn't happen when using "//" as comments
-"/"			{System.out.println("division" + "\n"); return (t.DIVISION);}
-"%"			{System.out.println("mod" + "\n"); return (t.MOD);}
-"<"			{System.out.println("less" + "\n"); return (t.LESS);}
-">"			{System.out.println("greater" + "\n"); return (t.GREATER);}
+"/"				{System.out.println("division" + "\n"); return (t.DIVISION);}
+"%"				{System.out.println("mod" + "\n"); return (t.MOD);}
+"<"				{System.out.println("less" + "\n"); return (t.LESS);}
+">"				{System.out.println("greater" + "\n"); return (t.GREATER);}
 "<="			{System.out.println("lessequal" + "\n"); return (t.LESSEQUAL);}
 ">="			{System.out.println("greaterequal" + "\n"); return (t.GREATEREQUAL);}
 "=="			{System.out.println("equal" + "\n"); return (t.EQUAL);}
 "!="			{System.out.println("notequal" + "\n"); return (t.NOTEQUAL);}
 "&&"			{System.out.println("and" + "\n"); return (t.AND);}
 "||"			{System.out.println("or" + "\n"); return (t.OR);}
-"!"			{System.out.println("not" + "\n"); return (t.NOT);}
-"="			{System.out.println("assignop" + "\n"); return (t.ASSIGNOP);}
-","			{System.out.println("comma" + "\n"); return (t.COMMA);}
-";"			{System.out.println("semicolon" + "\n"); return (t.SEMICOLON);}
-"."			{System.out.println("period" + "\n"); return (t.PERIOD);}
-"("			{System.out.println("leftparen" + "\n"); return (t.LEFTPAREN);}
-")"			{System.out.println("rightparen" + "\n"); return (t.RIGHTPAREN);}
-"["			{System.out.println("leftbracket" + "\n"); return (t.LEFTBRACKET);}
-"]"			{System.out.println("rightbracket" + "\n"); return (t.RIGHTBRACKET);}
-"{"			{System.out.println("leftbrace" + "\n"); return (t.LEFTBRACE);}
-"}"			{System.out.println("rightbrace" + "\n"); return (t.RIGHTBRACE);}
+"!"				{System.out.println("not" + "\n"); return (t.NOT);}
+"="				{System.out.println("assignop" + "\n"); return (t.ASSIGNOP);}
+","				{System.out.println("comma" + "\n"); return (t.COMMA);}
+";"				{System.out.println("semicolon" + "\n"); return (t.SEMICOLON);}
+"."				{System.out.println("period" + "\n"); return (t.PERIOD);}
+"("				{System.out.println("leftparen" + "\n"); return (t.LEFTPAREN);}
+")"				{System.out.println("rightparen" + "\n"); return (t.RIGHTPAREN);}
+"["				{System.out.println("leftbracket" + "\n"); return (t.LEFTBRACKET);}
+"]"				{System.out.println("rightbracket" + "\n"); return (t.RIGHTBRACKET);}
+"{"				{System.out.println("leftbrace" + "\n"); return (t.LEFTBRACE);}
+"}"				{System.out.println("rightbrace" + "\n"); return (t.RIGHTBRACE);}
 {int}			{System.out.println("intconstant" + "\n"); return (t.INTCONSTANT);}
 {id}			{System.out.println("id" + "\n"); return(t.ID);}
 {str}			{System.out.println("stringconstant" + "\n"); return (t.STRINGCONSTANT);}

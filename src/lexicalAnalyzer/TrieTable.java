@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class TrieTable {
 	// length of the swtch int array, includes letters, [A-Za-z]
 	private static final int ALPHABET_LENGTH = 52;
-	private static final int MAX_TRANSITION = 100;
+	private static final int MAX_TRANSITION = 5000;
 	
 	// index 0 is A, 1 is B etc.
 	private int[] swtch = new int[ALPHABET_LENGTH];
