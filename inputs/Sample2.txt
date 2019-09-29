@@ -1,0 +1,44 @@
+interface Sam{
+  public void test();
+}
+
+class Samp2 implements Sam{
+int a;
+void try(String m){
+this.a = a;
+int num = 100;
+double val = 101.12
+boolean isit = false;
+double total = (num + val);
+double multot = (num * val);
+double divtot = (val / num);
+double modtot = (val % num);
+double newtot;
+int[] b = newarray(12, int);
+int x = 19;
+double y = 2.0
+Integer big = new Integer();
+String s = "yo".;
+//this is sample 2
+println("hello 0101", s);
+while(x > 10 || num < 101) {
+	return x;
+}
+if( y == val && x != val){
+  return null;
+}
+else if(num >= 10){
+  break;
+}
+else if(! isit = true){
+  return total;
+}
+
+for ( ; x <= 22) { newtot = y - 2;}
+
+}
+}
+
+class Sup extends Samp2{
+
+}
