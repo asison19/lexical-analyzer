@@ -1,6 +1,9 @@
 # Lexical Analyzer  
-This program reads an input or text file, and tokenizes it according to the  
-lexical conventions of the Toy programming language.  
+This program reads an input or text file, and tokenizes it according to the lexical conventions of the Toy programming language. 
+
+# Authors  
+[Andrew Sison](https://github.com/asison19)  
+[Zach Martin](https://github.com/ZachMartin27) 
 
 ## Installation
 First download or git clone the repository.  
