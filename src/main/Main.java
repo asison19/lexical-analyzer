@@ -13,6 +13,7 @@ import java.net.URISyntaxException;
 
 public class Main {
 	public static void main(String[] args) throws IOException, URISyntaxException {
+		// get the file for the lexer, if no inputed file, use the default one.
 		File root = new File(Thread.currentThread().getContextClassLoader().getResource("").toURI());
 		File infile = new File(root ,"../inputs/testAll.txt");
 		FileReader reader;
@@ -21,10 +22,11 @@ public class Main {
 			System.out.println("Using file: " + infile);
 			reader = new FileReader(infile);
 		} catch(IndexOutOfBoundsException e) {
-			System.out.println("No inputted file detected, using default file:\n" + infile);
+			System.out.println("No inputed file detected, using default file:\n" + infile);
 			reader = new FileReader(infile);
 		}
 		
+		// Actual lexical analysis
 		ToyLexer lexer = new ToyLexer(reader);
 		int count = 0;
 		System.out.println("\n********** Start of lexical analysis **********");

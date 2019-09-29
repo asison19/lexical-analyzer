@@ -30,7 +30,7 @@ The jflex lexical specification file is located in "src/lexicalAnalyzer", along 
 ## Screenshots  
 Default "testAll.txt" file.
 ![image1](screenshots/image1.png)  
-![image2](screenshots/image2.png)
-Testing "Sample.txt" file. 
+![image2](screenshots/image2.png)  
+Testing "Sample.txt" file.  
 ![image3](screenshots/image3.png)  
 ![image4](screenshots/image4.png)  
