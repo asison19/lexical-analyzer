@@ -19,5 +19,6 @@ public class Main {
 		lexer.yylex();
 		x++;	
 		}
+		lexer.outputTrie();
 		}
 }

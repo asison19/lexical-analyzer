@@ -2,10 +2,6 @@ package lexicalAnalyzer;
 
 import java.util.Arrays;
 
-/* TODO
- * Create method to: Read from file, all the identifiers inside
- */
-
 public class TrieTable {
 	// length of the swtch int array, includes letters, [A-Za-z]
 	private static final int ALPHABET_LENGTH = 52;
@@ -21,6 +17,7 @@ public class TrieTable {
 	
 	public TrieTable() {
 		Arrays.fill(swtch, -1);
+		Arrays.fill(next, -1);
 	}
 	
 	public void insert(String str) {
@@ -92,10 +89,69 @@ public class TrieTable {
 		return "";
 	}
 	
-	// TODO
+	// Outputs the arrays of the Trie Table
+	// Last edited by: Andrew Sison 9/28 ~7pm
 	public void output() {
-		for(int i = 0; i < last; i++)
-			System.out.println(i + ": " + symbol[i] + " ");
+		System.out.println("\n\nOutputing the Trie Table: ");
+		// output the swtch array
+		int perLineSwtch = 15; // how many elements of the array to output per line
+		int a = 0, b = 0, n = 0;
+		while(a < ALPHABET_LENGTH) {
+			n = 0;
+			System.out.format("%8s","");
+			// output the letters
+			while(a < ALPHABET_LENGTH && n < perLineSwtch) {
+				if(a < 26)
+					System.out.format("%5s", (char) (a + 65));
+				else
+					System.out.format("%5s", (char) (a + 71));
+				
+				a++;
+				n++;
+			}
+			
+			// output the swtch array
+			System.out.print("\nswitch: ");
+			n = 0;
+			while(b < ALPHABET_LENGTH && n < perLineSwtch) {
+				System.out.format("%5d", swtch[b]);
+				b++;
+				n++;
+			}
+			System.out.println("\n");
+			
+		}
+		
+		// output the symbol and next array
+		int perLine = 18; // how many elements of the arrays to output per line
+		int j = 0, k = 0, l = 0, m = 0;
+		System.out.println("\nSymbol and Next Arrays: ");
+		while( l < last) {
+			
+			// output the index numbers
+			System.out.format("%8s", "");
+			for(m = 0; m < perLine; m++) {
+				System.out.format("%4d", j);		
+				j++;
+			}
+			
+			// output the symbol
+			System.out.print("\nsymbol: ");
+			for(m = 0; m < perLine; m++) {
+				System.out.format("%4s", symbol[k]);
+				k++;
+			}
+			
+			// output the next index
+			System.out.print("\nnext:   ");
+			for(m = 0; m < perLine; m++) {
+				if(next[l]!= -1)
+					System.out.format("%4d", next[l]);
+				else
+					System.out.format("%4s", "");
+				l++;
+			}
+			System.out.println("\n");
+		}
 	}
-	
 }
