@@ -1,0 +1,61 @@
+interface Sam{
+  public void test();
+}
+
+class Samp2 implements Sam{
+	int a;
+	void try(String m){
+		this.a = a;
+		int num = 100;
+		double val = 101.12;
+		int hex = 0xAbF67; // hexadecimal
+		double funny = 123456E+7; /* exponential */
+		funny = 123456E+7;
+		int hex = 0xabc2def6;
+		int hexPos = +0x789fda;
+		int hexNeg = -0x43252bdc;
+		double expo = 6.5E+6;
+		double expoPos = +1e-9001;
+		double expoNeg = -1e-9001;
+		int abc = +8;
+		int bcd = -8;
+		int abb = 2;
+		double duhble = 1.2;
+		double duhPos = +5.6;
+		double duhNeg = -3.4;
+		boolean isit = false;
+		double total = (num + val);
+		double multot = (num * val);
+		double divtot = (val / num);
+		double modtot = (val % num);
+		double newtot;
+		int[] b = newarray(12, int);
+		int x = 19;
+		double y = 2.0
+		Integer big = new Integer();
+		String s = "yo".;
+		//this is sample 2
+		println("hello 0101", s);
+		while(x > 10 || num < 101) {
+			return x;
+		}
+		if( y == val && x != val){
+			return null;
+		}
+		else if(num >= 10){
+			break;
+		}
+		else if(! isit = true){
+			return total;
+		}
+
+		for ( int i = 0; x <= 22) { 
+			newtot = y - 2;
+		}
+
+	}
+}
+
+class Sup extends Samp2{
+
+}

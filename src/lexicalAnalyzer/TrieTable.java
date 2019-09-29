@@ -93,6 +93,8 @@ public class TrieTable {
 	// Last edited by: Andrew Sison 9/28 ~7pm
 	public void output() {
 		System.out.println("\n\nOutputing the Trie Table: ");
+		
+		System.out.println("Switch Array:");
 		// output the swtch array
 		int perLineSwtch = 15; // how many elements of the array to output per line
 		int a = 0, b = 0, n = 0;

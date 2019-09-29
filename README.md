@@ -7,4 +7,6 @@ To install, run the compile.bat file. Open a terminal and go to the src director
 "java main/Main"  
 to run the default test file, or  
 "java main/Main *fileName*"  
-to test another input file.
+to test another input file.  
+
+The jflex lexical specification file is located in "src/lexicalAnalyzer", along with the java file it creates.

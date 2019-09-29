@@ -1,0 +1,14 @@
+Funny = 0X89aB; 
+funny = 123456E+7;
+int hex = 0xabc2def6;
+int hexPos = +0x789fda;
+int hexNeg = -0x43252bdc;
+double expo = 6.5E+6;
+double expoPos = +1e-9001;
+double expoNeg = -1e-9001;
+int abc = +8;
+int bcd = -8;
+int abb = 2;
+double duhble = 1.2;
+double duhPos = +5.6;
+double duhNeg = -3.4;

@@ -80,18 +80,24 @@ public void outputTrie() {
 // Pattern definitions
 letter = [a-zA-Z]
 digit = [0-9]
-double = [0-9]*\.[0-9]*
+/* From Prompt:
+A double constant is a sequence of at least one digit, a period, followed by any sequence of
+digits, may be none. Thus, .12 is not a valid double but both 0.12 and 12. are valid 
+*/
+double = [-+]?[0-9]+\.[0-9]*|{exponential}
 // includes regular and both slanted quotation marks, char 84, 8220 and 8221
 // does NOT match a mixture of both
 str = \"([^\"\\\\]|\\\\.)*\" | \“([^\”\\\\]|\\\\.)*\”
 id = {letter}({letter}|{digit})*
-int = {digit}+
+int = [-+]?{digit}+|[-+]?{hex}
 comment = {comment_multi}|{comment_line}
 comment_multi = [/][*][^*]*[*]+([^*/][^*]*[*]+)*[/]
 comment_line = "//".*  
 // comment_body = ( [ˆ*] | \*+ [ˆ/*] )*
 ws = [ \t\r\f]
 newline = [\n]
+hex = 0[xX][0-9a-fA-F]+
+exponential = [-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)
 
 %%
 // Lexical Rules
