@@ -7,6 +7,8 @@ import token.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.net.URISyntaxException;
+import java.io.File;
 import java.util.Scanner;
 
 
@@ -385,16 +387,27 @@ public void outputTrie() {
    * @param   in  the java.io.Reader to read input from.
    */
   public ToyLexer(java.io.Reader in) {
-  // Add keyword identifiers to the trie table.
-Scanner s;
+  // User added code.
+// Add keyword identifiers to the trie table.
+FileReader reader;
+File root = new File("");
 try {
-	s = new Scanner(new FileReader("src/lexicalAnalyzer/keywords.txt"));
+	root = new File(Thread.currentThread().getContextClassLoader().getResource("").toURI());
+} catch (URISyntaxException e1) {
+	e1.printStackTrace();
+}
+File infile = new File(root ,"../src/lexicalAnalyzer/keywords.txt");
+Scanner s;
+
+try {
+	s = new Scanner(new FileReader(infile));
 	while (s.hasNext()) {
 		trie.insert(s.next());
 	}
 } catch (FileNotFoundException e) {
 	e.printStackTrace();
 }
+// end user added code.
     this.zzReader = in;
   }
 

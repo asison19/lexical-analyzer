@@ -5,6 +5,8 @@ import token.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.net.URISyntaxException;
+import java.io.File;
 import java.util.Scanner;
 
 %%
@@ -15,16 +17,27 @@ import java.util.Scanner;
 
 // this gets added to the constructor of the created lexer class
 %init{
+// User added code.
 // Add keyword identifiers to the trie table.
-Scanner s;
+FileReader reader;
+File root = new File("");
 try {
-	s = new Scanner(new FileReader("src/lexicalAnalyzer/keywords.txt"));
+	root = new File(Thread.currentThread().getContextClassLoader().getResource("").toURI());
+} catch (URISyntaxException e1) {
+	e1.printStackTrace();
+}
+File infile = new File(root ,"../src/lexicalAnalyzer/keywords.txt");
+Scanner s;
+
+try {
+	s = new Scanner(new FileReader(infile));
 	while (s.hasNext()) {
 		trie.insert(s.next());
 	}
 } catch (FileNotFoundException e) {
 	e.printStackTrace();
 }
+// end user added code.
 %init}
 
 // this gets turned to code directly

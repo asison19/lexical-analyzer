@@ -5,19 +5,23 @@
 
 package main;
 import lexicalAnalyzer.*;
+
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		String infile = "../inputs/SampleOriginalUTF8.in";
+	public static void main(String[] args) throws IOException, URISyntaxException {
+		File root = new File(Thread.currentThread().getContextClassLoader().getResource("").toURI());
+		File infile = new File(root ,"../inputs/SampleOriginalUTF8.in");
 		FileReader reader;
 		try {
-			infile = args[0];
+			infile = new File(args[0]);
 			System.out.println("Using file: " + infile);
 			reader = new FileReader(infile);
 		} catch(IndexOutOfBoundsException e) {
-			infile = "inputs/SampleOriginalUTF8.in";
+			// infile = new File("inputs/SampleOriginalUTF8.in");
 			System.out.println("No inputted file detected, using default file: " + infile);
 			reader = new FileReader(infile);
 		}
