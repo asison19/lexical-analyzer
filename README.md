@@ -28,7 +28,7 @@ Both ANSI, and UTF-8 can work with text (.txt) files.
 The jflex lexical specification file is located in "src/lexicalAnalyzer", along with the java file it creates.  
 
 ## Screenshots  
-Default "testAll.txt" file.
+Default "testAll.txt" file.  
 ![image1](screenshots/image1.png)  
 ![image2](screenshots/image2.png)  
 Testing "Sample.txt" file.  
