@@ -1,4 +1,7 @@
-/* JFlex specification file for Toy Programming Language*/
+/* 
+Jflex specification file used to create the .java file was created by:
+Andrew Sison, and Zach Martin.
+*/
 // User Code
 package lexicalAnalyzer;
 import token.*;
@@ -19,7 +22,6 @@ import java.util.Scanner;
 %init{
 // User added code.
 // Add keyword identifiers to the trie table.
-FileReader reader;
 File root = new File("");
 try {
 	root = new File(Thread.currentThread().getContextClassLoader().getResource("").toURI());

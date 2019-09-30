@@ -1,6 +1,7 @@
 /*
  * Created by: Andrew Sison, and Zach Martin
- * This code does lexical analysis for the Toy programming language.
+ * This code is the driver class for the 
+ * lexical analysis of the Toy programming language.
  */
 
 package main;
