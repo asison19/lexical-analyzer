@@ -44,28 +44,6 @@ try {
 
 // this gets turned to code directly
 %{
-static final int BOOLEANCONSTANT = 0;
-static final int BOOLEAN = 1;
-static final int CLASS = 2;
-static final int DOUBLE = 3;
-static final int ELSE = 4;
-static final int EXTENDS = 5;
-static final int FOR = 6;
-static final int IF = 7;
-static final int IMPLEMENTS = 8;
-static final int INTERFACE = 9;
-static final int NEW = 10;
-static final int NEWARRAY = 11;
-static final int PRINTLN = 12;
-static final int READLN = 13;
-static final int RETURN = 14;
-static final int STRING = 15;
-static final int THIS = 16;
-static final int VOID = 17;
-static final int WHILE = 18;
-static final int BREAK = 19;
-static final int NULL = 20;
-static final int INT = 21;
 int t_flag = 0;
 int yylval;
 // trie table that contains the identifiers and keywords
@@ -86,7 +64,10 @@ digit = [0-9]
 A double constant is a sequence of at least one digit, a period, followed by any sequence of
 digits, may be none. Thus, .12 is not a valid double but both 0.12 and 12. are valid 
 */
-double = [-+]?[0-9]+\.[0-9]*|{exponential}
+double = {double_regular} |{exponential}
+double_regular = [-+]?{digit}+\.{digit}*
+exponential = [-+]?{digit}+\.{digit}*([eE][-+]?{digit}+)
+// exponential = [-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+) // old exponential for 123456E+7
 // includes regular and both slanted quotation marks, char 84, 8220 and 8221
 // does NOT match a mixture of both
 str = \"([^\"\\\\]|\\\\.)*\" | \“([^\”\\\\]|\\\\.)*\”
@@ -99,36 +80,35 @@ comment_line = "//".*
 ws = [ \t\r\f]
 newline = [\n]
 hex = 0[xX][0-9a-fA-F]+
-exponential = [-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)
 
 %%
-// Lexical Rules
+// Lexical Rules // TODO do we need the t_flag?
 {comment}		{}
 {ws}			{}
 {newline}		{System.out.print("\n");}
-true			{t_flag = BOOLEANCONSTANT; System.out.print(yytext() + " "); return (TokenDefinitions.BOOLEANCONSTANT);}
-false			{t_flag = BOOLEANCONSTANT; System.out.print(yytext() + " "); return (TokenDefinitions.BOOLEANCONSTANT);}
-boolean	        {t_flag = BOOLEAN; System.out.print(yytext() + " "); return (TokenDefinitions.BOOLEAN);}
-class	        {t_flag = CLASS; System.out.print(yytext() + " "); return (TokenDefinitions.CLASS);}
-double        	{t_flag = DOUBLE; System.out.print(yytext() + " "); return (TokenDefinitions.DOUBLE);}
-else	        {t_flag = ELSE; System.out.print(yytext() + " "); return (TokenDefinitions.ELSE);}
-extends        	{t_flag = EXTENDS; System.out.print(yytext() + " "); return (TokenDefinitions.EXTENDS);}
-for        		{t_flag = FOR; System.out.print(yytext() + " "); return (TokenDefinitions.FOR);}
-if        		{t_flag = IF; System.out.print(yytext() + " "); return (TokenDefinitions.IF);}
-implements	    {t_flag = IMPLEMENTS; System.out.print(yytext() + " "); return (TokenDefinitions.IMPLEMENTS);}
-interface	    {t_flag = INTERFACE; System.out.print(yytext() + " "); return (TokenDefinitions.INTERFACE);}
-new	        	{t_flag = NEW; System.out.print(yytext() + " "); return (TokenDefinitions.NEW);}
-newarray	    {t_flag = NEWARRAY; System.out.print(yytext() + " "); return (TokenDefinitions.NEWARRAY);}
-println	        {t_flag = PRINTLN; System.out.print(yytext() + " "); return (TokenDefinitions.PRINTLN);}
-readln	        {t_flag = READLN; System.out.print(yytext() + " "); return (TokenDefinitions.READLN);}
-return	        {t_flag = RETURN; System.out.print(yytext() + " "); return (TokenDefinitions.RETURN);}
-String	        {t_flag = STRING; System.out.print(yytext() + " "); return (TokenDefinitions.STRING);}
-this	        {t_flag = THIS; System.out.print(yytext() + " "); return (TokenDefinitions.THIS);}
-void	        {t_flag = VOID; System.out.print(yytext() + " "); return (TokenDefinitions.VOID);}
-while	        {t_flag = WHILE; System.out.print(yytext() + " "); return (TokenDefinitions.WHILE);}
-break			{t_flag = BREAK; System.out.print(yytext() + " "); return (TokenDefinitions.BREAK);}
-null	        {t_flag = NULL; System.out.print(yytext() + " "); return (TokenDefinitions.NULL);}
-int 			{t_flag = INT; System.out.print(yytext() + " "); return (TokenDefinitions.INT);}
+true			{t_flag = TokenDefinitions.BOOLEANCONSTANT; System.out.print(yytext() + " "); return (TokenDefinitions.BOOLEANCONSTANT);}
+false			{t_flag = TokenDefinitions.BOOLEANCONSTANT; System.out.print(yytext() + " "); return (TokenDefinitions.BOOLEANCONSTANT);}
+boolean	        {t_flag = TokenDefinitions.BOOLEAN; System.out.print(yytext() + " "); return (TokenDefinitions.BOOLEAN);}
+class	        {t_flag = TokenDefinitions.CLASS; System.out.print(yytext() + " "); return (TokenDefinitions.CLASS);}
+double        	{t_flag = TokenDefinitions.DOUBLE; System.out.print(yytext() + " "); return (TokenDefinitions.DOUBLE);}
+else	        {t_flag = TokenDefinitions.ELSE; System.out.print(yytext() + " "); return (TokenDefinitions.ELSE);}
+extends        	{t_flag = TokenDefinitions.EXTENDS; System.out.print(yytext() + " "); return (TokenDefinitions.EXTENDS);}
+for        		{t_flag = TokenDefinitions.FOR; System.out.print(yytext() + " "); return (TokenDefinitions.FOR);}
+if        		{t_flag = TokenDefinitions.IF; System.out.print(yytext() + " "); return (TokenDefinitions.IF);}
+implements	    {t_flag = TokenDefinitions.IMPLEMENTS; System.out.print(yytext() + " "); return (TokenDefinitions.IMPLEMENTS);}
+interface	    {t_flag = TokenDefinitions.INTERFACE; System.out.print(yytext() + " "); return (TokenDefinitions.INTERFACE);}
+new	        	{t_flag = TokenDefinitions.NEW; System.out.print(yytext() + " "); return (TokenDefinitions.NEW);}
+newarray	    {t_flag = TokenDefinitions.NEWARRAY; System.out.print(yytext() + " "); return (TokenDefinitions.NEWARRAY);}
+println	        {t_flag = TokenDefinitions.PRINTLN; System.out.print(yytext() + " "); return (TokenDefinitions.PRINTLN);}
+readln	        {t_flag = TokenDefinitions.READLN; System.out.print(yytext() + " "); return (TokenDefinitions.READLN);}
+return	        {t_flag = TokenDefinitions.RETURN; System.out.print(yytext() + " "); return (TokenDefinitions.RETURN);}
+String	        {t_flag = TokenDefinitions.STRING; System.out.print(yytext() + " "); return (TokenDefinitions.STRING);}
+this	        {t_flag = TokenDefinitions.THIS; System.out.print(yytext() + " "); return (TokenDefinitions.THIS);}
+void	        {t_flag = TokenDefinitions.VOID; System.out.print(yytext() + " "); return (TokenDefinitions.VOID);}
+while	        {t_flag = TokenDefinitions.WHILE; System.out.print(yytext() + " "); return (TokenDefinitions.WHILE);}
+break			{t_flag = TokenDefinitions.BREAK; System.out.print(yytext() + " "); return (TokenDefinitions.BREAK);}
+null	        {t_flag = TokenDefinitions.NULL; System.out.print(yytext() + " "); return (TokenDefinitions.NULL);}
+int 			{t_flag = TokenDefinitions.INT; System.out.print(yytext() + " "); return (TokenDefinitions.INT);}
 "+"				{System.out.print("plus" + " "); return (TokenDefinitions.PLUS);}
 "-"				{System.out.print("minus" + " "); return (TokenDefinitions.MINUS);}
 "*"				{System.out.print("multipication" + " "); return (TokenDefinitions.MULTIPLICATION);}
