@@ -16,7 +16,7 @@ public class Main {
 	public static void main(String[] args) throws IOException, URISyntaxException {
 		// get the file for the lexer, if no inputed file, use the default one.
 		File root = new File(Thread.currentThread().getContextClassLoader().getResource("").toURI());
-		File infile = new File(root ,"../inputs/testAll.txt");
+		File infile = new File(root ,"../inputs/test.txt");
 		FileReader reader;
 		try {
 			infile = new File(args[0]);

@@ -64,14 +64,15 @@ digit = [0-9]
 A double constant is a sequence of at least one digit, a period, followed by any sequence of
 digits, may be none. Thus, .12 is not a valid double but both 0.12 and 12. are valid 
 */
-double = {double_regular} |{exponential}
+double = {double_regular} | {exponential}
 double_regular = [-+]?{digit}+\.{digit}*
 exponential = [-+]?{digit}+\.{digit}*([eE][-+]?{digit}+)
 // exponential = [-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+) // old exponential for 123456E+7
 // includes regular and both slanted quotation marks, char 84, 8220 and 8221
 // does NOT match a mixture of both
 str = \"([^\"\\\\]|\\\\.)*\" | \“([^\”\\\\]|\\\\.)*\”
-id = {letter}({letter}|{digit})*
+// id = ("_"|{letter})("_"|{letter}|{digit})* // id can't start with '_' as per the prompt's switch array?
+id = {letter}("_"|{letter}|{digit})*
 int = [-+]?{digit}+|[-+]?{hex}
 comment = {comment_multi}|{comment_line}
 comment_multi = [/][*][^*]*[*]+([^*/][^*]*[*]+)*[/]
