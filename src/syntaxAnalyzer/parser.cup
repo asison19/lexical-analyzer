@@ -13,12 +13,12 @@ init with {: s.init(); :};
 scan with {: return s.nextToken(); :};
 
 /* Terminals (tokens returned by the scanner). */
-terminal        true, false, boolean, CLASS, double, else, EXTENDS, for, if; // TODO error is possibly here?
-terminal	    implements, interface, new, newarray, println, readln, return;
-terminal	    String, this, void, while, break, null, int, plus, minus, multiplication;
-terminal	    division, mod, less, greater, lessequal, greaterequal, equal, notequal, and, or;
-terminal	    not, assignop, COMMA, semicolon, period, leftparen, rightparen, leftbracket, rightbracket;
-terminal	    leftbrace, rightbrace, intconstant, id, stringconstant, doubleconstant;
+terminal        TRUE, FALSE, BOOLEAN, CLASS, DOUBLE, ELSE, EXTENDS, FOR, IF; // TODO ERROR IS POSSIBLY HERE?
+terminal	    IMPLEMENTS, INTERFACE, NEW, NEWARRAY, PRINTLN, READLN, RETURN;
+terminal	    STRING, THIS, VOID, WHILE, BREAK, NULL, INT, PLUS, MINUS, MULTIPLICATION;
+terminal	    DIVISION, MOD, LESS, GREATER, LESSEQUAL, GREATEREQUAL, EQUAL, NOTEQUAL, AND, OR;
+terminal	    NOT, ASSIGNOP, COMMA, SEMICOLON, PERIOD, LEFTPAREN, RIGHTPAREN, LEFTBRACKET, RIGHTBRACKET;// TODO the rest above need to be uppercased
+terminal	    LEFTBRACE, RIGHTBRACE, INTCONSTANT, ID, STRINGCONSTANT, DOUBLECONSTANT; // these have been uppercased in the grammar rules section
 
 /* Non terminals */
 non terminal            Program, Decl, VariableDecl, Variable, Type, FunctionDecl, Formals, ClassDecl;
@@ -26,15 +26,15 @@ non terminal		Field, InterfaceDecl, Prototype, StmtBlock, Stmt, IfStmt, WhileStm
 non terminal		BreakStmt, ReturnStmt, PrintStmt, Expr, Lvalue, Call, Actuals, Constant;
 
 /* Precedences */
-precedence left assignop;
-precedence left or;
-precedence left and;
-precedence left equal, notequal;
-precedence left less, lessequal, greater, greaterequal;
-precedence left plus, minus;
-precedence left multiplication, division, mod;
-precedence left not;
-precedence left leftbracket, period;
+precedence left ASSIGNOP;
+precedence left OR;
+precedence left AND;
+precedence left EQUAL, NOTEQUAL;
+precedence left LESS, LESSEQUAL, GREATER, GREATEREQUAL;
+precedence left PLUS, MINUS;
+precedence left MULTIPLICATION, DIVISION, MOD;
+precedence left NOT;
+precedence left LEFTBRACKET, PERIOD;
 
 // TODO '+' character is unrecognized and ignored
 /* The grammar rules */
@@ -45,36 +45,37 @@ Decl ::= VariableDecl
 	| ClassDecl
 	| InterfaceDecl
 ;
-VariableDecl ::= Variable semicolon
+VariableDecl ::= Variable SEMICOLON
 ;
-Variable ::= Type id
+Variable ::= Type ID
 ;
 Type ::= int
 	| double
 	| boolean
 	| String
 	| Type leftbracket rightbracket
-	| id
+	| ID
 ;
-FunctionDecl ::= Type id leftparen Formals rightparen StmtBlock
-		| void id leftparen Formals rightparen StmtBlock
+FunctionDecl ::= Type ID leftparen Formals rightparen StmtBlock
+		| void ID leftparen Formals rightparen StmtBlock
 ;
-Formals ::= Variable+,
-	   |
+Formals ::= Variable
+		| Formals COMMA Formals
+	    |
 ; // TODO comma, ',' in formals is causing an error
-ClassDecl ::= class id <extends id> <implements id+,> leftbrace Field* rightbrace
+ClassDecl ::= CLASS ID <extends ID> <implements ID+,> LEFTBRACE Field* RIGHTBRACE
 ;
 Field ::= VariableDecl
 	| FunctionDecl
 ;
-InterfaceDecl ::= interface id leftbrace Prototype* rightbrace
+InterfaceDecl ::= interface ID LEFTBRACE Prototype* RIGHTBRACE
 ;
-Prototype ::= Type id leftparen Formals rightparen semicolon
-	     | void id leftparen Formals rightparen semicolon
+Prototype ::= Type ID leftparen Formals rightparen SEMICOLON
+	     | void ID leftparen Formals rightparen SEMICOLON
 ;
-StmtBlock ::= leftbrace VariableDecl* Stmt* rightbrace
+StmtBlock ::= LEFTBRACE VariableDecl* Stmt* RIGHTBRACE
 ;
-Stmt ::= <Expr> semicolon
+Stmt ::= <Expr> SEMICOLON
 	| IfStmt
 	| WhileStmt
 	| ForStmt
@@ -87,13 +88,13 @@ IfStmt ::= if leftparen Expr rightparen Stmt <else Stmt>
 ;
 WhileStmt ::= while leftparen Expr rightparen Stmt
 ;
-ForStmt ::= for leftparen <Expr> semicolon Expr semicolon <Expr> rightparen Stmt
+ForStmt ::= for leftparen <Expr> SEMICOLON Expr SEMICOLON <Expr> rightparen Stmt
 ;
-BreakStmt ::= break semicolon
+BreakStmt ::= break SEMICOLON
 ;
-ReturnStmt ::= return <Expr> semicolon
+ReturnStmt ::= return <Expr> SEMICOLON
 ;
-PrintStmt ::= println leftparen Expr+, rightparen semicolon
+PrintStmt ::= println leftparen Expr+, rightparen SEMICOLON
 ;
 Expr ::= Lvalue assignop Expr
 	| Constant
@@ -117,22 +118,22 @@ Expr ::= Lvalue assignop Expr
 	| Expr or Expr
 	| not Expr
 	| readln leftparen rightparen
-	| new leftparen id rightparen
-	| newarray leftparen intconstant comma Type rightparen
+	| new leftparen ID rightparen
+	| newarray leftparen INTCONSTANT comma Type rightparen
 ;
-Lvalue ::= id
+Lvalue ::= ID
 	  | Lvalue leftbracket Expr rightbracket
-	  | Lvalue period id
+	  | Lvalue period ID
 ;
-Call ::= id leftparen Actuals rightparen
-	| id period id leftparen Actuals rightparen
+Call ::= ID leftparen Actuals rightparen
+	| ID period ID leftparen Actuals rightparen
 ;
 Actuals ::= Expr+,
 	   |
 ;
-Constant ::= intconstant
-	    | doubleconstant
-	    | stringconstant
-	    | booleanconstant
-	    | null
+Constant ::= INTCONSTANT
+	    | DOUBLECONSTANT
+	    | STRINGCONSTANT
+	    | BOOLEANCONSTANT
+	    | NULL
 ;
