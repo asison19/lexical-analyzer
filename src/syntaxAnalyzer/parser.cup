@@ -21,9 +21,10 @@ terminal	    NOT, ASSIGNOP, COMMA, SEMICOLON, PERIOD, LEFTPAREN, RIGHTPAREN, LEF
 terminal	    LEFTBRACE, RIGHTBRACE, INTCONSTANT, ID, STRINGCONSTANT, DOUBLECONSTANT; // these have been uppercased in the grammar rules section
 
 /* Non terminals */
-non terminal            Program, Decl, VariableDecl, Variable, Type, FunctionDecl, Formals, ClassDecl;
-non terminal		Field, InterfaceDecl, Prototype, StmtBlock, Stmt, IfStmt, WhileStmt, ForStmt;
-non terminal		BreakStmt, ReturnStmt, PrintStmt, Expr, Lvalue, Call, Actuals, Constant;
+non terminal            program, decl, variabledecl, variable, type, functiondecl, formals, classdecl;
+non terminal		field, interfacedecl, prototype, stmtblock, stmt, ifstmt, whilestmt, forstmt;
+non terminal		breakstmt, returnstmt, printstmt, expr, lvalue, call, actuals, constant;
+non terminal	 	declplus, variablecommplus, idcommplus, exprcommplus; // ALL OF THE NON TERMINALS TO FIX ISSUES
 
 /* Precedences */
 precedence left ASSIGNOP;
@@ -36,102 +37,121 @@ precedence left MULTIPLICATION, DIVISION, MOD;
 precedence left NOT;
 precedence left LEFTBRACKET, PERIOD;
 
-// TODO '+' character is unrecognized and ignored
 /* The grammar rules */
-Program ::= Decl+
+program ::= decl declplus
 ;
-Decl ::= VariableDecl
-	| FunctionDecl
-	| ClassDecl
-	| InterfaceDecl
-;
-VariableDecl ::= Variable SEMICOLON
-;
-Variable ::= Type ID
-;
-Type ::= int
-	| double
-	| boolean
-	| String
-	| Type leftbracket rightbracket
-	| ID
-;
-FunctionDecl ::= Type ID leftparen Formals rightparen StmtBlock
-		| void ID leftparen Formals rightparen StmtBlock
-;
-Formals ::= Variable
-		| Formals COMMA Formals
-	    |
-; // TODO comma, ',' in formals is causing an error
-ClassDecl ::= CLASS ID <extends ID> <implements ID+,> LEFTBRACE Field* RIGHTBRACE
-;
-Field ::= VariableDecl
-	| FunctionDecl
-;
-InterfaceDecl ::= interface ID LEFTBRACE Prototype* RIGHTBRACE
-;
-Prototype ::= Type ID leftparen Formals rightparen SEMICOLON
-	     | void ID leftparen Formals rightparen SEMICOLON
-;
-StmtBlock ::= LEFTBRACE VariableDecl* Stmt* RIGHTBRACE
-;
-Stmt ::= <Expr> SEMICOLON
-	| IfStmt
-	| WhileStmt
-	| ForStmt
-	| BreakStmt
-	| ReturnStmt
-	| PrintStmt
-	| StmtBlock
-;
-IfStmt ::= if leftparen Expr rightparen Stmt <else Stmt>
-;
-WhileStmt ::= while leftparen Expr rightparen Stmt
-;
-ForStmt ::= for leftparen <Expr> SEMICOLON Expr SEMICOLON <Expr> rightparen Stmt
-;
-BreakStmt ::= break SEMICOLON
-;
-ReturnStmt ::= return <Expr> SEMICOLON
-;
-PrintStmt ::= println leftparen Expr+, rightparen SEMICOLON
-;
-Expr ::= Lvalue assignop Expr
-	| Constant
-	| Lvalue
-	| this
-	| Call
-	| leftparen Expr rightparen
-	| Expr plus Expr
-	| Expr minus Expr
-	| Expr multiplication Expr
-	| Expr division Expr
-	| Expr mod Expr
-	| minus Expr
-	| Expr less Expr
-	| Expr lessequal Expr
-	| Expr greater Expr
-	| Expr greaterequal Expr
-	| Expr equal Expr
-	| Expr notequal Expr
-	| Expr and Expr
-	| Expr or Expr
-	| not Expr
-	| readln leftparen rightparen
-	| new leftparen ID rightparen
-	| newarray leftparen INTCONSTANT comma Type rightparen
-;
-Lvalue ::= ID
-	  | Lvalue leftbracket Expr rightbracket
-	  | Lvalue period ID
-;
-Call ::= ID leftparen Actuals rightparen
-	| ID period ID leftparen Actuals rightparen
-;
-Actuals ::= Expr+,
+declplus ::= decl declplus // FIXES '+' PROBLEM
 	   |
 ;
-Constant ::= INTCONSTANT
+decl ::= variabledecl
+	| functiondecl
+	| classdecl
+	| interfacedecl
+;
+variabledecl ::= variable SEMICOLON
+;
+variable ::= type ID
+;
+type ::= INT
+	| DOUBLE
+	| BOOLEAN
+	| STRING
+	| type LEFTBRACKET RIGHTBRACKET
+	| ID
+;
+functiondecl ::= type ID LEFTPAREN formals RIGHTPAREN stmtblock
+		| VOID ID LEFTPAREN formals RIGHTPAREN stmtblock
+;
+formals ::= variable variablecommplus
+	   |
+;
+variablecommplus ::= COMMA variable variablecommplus // FIXES '+,' PROBLEM
+		    |
+;
+classdecl ::= CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE field* RIGHTBRACE // FIXES '<>' PROBLEM
+	     | CLASS ID EXTENDS ID LEFTBRACE field* RIGHTBRACE
+	     | CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE field* RIGHTBRACE
+	     | CLASS ID LEFTBRACE field* RIGHTBRACE
+;
+idcommplus ::= COMMA ID idcommplus // FIXES '+,' PROBLEM
+	      |
+;
+field ::= variabledecl
+	| functiondecl
+;
+interfacedecl ::= INTERFACE ID LEFTBRACE prototype* RIGHTBRACE
+;
+prototype ::= type ID LEFTPAREN formals RIGHTPAREN SEMICOLON
+	     | VOID ID LEFTPAREN formals RIGHTPAREN SEMICOLON
+;
+stmtblock ::= LEFTBRACE variabledecl* stmt* RIGHTBRACE
+;
+stmt ::= expr SEMICOLON // FIXES '<>' PROBLEM
+	| SEMICOLON
+	| ifstmt
+	| whilestmt
+	| forstmt
+	| breakstmt
+	| returnstmt
+	| printstmt
+	| stmtblock
+;
+ifstmt ::= IF LEFTPAREN expr RIGHTPAREN stmt ELSE stmt // FIXES '<>' PROBLEM
+	  | IF LEFTPAREN expr RIGHTPAREN stmt
+;
+whilestmt ::= WHILE LEFTPAREN expr RIGHTPAREN stmt
+;
+forstmt ::= FOR LEFTPAREN expr SEMICOLON expr SEMICOLON expr RIGHTPAREN stmt // FIXES '<>' PROBLEM
+	   | FOR LEFTPAREN expr SEMICOLON expr SEMICOLON RIGHTPAREN stmt
+	   | FOR LEFTPAREN SEMICOLON expr SEMICOLON expr RIGHTPAREN stmt
+	   | FOR LEFTPAREN SEMICOLON expr SEMICOLON RIGHTPAREN stmt
+;
+breakstmt ::= BREAK SEMICOLON
+;
+returnstmt ::= RETURN expr SEMICOLON // FIXES '<>' PROBLEM
+	     | RETURN SEMICOLON
+;
+printstmt ::= PRINTLN LEFTPAREN expr exprcommplus RIGHTPAREN SEMICOLON
+;
+exprcommplus ::= COMMA expr exprcommplus // FIXES '+,' PROBLEM
+	       |
+;
+expr ::= lvalue ASSIGNOP expr
+	| constant
+	| lvalue
+	| THIS
+	| call
+	| LEFTPAREN expr RIGHTPAREN
+	| expr PLUS expr
+	| expr MINUS expr
+	| expr MULTIPLICATION expr
+	| expr DIVISION expr
+	| expr MOD expr
+	| MINUS expr
+	| expr LESS expr
+	| expr LESSEQUAL expr
+	| expr GREATER expr
+	| expr GREATEREQUAL expr
+	| expr EQUAL expr
+	| expr NOTEQUAL expr
+	| expr AND expr
+	| expr OR expr
+	| NOT expr
+	| READLN LEFTPAREN RIGHTPAREN
+	| NEW LEFTPAREN ID RIGHTPAREN
+	| NEWARRAY LEFTPAREN INTCONSTANT COMMA type RIGHTPAREN
+;
+lvalue ::= ID
+	  | lvalue LEFTBRACKET expr RIGHTBRACKET
+	  | lvalue PERIOD ID
+;
+call ::= ID LEFTPAREN actuals RIGHTPAREN
+	| ID PERIOD ID LEFTPAREN actuals RIGHTPAREN
+;
+actuals ::= expr exprcommplus
+	   |
+;
+constant ::= INTCONSTANT
 	    | DOUBLECONSTANT
 	    | STRINGCONSTANT
 	    | BOOLEANCONSTANT
