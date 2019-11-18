@@ -1,0 +1,137 @@
+/* Simple Toy language; parser evaluates constant expressions on the fly*/
+package cupexample;
+import java_cup.runtime.*;
+
+parser code {:
+    // Connect this parser to a scanner!
+    Lexer s;
+    Parser(Lexer s){ this.s=s; }
+:}
+
+/* define how to connect to the scanner! */
+init with {: s.init(); :};
+scan with {: return s.nextToken(); :};
+
+/* Terminals (tokens returned by the scanner). */
+terminal            true, false, boolean, class, double, else, extends, for, if;
+terminal	    implements, interface, new, newarray, println, readln, return;
+terminal	    String, this, void, while, break, null, int, plus, minus, multiplication;
+terminal	    division, mod, less, greater, lessequal, greaterequal, equal, notequal, and, or;
+terminal	    not, assignop, comma, semicolon, period, leftparen, rightparen, leftbracket, rightbracket;
+terminal	    leftbrace, rightbrace, intconstant, id, stringconstant, doubleconstant;
+
+/* Non terminals */
+non terminal            Program, Decl, VariableDecl, Variable, Type, FunctionDecl, Formals, ClassDecl;
+non terminal		Field, InterfaceDecl, Prototype, StmtBlock, Stmt, IfStmt, WhileStmt, ForStmt;
+non terminal		BreakStmt, ReturnStmt, PrintStmt, Expr, Lvalue, Call, Actuals, Constant;
+
+/* Precedences */
+precedence left assignop;
+precedence left or;
+precedence left and;
+precedence left equal, notequal;
+precedence left less, lessequal, greater, greaterequal;
+precedence left plus, minus;
+precedence left multiplication, division, mod;
+precedence left not;
+precedence left leftbracket, period;
+
+/* The grammar rules */
+Program ::= Decl+
+;
+Decl ::= VariableDecl
+	| FunctionDecl
+	| ClassDecl
+	| InterfaceDecl
+;
+VariableDecl ::= Variable semicolon
+;
+Variable ::= Type id
+;
+Type ::= int
+	| double
+	| boolean
+	| String
+	| Type leftbracket rightbracket
+	| id
+;
+FunctionDecl ::= Type id leftparen Formals rightparen StmtBlock
+		| void id leftparen Formals rightparen StmtBlock
+;
+Formals ::= Variable+,
+	   |
+;
+ClassDecl ::= class id <extends id> <implements id+,> leftbrace Field* rightbrace
+;
+Field ::= VariableDecl
+	| FunctionDecl
+;
+InterfaceDecl ::= interface id leftbrace Prototype* rightbrace
+;
+Prototype ::= Type id leftparen Formals rightparen semicolon
+	     | void id leftparen Formals rightparen semicolon
+;
+StmtBlock ::= leftbrace VariableDecl* Stmt* rightbrace
+;
+Stmt ::= <Expr> semicolon
+	| IfStmt
+	| WhileStmt
+	| ForStmt
+	| BreakStmt
+	| ReturnStmt
+	| PrintStmt
+	| StmtBlock
+;
+IfStmt ::= if leftparen Expr rightparen Stmt <else Stmt>
+;
+WhileStmt ::= while leftparen Expr rightparen Stmt
+;
+ForStmt ::= for leftparen <Expr> semicolon Expr semicolon <Expr> rightparen Stmt
+;
+BreakStmt ::= break semicolon
+;
+ReturnStmt ::= return <Expr> semicolon
+;
+PrintStmt ::= println leftparen Expr+, rightparen semicolon
+;
+Expr ::= Lvalue assignop Expr
+	| Constant
+	| Lvalue
+	| this
+	| Call
+	| leftparen Expr rightparen
+	| Expr plus Expr
+	| Expr minus Expr
+	| Expr multiplication Expr
+	| Expr division Expr
+	| Expr mod Expr
+	| minus Expr
+	| Expr less Expr
+	| Expr lessequal Expr
+	| Expr greater Expr
+	| Expr greaterequal Expr
+	| Expr equal Expr
+	| Expr notequal Expr
+	| Expr and Expr
+	| Expr or Expr
+	| not Expr
+	| readln leftparen rightparen
+	| new leftparen id rightparen
+	| newarray leftparen intconstant comma Type rightparen
+;
+Lvalue ::= id
+	  | Lvalue leftbracket Expr rightbracket
+	  | Lvalue period id
+;
+Call ::= id leftparen Actuals rightparen
+	| id period id leftparen Actuals rightparen
+;
+Actuals ::= Expr+,
+	   |
+;
+Constant ::= intconstant
+	    | doubleconstant
+	    | stringconstant
+	    | booleanconstant
+	    | null
+;
