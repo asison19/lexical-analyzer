@@ -13,11 +13,11 @@ init with {: s.init(); :};
 scan with {: return s.nextToken(); :};
 
 /* Terminals (tokens returned by the scanner). */
-terminal            true, false, boolean, class, double, else, extends, for, if;
+terminal        true, false, boolean, CLASS, double, else, EXTENDS, for, if; // TODO error is possibly here?
 terminal	    implements, interface, new, newarray, println, readln, return;
 terminal	    String, this, void, while, break, null, int, plus, minus, multiplication;
 terminal	    division, mod, less, greater, lessequal, greaterequal, equal, notequal, and, or;
-terminal	    not, assignop, comma, semicolon, period, leftparen, rightparen, leftbracket, rightbracket;
+terminal	    not, assignop, COMMA, semicolon, period, leftparen, rightparen, leftbracket, rightbracket;
 terminal	    leftbrace, rightbrace, intconstant, id, stringconstant, doubleconstant;
 
 /* Non terminals */
@@ -36,6 +36,7 @@ precedence left multiplication, division, mod;
 precedence left not;
 precedence left leftbracket, period;
 
+// TODO '+' character is unrecognized and ignored
 /* The grammar rules */
 Program ::= Decl+
 ;
@@ -60,7 +61,7 @@ FunctionDecl ::= Type id leftparen Formals rightparen StmtBlock
 ;
 Formals ::= Variable+,
 	   |
-;
+; // TODO comma, ',' in formals is causing an error
 ClassDecl ::= class id <extends id> <implements id+,> leftbrace Field* rightbrace
 ;
 Field ::= VariableDecl
