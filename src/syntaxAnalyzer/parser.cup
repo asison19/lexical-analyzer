@@ -18,13 +18,13 @@ terminal	    IMPLEMENTS, INTERFACE, NEW, NEWARRAY, PRINTLN, READLN, RETURN;
 terminal	    STRING, THIS, VOID, WHILE, BREAK, NULL, INT, PLUS, MINUS, MULTIPLICATION;
 terminal	    DIVISION, MOD, LESS, GREATER, LESSEQUAL, GREATEREQUAL, EQUAL, NOTEQUAL, AND, OR;
 terminal	    NOT, ASSIGNOP, COMMA, SEMICOLON, PERIOD, LEFTPAREN, RIGHTPAREN, LEFTBRACKET, RIGHTBRACKET;// TODO the rest above need to be uppercased
-terminal	    LEFTBRACE, RIGHTBRACE, INTCONSTANT, ID, STRINGCONSTANT, DOUBLECONSTANT; // these have been uppercased in the grammar rules section
+terminal	    LEFTBRACE, RIGHTBRACE, INTCONSTANT, ID, STRINGCONSTANT, DOUBLECONSTANT, BOOLEANCONSTANT; // these have been uppercased in the grammar rules section
 
 /* Non terminals */
 non terminal            program, decl, variabledecl, variable, type, functiondecl, formals, classdecl;
 non terminal		field, interfacedecl, prototype, stmtblock, stmt, ifstmt, whilestmt, forstmt;
 non terminal		breakstmt, returnstmt, printstmt, expr, lvalue, call, actuals, constant;
-non terminal	 	declplus, variablecommplus, idcommplus, exprcommplus; // ALL OF THE NON TERMINALS TO FIX ISSUES
+non terminal	 	declplus, variablecommplus, idcommplus, exprcommplus, fieldstar, prototypestar, variabledeclstar, stmtstar; // ALL OF THE NON TERMINALS TO FIX ISSUES
 
 /* Precedences */
 precedence left ASSIGNOP;
@@ -68,10 +68,13 @@ formals ::= variable variablecommplus
 variablecommplus ::= COMMA variable variablecommplus // FIXES '+,' PROBLEM
 		    |
 ;
-classdecl ::= CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE field* RIGHTBRACE // FIXES '<>' PROBLEM
-	     | CLASS ID EXTENDS ID LEFTBRACE field* RIGHTBRACE
-	     | CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE field* RIGHTBRACE
-	     | CLASS ID LEFTBRACE field* RIGHTBRACE
+classdecl ::= CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE // FIXES '<>' PROBLEM
+	     | CLASS ID EXTENDS ID LEFTBRACE fieldstar RIGHTBRACE
+	     | CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE
+	     | CLASS ID LEFTBRACE fieldstar RIGHTBRACE
+;
+fieldstar ::= field fieldstar // FIXES '*' PROBLEM
+	     |
 ;
 idcommplus ::= COMMA ID idcommplus // FIXES '+,' PROBLEM
 	      |
@@ -79,12 +82,21 @@ idcommplus ::= COMMA ID idcommplus // FIXES '+,' PROBLEM
 field ::= variabledecl
 	| functiondecl
 ;
-interfacedecl ::= INTERFACE ID LEFTBRACE prototype* RIGHTBRACE
+interfacedecl ::= INTERFACE ID LEFTBRACE prototypestar RIGHTBRACE
+;
+prototypestar ::= prototype prototypestar
+		 |
 ;
 prototype ::= type ID LEFTPAREN formals RIGHTPAREN SEMICOLON
 	     | VOID ID LEFTPAREN formals RIGHTPAREN SEMICOLON
 ;
-stmtblock ::= LEFTBRACE variabledecl* stmt* RIGHTBRACE
+stmtblock ::= LEFTBRACE variabledeclstar stmtstar RIGHTBRACE
+;
+variabledeclstar ::= variabledecl variabledeclstar // FIXES '*' PROBLEM
+		    |
+;
+stmtstar ::= stmt stmtstar // FIXES '*' PROBLEM
+	    |
 ;
 stmt ::= expr SEMICOLON // FIXES '<>' PROBLEM
 	| SEMICOLON

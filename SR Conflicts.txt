@@ -1,0 +1,17 @@
+Warning : *** Shift/Reduce conflict found in state #57
+  between variabledeclstar ::= (*)
+  and     type ::= (*) ID
+  under symbol ID
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #58
+  between variabledeclstar ::= (*)
+  and     type ::= (*) ID
+  under symbol ID
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #181
+  between ifstmt ::= IF LEFTPAREN expr RIGHTPAREN stmt (*)
+  and     ifstmt ::= IF LEFTPAREN expr RIGHTPAREN stmt (*) ELSE stmt
+  under symbol ELSE
+  Resolved in favor of shifting.
