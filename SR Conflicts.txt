@@ -15,3 +15,21 @@ Warning : *** Shift/Reduce conflict found in state #181
   and     ifstmt ::= IF LEFTPAREN expr RIGHTPAREN stmt (*) ELSE stmt
   under symbol ELSE
   Resolved in favor of shifting.
+
+
+
+Warning : *** Reduce/Reduce conflict found in state #102
+  between type ::= ID (*)
+  and     lvalue ::= ID (*)
+  under symbols: {LEFTBRACKET}
+  Resolved in favor of the first production.
+
+Warning : *** Shift/Reduce conflict found in state #102
+  between type ::= ID (*)
+  under symbol LEFTBRACKET
+  Resolved in favor of shifting.
+
+Warning : *** Shift/Reduce conflict found in state #102
+  between lvalue ::= ID (*)
+  under symbol LEFTBRACKET
+  Resolved in favor of shifting.

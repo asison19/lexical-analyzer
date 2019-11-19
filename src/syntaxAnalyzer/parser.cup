@@ -36,6 +36,7 @@ precedence left PLUS, MINUS;
 precedence left MULTIPLICATION, DIVISION, MOD;
 precedence left NOT;
 precedence left LEFTBRACKET, PERIOD;
+precedence left ELSE; // FIXES SR DANGLING ELSE PROBLEM
 
 /* The grammar rules */
 program ::= decl declplus
@@ -56,7 +57,7 @@ type ::= INT
 	| DOUBLE
 	| BOOLEAN
 	| STRING
-	| type LEFTBRACKET RIGHTBRACKET
+	| type LEFTBRACKET RIGHTBRACKET ID
 	| ID
 ;
 functiondecl ::= type ID LEFTPAREN formals RIGHTPAREN stmtblock
@@ -69,12 +70,15 @@ variablecommplus ::= COMMA variable variablecommplus // FIXES '+,' PROBLEM
 		    |
 ;
 classdecl ::= CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE // FIXES '<>' PROBLEM
+	     | CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE RIGHTBRACE
 	     | CLASS ID EXTENDS ID LEFTBRACE fieldstar RIGHTBRACE
+	     | CLASS ID EXTENDS ID LEFTBRACE RIGHTBRACE
 	     | CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE
+	     | CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE RIGHTBRACE
 	     | CLASS ID LEFTBRACE fieldstar RIGHTBRACE
+	     | CLASS ID LEFTBRACE RIGHTBRACE
 ;
 fieldstar ::= field fieldstar // FIXES '*' PROBLEM
-	     |
 ;
 idcommplus ::= COMMA ID idcommplus // FIXES '+,' PROBLEM
 	      |
@@ -83,20 +87,21 @@ field ::= variabledecl
 	| functiondecl
 ;
 interfacedecl ::= INTERFACE ID LEFTBRACE prototypestar RIGHTBRACE
+		  | INTERFACE ID LEFTBRACE RIGHTBRACE
 ;
-prototypestar ::= prototype prototypestar
-		 |
+prototypestar ::= prototype prototypestar // FIXED '*' PROBLEM
 ;
 prototype ::= type ID LEFTPAREN formals RIGHTPAREN SEMICOLON
 	     | VOID ID LEFTPAREN formals RIGHTPAREN SEMICOLON
 ;
 stmtblock ::= LEFTBRACE variabledeclstar stmtstar RIGHTBRACE
+	     | LEFTBRACE stmtstar RIGHTBRACE
+	     | LEFTBRACE variabledeclstar RIGHTBRACE
+	     | LEFTBRACE RIGHTBRACE
 ;
-variabledeclstar ::= variabledecl variabledeclstar // FIXES '*' PROBLEM
-		    |
+variabledeclstar ::= variabledecl variabledeclstar // FIXED '*' PROBLEM
 ;
-stmtstar ::= stmt stmtstar // FIXES '*' PROBLEM
-	    |
+stmtstar ::= stmt stmtstar // FIXED '*' PROBLEM
 ;
 stmt ::= expr SEMICOLON // FIXES '<>' PROBLEM
 	| SEMICOLON
@@ -153,7 +158,8 @@ expr ::= lvalue ASSIGNOP expr
 	| NEW LEFTPAREN ID RIGHTPAREN
 	| NEWARRAY LEFTPAREN INTCONSTANT COMMA type RIGHTPAREN
 ;
-lvalue ::= ID
+lvalue ::= ID LEFTBRACKET expr RIGHTBRACKET // FIXED SR AND RR ISSUES HERE
+	  | ID PERIOD ID
 	  | lvalue LEFTBRACKET expr RIGHTBRACKET
 	  | lvalue PERIOD ID
 ;
