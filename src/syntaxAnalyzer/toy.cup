@@ -1,16 +1,22 @@
 /* Simple Toy language; parser evaluates constant expressions on the fly*/
-package cupexample;
+
+// requires java-cup-11b-runtime.jar
+package syntaxAnalyzer;
+
 import java_cup.runtime.*;
+import lexicalAnalyzer.*; // Project 1
+
+class ToyParser;
 
 parser code {:
     // Connect this parser to a scanner!
-    Lexer s;
-    Parser(Lexer s){ this.s=s; }
+    ToyLexer s;
+    ToyParser(ToyLexer s){ this.s=s; }
 :}
 
 /* define how to connect to the scanner! */
-init with {: s.init(); :};
-scan with {: return s.nextToken(); :};
+// init with {: s.init(); :};
+scan with {: return s.yylex(); :};
 
 /* Terminals (tokens returned by the scanner). */
 terminal        TRUE, FALSE, BOOLEAN, CLASS, DOUBLE, ELSE, EXTENDS, FOR, IF; // TODO ERROR IS POSSIBLY HERE?
