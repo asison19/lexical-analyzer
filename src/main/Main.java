@@ -33,7 +33,7 @@ public class Main {
 		System.out.println("\n********** Start of lexical analysis **********");
 		do {
 			count++;
-		} while (lexer.yylex() != null);
+		} while (lexer.next_token().sym != 0); // 0 being EOF symbol
 		
 		System.out.println("\n********** End of lexical analysis **********");
 		System.out.println("There were " + count +" tokens in the file:\n" + infile);

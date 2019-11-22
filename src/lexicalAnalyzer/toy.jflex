@@ -5,6 +5,7 @@ Andrew Sison, and Zach Martin.
 // User Code
 package lexicalAnalyzer;
 import token.*;
+import syntaxAnalyzer.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -16,7 +17,9 @@ import java.util.Scanner;
 // Options and Declarations
 %public
 %class ToyLexer
-%type Integer
+//%type Integer
+//%type java_cup.runtime.Symbol
+%cup
 
 // this gets added to the constructor of the created lexer class
 %init{
@@ -87,54 +90,54 @@ hex = 0[xX][0-9a-fA-F]+
 {comment}		{}
 {ws}			{}
 {newline}		{System.out.print("\n");}
-true			{t_flag = TokenDefinitions.BOOLEANCONSTANT; System.out.print(yytext() + " "); return (TokenDefinitions.BOOLEANCONSTANT);}
-false			{t_flag = TokenDefinitions.BOOLEANCONSTANT; System.out.print(yytext() + " "); return (TokenDefinitions.BOOLEANCONSTANT);}
-boolean	        {t_flag = TokenDefinitions.BOOLEAN; System.out.print(yytext() + " "); return (TokenDefinitions.BOOLEAN);}
-class	        {t_flag = TokenDefinitions.CLASS; System.out.print(yytext() + " "); return (TokenDefinitions.CLASS);}
-double        	{t_flag = TokenDefinitions.DOUBLE; System.out.print(yytext() + " "); return (TokenDefinitions.DOUBLE);}
-else	        {t_flag = TokenDefinitions.ELSE; System.out.print(yytext() + " "); return (TokenDefinitions.ELSE);}
-extends        	{t_flag = TokenDefinitions.EXTENDS; System.out.print(yytext() + " "); return (TokenDefinitions.EXTENDS);}
-for        		{t_flag = TokenDefinitions.FOR; System.out.print(yytext() + " "); return (TokenDefinitions.FOR);}
-if        		{t_flag = TokenDefinitions.IF; System.out.print(yytext() + " "); return (TokenDefinitions.IF);}
-implements	    {t_flag = TokenDefinitions.IMPLEMENTS; System.out.print(yytext() + " "); return (TokenDefinitions.IMPLEMENTS);}
-interface	    {t_flag = TokenDefinitions.INTERFACE; System.out.print(yytext() + " "); return (TokenDefinitions.INTERFACE);}
-new	        	{t_flag = TokenDefinitions.NEW; System.out.print(yytext() + " "); return (TokenDefinitions.NEW);}
-newarray	    {t_flag = TokenDefinitions.NEWARRAY; System.out.print(yytext() + " "); return (TokenDefinitions.NEWARRAY);}
-println	        {t_flag = TokenDefinitions.PRINTLN; System.out.print(yytext() + " "); return (TokenDefinitions.PRINTLN);}
-readln	        {t_flag = TokenDefinitions.READLN; System.out.print(yytext() + " "); return (TokenDefinitions.READLN);}
-return	        {t_flag = TokenDefinitions.RETURN; System.out.print(yytext() + " "); return (TokenDefinitions.RETURN);}
-String	        {t_flag = TokenDefinitions.STRING; System.out.print(yytext() + " "); return (TokenDefinitions.STRING);}
-this	        {t_flag = TokenDefinitions.THIS; System.out.print(yytext() + " "); return (TokenDefinitions.THIS);}
-void	        {t_flag = TokenDefinitions.VOID; System.out.print(yytext() + " "); return (TokenDefinitions.VOID);}
-while	        {t_flag = TokenDefinitions.WHILE; System.out.print(yytext() + " "); return (TokenDefinitions.WHILE);}
-break			{t_flag = TokenDefinitions.BREAK; System.out.print(yytext() + " "); return (TokenDefinitions.BREAK);}
-null	        {t_flag = TokenDefinitions.NULL; System.out.print(yytext() + " "); return (TokenDefinitions.NULL);}
-int 			{t_flag = TokenDefinitions.INT; System.out.print(yytext() + " "); return (TokenDefinitions.INT);}
-"+"				{System.out.print("plus" + " "); return (TokenDefinitions.PLUS);}
-"-"				{System.out.print("minus" + " "); return (TokenDefinitions.MINUS);}
-"*"				{System.out.print("multipication" + " "); return (TokenDefinitions.MULTIPLICATION);}
-"/"				{System.out.print("division" + " "); return (TokenDefinitions.DIVISION);}
-"%"				{System.out.print("mod" + " "); return (TokenDefinitions.MOD);}
-"<"				{System.out.print("less" + " "); return (TokenDefinitions.LESS);}
-">"				{System.out.print("greater" + " "); return (TokenDefinitions.GREATER);}
-"<="			{System.out.print("lessequal" + " "); return (TokenDefinitions.LESSEQUAL);}
-">="			{System.out.print("greaterequal" + " "); return (TokenDefinitions.GREATEREQUAL);}
-"=="			{System.out.print("equal" + " "); return (TokenDefinitions.EQUAL);}
-"!="			{System.out.print("notequal" + " "); return (TokenDefinitions.NOTEQUAL);}
-"&&"			{System.out.print("and" + " "); return (TokenDefinitions.AND);}
-"||"			{System.out.print("or" + " "); return (TokenDefinitions.OR);}
-"!"				{System.out.print("not" + " "); return (TokenDefinitions.NOT);}
-"="				{System.out.print("assignop" + " "); return (TokenDefinitions.ASSIGNOP);}
-","				{System.out.print("comma" + " "); return (TokenDefinitions.COMMA);}
-";"				{System.out.print("semicolon" + " "); return (TokenDefinitions.SEMICOLON);}
-"."				{System.out.print("period" + " "); return (TokenDefinitions.PERIOD);}
-"("				{System.out.print("leftparen" + " "); return (TokenDefinitions.LEFTPAREN);}
-")"				{System.out.print("rightparen" + " "); return (TokenDefinitions.RIGHTPAREN);}
-"["				{System.out.print("leftbracket" + " "); return (TokenDefinitions.LEFTBRACKET);}
-"]"				{System.out.print("rightbracket" + " "); return (TokenDefinitions.RIGHTBRACKET);}
-"{"				{System.out.print("leftbrace" + " "); return (TokenDefinitions.LEFTBRACE);}
-"}"				{System.out.print("rightbrace" + " "); return (TokenDefinitions.RIGHTBRACE);}
-{int}			{System.out.print("intconstant" + " "); return (TokenDefinitions.INTCONSTANT);}
-{id}			{System.out.print("id" + " "); trie.insert(yytext()); return(TokenDefinitions.ID);}
-{str}			{System.out.print("stringconstant" + " "); return (TokenDefinitions.STRINGCONSTANT);}
-{double}		{System.out.print("doubleconstant" + " "); return (TokenDefinitions.DOUBLECONSTANT);}
+true			{t_flag = TokenDefinitions.BOOLEANCONSTANT; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ID);}
+false			{t_flag = TokenDefinitions.BOOLEANCONSTANT; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEANCONSTANT);}
+boolean	        {t_flag = TokenDefinitions.BOOLEAN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEAN);}
+class	        {t_flag = TokenDefinitions.CLASS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.CLASS);}
+double        	{t_flag = TokenDefinitions.DOUBLE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DOUBLE);}
+else	        {t_flag = TokenDefinitions.ELSE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ELSE);}
+extends        	{t_flag = TokenDefinitions.EXTENDS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.EXTENDS);}
+for        		{t_flag = TokenDefinitions.FOR; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.FOR);}
+if        		{t_flag = TokenDefinitions.IF; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IF);}
+implements	    {t_flag = TokenDefinitions.IMPLEMENTS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IMPLEMENTS);}
+interface	    {t_flag = TokenDefinitions.INTERFACE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INTERFACE);}
+new	        	{t_flag = TokenDefinitions.NEW; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEW);}
+newarray	    {t_flag = TokenDefinitions.NEWARRAY; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEWARRAY);}
+println	        {t_flag = TokenDefinitions.PRINTLN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PRINTLN);}
+readln	        {t_flag = TokenDefinitions.READLN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.READLN);}
+return	        {t_flag = TokenDefinitions.RETURN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RETURN);}
+String	        {t_flag = TokenDefinitions.STRING; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.STRING);}
+this	        {t_flag = TokenDefinitions.THIS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.THIS);}
+void	        {t_flag = TokenDefinitions.VOID; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.VOID);}
+while	        {t_flag = TokenDefinitions.WHILE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.WHILE);}
+break			{t_flag = TokenDefinitions.BREAK; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BREAK);}
+null	        {t_flag = TokenDefinitions.NULL; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NULL);}
+int 			{t_flag = TokenDefinitions.INT; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INT);}
+"+"				{System.out.print("plus" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PLUS);}
+"-"				{System.out.print("minus" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MINUS);}
+"*"				{System.out.print("multipication" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MULTIPLICATION);}
+"/"				{System.out.print("division" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DIVISION);}
+"%"				{System.out.print("mod" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MOD);}
+"<"				{System.out.print("less" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LESS);}
+">"				{System.out.print("greater" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.GREATER);}
+"<="			{System.out.print("lessequal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LESSEQUAL);}
+">="			{System.out.print("greaterequal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.GREATEREQUAL);}
+"=="			{System.out.print("equal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.EQUAL);}
+"!="			{System.out.print("notequal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NOTEQUAL);}
+"&&"			{System.out.print("and" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.AND);}
+"||"			{System.out.print("or" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.OR);}
+"!"				{System.out.print("not" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NOT);}
+"="				{System.out.print("assignop" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ASSIGNOP);}
+","				{System.out.print("comma" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.COMMA);}
+";"				{System.out.print("semicolon" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.SEMICOLON);}
+"."				{System.out.print("period" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PERIOD);}
+"("				{System.out.print("leftparen" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTPAREN);}
+")"				{System.out.print("rightparen" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTPAREN);}
+"["				{System.out.print("leftbracket" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTBRACKET);}
+"]"				{System.out.print("rightbracket" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTBRACKET);}
+"{"				{System.out.print("leftbrace" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTBRACE);}
+"}"				{System.out.print("rightbrace" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTBRACE);}
+{int}			{System.out.print("intconstant" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INTCONSTANT);}
+{id}			{System.out.print("id" + " "); trie.insert(yytext()); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ID);}
+{str}			{System.out.print("stringconstant" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.STRINGCONSTANT);}
+{double}		{System.out.print("doubleconstant" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DOUBLECONSTANT);}

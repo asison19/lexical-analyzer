@@ -7,6 +7,7 @@ Andrew Sison, and Zach Martin.
 // User Code
 package lexicalAnalyzer;
 import token.*;
+import syntaxAnalyzer.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -20,7 +21,7 @@ import java.util.Scanner;
  * <a href="http://www.jflex.de/">JFlex</a> 1.7.0
  * from the specification file <tt>D:/eclipse/java-oxygen/eclipse-workspace/lexical-analyzer/src/lexicalAnalyzer/toy.jflex</tt>
  */
-public class ToyLexer {
+public class ToyLexer implements java_cup.runtime.Scanner {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -73,13 +74,13 @@ public class ToyLexer {
     "\2\0\15\1\1\31\6\1\1\32\1\33\1\34\1\35"+
     "\1\36\1\37\4\0\1\2\7\1\1\40\3\1\1\41"+
     "\2\1\1\42\5\1\1\27\3\0\1\43\1\44\2\1"+
-    "\1\45\3\1\1\46\10\1\1\47\2\0\3\1\1\50"+
-    "\2\1\1\51\4\1\1\52\1\1\1\53\1\54\3\1"+
-    "\1\55\3\1\1\56\1\57\1\60\3\1\1\61\1\62"+
-    "\2\1\1\63\1\1\1\64";
+    "\1\45\4\1\1\46\10\1\1\47\2\0\3\1\1\50"+
+    "\1\51\2\1\1\52\4\1\1\53\1\1\1\54\1\55"+
+    "\3\1\1\56\3\1\1\57\1\60\1\61\3\1\1\62"+
+    "\1\63\2\1\1\64\1\1\1\65";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[158];
+    int [] result = new int[160];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -117,16 +118,16 @@ public class ToyLexer {
     "\0\u0e0c\0\u0e4a\0\u0e88\0\u0ec6\0\u0f04\0\u0f42\0\76\0\u0f80"+
     "\0\u0fbe\0\u0ffc\0\u103a\0\u1078\0\u10b6\0\u10f4\0\u1132\0\u1170"+
     "\0\u11ae\0\u11ec\0\u122a\0\u1268\0\u1268\0\u12a6\0\u12e4\0\76"+
-    "\0\76\0\u1322\0\u1360\0\76\0\u139e\0\u13dc\0\u141a\0\76"+
-    "\0\u1458\0\u1496\0\u14d4\0\u1512\0\u1550\0\u158e\0\u15cc\0\u160a"+
-    "\0\76\0\u1648\0\u1686\0\u16c4\0\u1702\0\u1740\0\76\0\u177e"+
-    "\0\u17bc\0\76\0\u17fa\0\u1838\0\u1876\0\u18b4\0\76\0\u18f2"+
-    "\0\76\0\76\0\u1930\0\u196e\0\u19ac\0\76\0\u19ea\0\u1a28"+
-    "\0\u1a66\0\76\0\76\0\76\0\u1aa4\0\u1ae2\0\u1b20\0\76"+
-    "\0\76\0\u1b5e\0\u1b9c\0\76\0\u1bda\0\76";
+    "\0\76\0\u1322\0\u1360\0\76\0\u139e\0\u13dc\0\u141a\0\u1458"+
+    "\0\76\0\u1496\0\u14d4\0\u1512\0\u1550\0\u158e\0\u15cc\0\u160a"+
+    "\0\u1648\0\76\0\u1686\0\u16c4\0\u1702\0\u1740\0\u177e\0\76"+
+    "\0\76\0\u17bc\0\u17fa\0\76\0\u1838\0\u1876\0\u18b4\0\u18f2"+
+    "\0\76\0\u1930\0\76\0\76\0\u196e\0\u19ac\0\u19ea\0\76"+
+    "\0\u1a28\0\u1a66\0\u1aa4\0\76\0\76\0\76\0\u1ae2\0\u1b20"+
+    "\0\u1b5e\0\76\0\76\0\u1b9c\0\u1bda\0\76\0\u1c18\0\76";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[158];
+    int [] result = new int[160];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -219,71 +220,72 @@ public class ToyLexer {
     "\2\2\2\0\1\2\11\0\1\2\3\0\6\2\1\154"+
     "\24\2\21\0\2\2\2\0\1\2\11\0\1\2\3\0"+
     "\6\2\1\155\24\2\21\0\2\2\2\0\1\2\11\0"+
-    "\1\2\3\0\12\2\1\120\20\2\21\0\2\2\2\0"+
-    "\1\2\11\0\1\2\3\0\10\2\1\156\22\2\21\0"+
-    "\2\2\2\0\1\2\11\0\1\2\3\0\11\2\1\157"+
+    "\1\2\3\0\12\2\1\156\20\2\21\0\2\2\2\0"+
+    "\1\2\11\0\1\2\3\0\10\2\1\157\22\2\21\0"+
+    "\2\2\2\0\1\2\11\0\1\2\3\0\11\2\1\160"+
     "\21\2\21\0\2\2\2\0\1\2\11\0\1\2\3\0"+
-    "\11\2\1\160\21\2\21\0\2\2\2\0\1\2\11\0"+
-    "\1\2\3\0\10\2\1\161\22\2\21\0\2\2\2\0"+
-    "\1\2\11\0\1\2\3\0\12\2\1\162\20\2\21\0"+
-    "\2\2\2\0\1\2\11\0\1\2\3\0\13\2\1\163"+
+    "\11\2\1\161\21\2\21\0\2\2\2\0\1\2\11\0"+
+    "\1\2\3\0\10\2\1\162\22\2\21\0\2\2\2\0"+
+    "\1\2\11\0\1\2\3\0\12\2\1\163\20\2\21\0"+
+    "\2\2\2\0\1\2\11\0\1\2\3\0\13\2\1\164"+
     "\17\2\21\0\2\2\2\0\1\2\11\0\1\2\3\0"+
-    "\6\2\1\164\24\2\21\0\2\2\2\0\1\2\11\0"+
-    "\1\2\3\0\11\2\1\165\21\2\21\0\2\2\2\0"+
-    "\1\2\11\0\1\2\3\0\15\2\1\166\15\2\21\0"+
-    "\2\2\2\0\1\2\11\0\1\2\3\0\11\2\1\167"+
+    "\6\2\1\165\24\2\21\0\2\2\2\0\1\2\11\0"+
+    "\1\2\3\0\11\2\1\166\21\2\21\0\2\2\2\0"+
+    "\1\2\11\0\1\2\3\0\15\2\1\167\15\2\21\0"+
+    "\2\2\2\0\1\2\11\0\1\2\3\0\11\2\1\170"+
     "\21\2\21\0\2\2\2\0\1\2\11\0\1\2\3\0"+
-    "\21\2\1\170\11\2\21\0\2\2\2\0\1\2\11\0"+
-    "\1\2\3\0\17\2\1\171\13\2\22\0\1\144\20\0"+
-    "\1\144\61\0\1\172\102\0\1\173\62\0\2\2\2\0"+
-    "\1\2\11\0\1\2\3\0\4\2\1\174\26\2\21\0"+
-    "\2\2\2\0\1\2\11\0\1\2\3\0\11\2\1\175"+
+    "\21\2\1\171\11\2\21\0\2\2\2\0\1\2\11\0"+
+    "\1\2\3\0\17\2\1\172\13\2\22\0\1\144\20\0"+
+    "\1\144\61\0\1\173\102\0\1\174\62\0\2\2\2\0"+
+    "\1\2\11\0\1\2\3\0\4\2\1\175\26\2\21\0"+
+    "\2\2\2\0\1\2\11\0\1\2\3\0\11\2\1\176"+
     "\21\2\21\0\2\2\2\0\1\2\11\0\1\2\3\0"+
-    "\15\2\1\176\15\2\21\0\2\2\2\0\1\2\11\0"+
-    "\1\2\3\0\32\2\1\177\21\0\2\2\2\0\1\2"+
-    "\11\0\1\2\3\0\6\2\1\200\24\2\21\0\2\2"+
-    "\2\0\1\2\11\0\1\2\3\0\4\2\1\201\26\2"+
-    "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\12\2"+
-    "\1\202\20\2\21\0\2\2\2\0\1\2\11\0\1\2"+
-    "\3\0\11\2\1\203\21\2\21\0\2\2\2\0\1\2"+
-    "\11\0\1\2\3\0\4\2\1\204\26\2\21\0\2\2"+
-    "\2\0\1\2\11\0\1\2\3\0\6\2\1\205\24\2"+
-    "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\3\2"+
-    "\1\206\27\2\21\0\2\2\2\0\1\2\11\0\1\2"+
-    "\3\0\6\2\1\207\24\2\21\0\2\2\2\0\1\2"+
-    "\11\0\1\2\3\0\15\2\1\210\15\2\20\0\10\115"+
-    "\3\0\63\115\16\0\1\53\60\0\2\2\2\0\1\2"+
-    "\11\0\1\2\3\0\15\2\1\211\15\2\21\0\2\2"+
-    "\2\0\1\2\11\0\1\2\3\0\15\2\1\212\15\2"+
-    "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\17\2"+
-    "\1\213\13\2\21\0\2\2\2\0\1\2\11\0\1\2"+
-    "\3\0\10\2\1\214\22\2\21\0\2\2\2\0\1\2"+
-    "\11\0\1\2\3\0\4\2\1\215\26\2\21\0\2\2"+
-    "\2\0\1\2\11\0\1\2\3\0\6\2\1\216\24\2"+
-    "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\7\2"+
-    "\1\217\23\2\21\0\2\2\2\0\1\2\11\0\1\2"+
-    "\3\0\22\2\1\220\10\2\21\0\2\2\2\0\1\2"+
-    "\11\0\1\2\3\0\11\2\1\221\21\2\21\0\2\2"+
-    "\2\0\1\2\11\0\1\2\3\0\27\2\1\222\3\2"+
-    "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\12\2"+
-    "\1\223\20\2\21\0\2\2\2\0\1\2\11\0\1\2"+
-    "\3\0\15\2\1\224\15\2\21\0\2\2\2\0\1\2"+
-    "\11\0\1\2\3\0\10\2\1\225\22\2\21\0\2\2"+
-    "\2\0\1\2\11\0\1\2\3\0\10\2\1\226\22\2"+
+    "\15\2\1\177\15\2\21\0\2\2\2\0\1\2\11\0"+
+    "\1\2\3\0\6\2\1\200\24\2\21\0\2\2\2\0"+
+    "\1\2\11\0\1\2\3\0\32\2\1\201\21\0\2\2"+
+    "\2\0\1\2\11\0\1\2\3\0\6\2\1\202\24\2"+
+    "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\4\2"+
+    "\1\203\26\2\21\0\2\2\2\0\1\2\11\0\1\2"+
+    "\3\0\12\2\1\204\20\2\21\0\2\2\2\0\1\2"+
+    "\11\0\1\2\3\0\11\2\1\205\21\2\21\0\2\2"+
+    "\2\0\1\2\11\0\1\2\3\0\4\2\1\206\26\2"+
     "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\6\2"+
-    "\1\227\24\2\21\0\2\2\2\0\1\2\11\0\1\2"+
-    "\3\0\15\2\1\230\15\2\21\0\2\2\2\0\1\2"+
-    "\11\0\1\2\3\0\25\2\1\231\5\2\21\0\2\2"+
-    "\2\0\1\2\11\0\1\2\3\0\16\2\1\232\14\2"+
+    "\1\207\24\2\21\0\2\2\2\0\1\2\11\0\1\2"+
+    "\3\0\3\2\1\210\27\2\21\0\2\2\2\0\1\2"+
+    "\11\0\1\2\3\0\6\2\1\211\24\2\21\0\2\2"+
+    "\2\0\1\2\11\0\1\2\3\0\15\2\1\212\15\2"+
+    "\20\0\10\115\3\0\63\115\16\0\1\53\60\0\2\2"+
+    "\2\0\1\2\11\0\1\2\3\0\15\2\1\213\15\2"+
     "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\15\2"+
-    "\1\233\15\2\21\0\2\2\2\0\1\2\11\0\1\2"+
-    "\3\0\6\2\1\234\24\2\21\0\2\2\2\0\1\2"+
-    "\11\0\1\2\3\0\3\2\1\235\27\2\21\0\2\2"+
-    "\2\0\1\2\11\0\1\2\3\0\12\2\1\236\20\2"+
-    "\20\0";
+    "\1\214\15\2\21\0\2\2\2\0\1\2\11\0\1\2"+
+    "\3\0\17\2\1\215\13\2\21\0\2\2\2\0\1\2"+
+    "\11\0\1\2\3\0\10\2\1\216\22\2\21\0\2\2"+
+    "\2\0\1\2\11\0\1\2\3\0\4\2\1\217\26\2"+
+    "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\6\2"+
+    "\1\220\24\2\21\0\2\2\2\0\1\2\11\0\1\2"+
+    "\3\0\7\2\1\221\23\2\21\0\2\2\2\0\1\2"+
+    "\11\0\1\2\3\0\22\2\1\222\10\2\21\0\2\2"+
+    "\2\0\1\2\11\0\1\2\3\0\11\2\1\223\21\2"+
+    "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\27\2"+
+    "\1\224\3\2\21\0\2\2\2\0\1\2\11\0\1\2"+
+    "\3\0\12\2\1\225\20\2\21\0\2\2\2\0\1\2"+
+    "\11\0\1\2\3\0\15\2\1\226\15\2\21\0\2\2"+
+    "\2\0\1\2\11\0\1\2\3\0\10\2\1\227\22\2"+
+    "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\10\2"+
+    "\1\230\22\2\21\0\2\2\2\0\1\2\11\0\1\2"+
+    "\3\0\6\2\1\231\24\2\21\0\2\2\2\0\1\2"+
+    "\11\0\1\2\3\0\15\2\1\232\15\2\21\0\2\2"+
+    "\2\0\1\2\11\0\1\2\3\0\25\2\1\233\5\2"+
+    "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\16\2"+
+    "\1\234\14\2\21\0\2\2\2\0\1\2\11\0\1\2"+
+    "\3\0\15\2\1\235\15\2\21\0\2\2\2\0\1\2"+
+    "\11\0\1\2\3\0\6\2\1\236\24\2\21\0\2\2"+
+    "\2\0\1\2\11\0\1\2\3\0\3\2\1\237\27\2"+
+    "\21\0\2\2\2\0\1\2\11\0\1\2\3\0\12\2"+
+    "\1\240\20\2\20\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[7192];
+    int [] result = new int[7254];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -323,11 +325,11 @@ public class ToyLexer {
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\1\0\3\1\1\11\1\0\2\11\1\0\1\1\1\11"+
     "\17\1\1\11\4\1\2\0\10\11\1\1\1\11\2\0"+
-    "\1\1\2\0\24\1\6\11\4\0\26\1\3\0\22\1"+
-    "\2\0\43\1";
+    "\1\1\2\0\24\1\6\11\4\0\26\1\3\0\23\1"+
+    "\2\0\44\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[158];
+    int [] result = new int[160];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -659,13 +661,25 @@ try {
 
 
   /**
+   * Contains user EOF-code, which will be executed exactly once,
+   * when the end of file is reached
+   */
+  private void zzDoEOF() throws java.io.IOException {
+    if (!zzEOFDone) {
+      zzEOFDone = true;
+      yyclose();
+    }
+  }
+
+
+  /**
    * Resumes scanning until the next regular expression is matched,
    * the end of input is encountered or an I/O-Error occurs.
    *
    * @return      the next token
    * @exception   java.io.IOException  if any I/O-Error occurs
    */
-  public Integer yylex() throws java.io.IOException {
+  public java_cup.runtime.Symbol next_token() throws java.io.IOException {
     int zzInput;
     int zzAction;
 
@@ -745,270 +759,276 @@ try {
 
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
-        return null;
+            zzDoEOF();
+          { return new java_cup.runtime.Symbol(sym.EOF); }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { System.out.print("id" + " "); trie.insert(yytext()); return(TokenDefinitions.ID);
-            } 
-            // fall through
-          case 53: break;
-          case 2: 
-            { System.out.print("intconstant" + " "); return (TokenDefinitions.INTCONSTANT);
+            { System.out.print("id" + " "); trie.insert(yytext()); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ID);
             } 
             // fall through
           case 54: break;
-          case 3: 
-            { System.out.print("minus" + " "); return (TokenDefinitions.MINUS);
+          case 2: 
+            { System.out.print("intconstant" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INTCONSTANT);
             } 
             // fall through
           case 55: break;
-          case 4: 
-            { System.out.print("period" + " "); return (TokenDefinitions.PERIOD);
+          case 3: 
+            { System.out.print("minus" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MINUS);
             } 
             // fall through
           case 56: break;
+          case 4: 
+            { System.out.print("period" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PERIOD);
+            } 
+            // fall through
+          case 57: break;
           case 5: 
             { System.out.print("\n");
             } 
             // fall through
-          case 57: break;
+          case 58: break;
           case 6: 
             { 
             } 
             // fall through
-          case 58: break;
-          case 7: 
-            { System.out.print("division" + " "); return (TokenDefinitions.DIVISION);
-            } 
-            // fall through
           case 59: break;
-          case 8: 
-            { System.out.print("multipication" + " "); return (TokenDefinitions.MULTIPLICATION);
+          case 7: 
+            { System.out.print("division" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DIVISION);
             } 
             // fall through
           case 60: break;
-          case 9: 
-            { System.out.print("plus" + " "); return (TokenDefinitions.PLUS);
+          case 8: 
+            { System.out.print("multipication" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MULTIPLICATION);
             } 
             // fall through
           case 61: break;
-          case 10: 
-            { System.out.print("mod" + " "); return (TokenDefinitions.MOD);
+          case 9: 
+            { System.out.print("plus" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PLUS);
             } 
             // fall through
           case 62: break;
-          case 11: 
-            { System.out.print("less" + " "); return (TokenDefinitions.LESS);
+          case 10: 
+            { System.out.print("mod" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MOD);
             } 
             // fall through
           case 63: break;
-          case 12: 
-            { System.out.print("greater" + " "); return (TokenDefinitions.GREATER);
+          case 11: 
+            { System.out.print("less" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LESS);
             } 
             // fall through
           case 64: break;
-          case 13: 
-            { System.out.print("assignop" + " "); return (TokenDefinitions.ASSIGNOP);
+          case 12: 
+            { System.out.print("greater" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.GREATER);
             } 
             // fall through
           case 65: break;
-          case 14: 
-            { System.out.print("not" + " "); return (TokenDefinitions.NOT);
+          case 13: 
+            { System.out.print("assignop" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ASSIGNOP);
             } 
             // fall through
           case 66: break;
-          case 15: 
-            { System.out.print("comma" + " "); return (TokenDefinitions.COMMA);
+          case 14: 
+            { System.out.print("not" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NOT);
             } 
             // fall through
           case 67: break;
-          case 16: 
-            { System.out.print("semicolon" + " "); return (TokenDefinitions.SEMICOLON);
+          case 15: 
+            { System.out.print("comma" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.COMMA);
             } 
             // fall through
           case 68: break;
-          case 17: 
-            { System.out.print("leftparen" + " "); return (TokenDefinitions.LEFTPAREN);
+          case 16: 
+            { System.out.print("semicolon" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.SEMICOLON);
             } 
             // fall through
           case 69: break;
-          case 18: 
-            { System.out.print("rightparen" + " "); return (TokenDefinitions.RIGHTPAREN);
+          case 17: 
+            { System.out.print("leftparen" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTPAREN);
             } 
             // fall through
           case 70: break;
-          case 19: 
-            { System.out.print("leftbracket" + " "); return (TokenDefinitions.LEFTBRACKET);
+          case 18: 
+            { System.out.print("rightparen" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTPAREN);
             } 
             // fall through
           case 71: break;
-          case 20: 
-            { System.out.print("rightbracket" + " "); return (TokenDefinitions.RIGHTBRACKET);
+          case 19: 
+            { System.out.print("leftbracket" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTBRACKET);
             } 
             // fall through
           case 72: break;
-          case 21: 
-            { System.out.print("leftbrace" + " "); return (TokenDefinitions.LEFTBRACE);
+          case 20: 
+            { System.out.print("rightbracket" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTBRACKET);
             } 
             // fall through
           case 73: break;
-          case 22: 
-            { System.out.print("rightbrace" + " "); return (TokenDefinitions.RIGHTBRACE);
+          case 21: 
+            { System.out.print("leftbrace" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTBRACE);
             } 
             // fall through
           case 74: break;
-          case 23: 
-            { System.out.print("doubleconstant" + " "); return (TokenDefinitions.DOUBLECONSTANT);
+          case 22: 
+            { System.out.print("rightbrace" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTBRACE);
             } 
             // fall through
           case 75: break;
-          case 24: 
-            { System.out.print("stringconstant" + " "); return (TokenDefinitions.STRINGCONSTANT);
+          case 23: 
+            { System.out.print("doubleconstant" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DOUBLECONSTANT);
             } 
             // fall through
           case 76: break;
-          case 25: 
-            { t_flag = TokenDefinitions.IF; System.out.print(yytext() + " "); return (TokenDefinitions.IF);
+          case 24: 
+            { System.out.print("stringconstant" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.STRINGCONSTANT);
             } 
             // fall through
           case 77: break;
-          case 26: 
-            { System.out.print("lessequal" + " "); return (TokenDefinitions.LESSEQUAL);
+          case 25: 
+            { t_flag = TokenDefinitions.IF; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IF);
             } 
             // fall through
           case 78: break;
-          case 27: 
-            { System.out.print("greaterequal" + " "); return (TokenDefinitions.GREATEREQUAL);
+          case 26: 
+            { System.out.print("lessequal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LESSEQUAL);
             } 
             // fall through
           case 79: break;
-          case 28: 
-            { System.out.print("equal" + " "); return (TokenDefinitions.EQUAL);
+          case 27: 
+            { System.out.print("greaterequal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.GREATEREQUAL);
             } 
             // fall through
           case 80: break;
-          case 29: 
-            { System.out.print("notequal" + " "); return (TokenDefinitions.NOTEQUAL);
+          case 28: 
+            { System.out.print("equal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.EQUAL);
             } 
             // fall through
           case 81: break;
-          case 30: 
-            { System.out.print("and" + " "); return (TokenDefinitions.AND);
+          case 29: 
+            { System.out.print("notequal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NOTEQUAL);
             } 
             // fall through
           case 82: break;
-          case 31: 
-            { System.out.print("or" + " "); return (TokenDefinitions.OR);
+          case 30: 
+            { System.out.print("and" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.AND);
             } 
             // fall through
           case 83: break;
-          case 32: 
-            { t_flag = TokenDefinitions.FOR; System.out.print(yytext() + " "); return (TokenDefinitions.FOR);
+          case 31: 
+            { System.out.print("or" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.OR);
             } 
             // fall through
           case 84: break;
-          case 33: 
-            { t_flag = TokenDefinitions.NEW; System.out.print(yytext() + " "); return (TokenDefinitions.NEW);
+          case 32: 
+            { t_flag = TokenDefinitions.FOR; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.FOR);
             } 
             // fall through
           case 85: break;
-          case 34: 
-            { t_flag = TokenDefinitions.INT; System.out.print(yytext() + " "); return (TokenDefinitions.INT);
+          case 33: 
+            { t_flag = TokenDefinitions.NEW; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEW);
             } 
             // fall through
           case 86: break;
-          case 35: 
-            { t_flag = TokenDefinitions.BOOLEANCONSTANT; System.out.print(yytext() + " "); return (TokenDefinitions.BOOLEANCONSTANT);
+          case 34: 
+            { t_flag = TokenDefinitions.INT; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INT);
             } 
             // fall through
           case 87: break;
-          case 36: 
-            { t_flag = TokenDefinitions.THIS; System.out.print(yytext() + " "); return (TokenDefinitions.THIS);
+          case 35: 
+            { t_flag = TokenDefinitions.BOOLEANCONSTANT; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ID);
             } 
             // fall through
           case 88: break;
-          case 37: 
-            { t_flag = TokenDefinitions.ELSE; System.out.print(yytext() + " "); return (TokenDefinitions.ELSE);
+          case 36: 
+            { t_flag = TokenDefinitions.THIS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.THIS);
             } 
             // fall through
           case 89: break;
-          case 38: 
-            { t_flag = TokenDefinitions.NULL; System.out.print(yytext() + " "); return (TokenDefinitions.NULL);
+          case 37: 
+            { t_flag = TokenDefinitions.ELSE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ELSE);
             } 
             // fall through
           case 90: break;
-          case 39: 
-            { t_flag = TokenDefinitions.VOID; System.out.print(yytext() + " "); return (TokenDefinitions.VOID);
+          case 38: 
+            { t_flag = TokenDefinitions.NULL; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NULL);
             } 
             // fall through
           case 91: break;
-          case 40: 
-            { t_flag = TokenDefinitions.BREAK; System.out.print(yytext() + " "); return (TokenDefinitions.BREAK);
+          case 39: 
+            { t_flag = TokenDefinitions.VOID; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.VOID);
             } 
             // fall through
           case 92: break;
-          case 41: 
-            { t_flag = TokenDefinitions.CLASS; System.out.print(yytext() + " "); return (TokenDefinitions.CLASS);
+          case 40: 
+            { t_flag = TokenDefinitions.BOOLEANCONSTANT; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEANCONSTANT);
             } 
             // fall through
           case 93: break;
-          case 42: 
-            { t_flag = TokenDefinitions.WHILE; System.out.print(yytext() + " "); return (TokenDefinitions.WHILE);
+          case 41: 
+            { t_flag = TokenDefinitions.BREAK; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BREAK);
             } 
             // fall through
           case 94: break;
-          case 43: 
-            { t_flag = TokenDefinitions.RETURN; System.out.print(yytext() + " "); return (TokenDefinitions.RETURN);
+          case 42: 
+            { t_flag = TokenDefinitions.CLASS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.CLASS);
             } 
             // fall through
           case 95: break;
-          case 44: 
-            { t_flag = TokenDefinitions.READLN; System.out.print(yytext() + " "); return (TokenDefinitions.READLN);
+          case 43: 
+            { t_flag = TokenDefinitions.WHILE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.WHILE);
             } 
             // fall through
           case 96: break;
-          case 45: 
-            { t_flag = TokenDefinitions.DOUBLE; System.out.print(yytext() + " "); return (TokenDefinitions.DOUBLE);
+          case 44: 
+            { t_flag = TokenDefinitions.RETURN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RETURN);
             } 
             // fall through
           case 97: break;
-          case 46: 
-            { t_flag = TokenDefinitions.STRING; System.out.print(yytext() + " "); return (TokenDefinitions.STRING);
+          case 45: 
+            { t_flag = TokenDefinitions.READLN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.READLN);
             } 
             // fall through
           case 98: break;
-          case 47: 
-            { t_flag = TokenDefinitions.EXTENDS; System.out.print(yytext() + " "); return (TokenDefinitions.EXTENDS);
+          case 46: 
+            { t_flag = TokenDefinitions.DOUBLE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DOUBLE);
             } 
             // fall through
           case 99: break;
-          case 48: 
-            { t_flag = TokenDefinitions.BOOLEAN; System.out.print(yytext() + " "); return (TokenDefinitions.BOOLEAN);
+          case 47: 
+            { t_flag = TokenDefinitions.STRING; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.STRING);
             } 
             // fall through
           case 100: break;
-          case 49: 
-            { t_flag = TokenDefinitions.PRINTLN; System.out.print(yytext() + " "); return (TokenDefinitions.PRINTLN);
+          case 48: 
+            { t_flag = TokenDefinitions.EXTENDS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.EXTENDS);
             } 
             // fall through
           case 101: break;
-          case 50: 
-            { t_flag = TokenDefinitions.NEWARRAY; System.out.print(yytext() + " "); return (TokenDefinitions.NEWARRAY);
+          case 49: 
+            { t_flag = TokenDefinitions.BOOLEAN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEAN);
             } 
             // fall through
           case 102: break;
-          case 51: 
-            { t_flag = TokenDefinitions.INTERFACE; System.out.print(yytext() + " "); return (TokenDefinitions.INTERFACE);
+          case 50: 
+            { t_flag = TokenDefinitions.PRINTLN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PRINTLN);
             } 
             // fall through
           case 103: break;
-          case 52: 
-            { t_flag = TokenDefinitions.IMPLEMENTS; System.out.print(yytext() + " "); return (TokenDefinitions.IMPLEMENTS);
+          case 51: 
+            { t_flag = TokenDefinitions.NEWARRAY; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEWARRAY);
             } 
             // fall through
           case 104: break;
+          case 52: 
+            { t_flag = TokenDefinitions.INTERFACE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INTERFACE);
+            } 
+            // fall through
+          case 105: break;
+          case 53: 
+            { t_flag = TokenDefinitions.IMPLEMENTS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IMPLEMENTS);
+            } 
+            // fall through
+          case 106: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

@@ -698,12 +698,12 @@ public class parser extends java_cup.runtime.lr_parser {
   public java_cup.runtime.Symbol scan()
     throws java.lang.Exception
     {
- return s.nextToken(); 
+ return s.yylex(); 
     }
 
 
     // Connect this parser to a scanner!
-    Lexer s;
+    ToyLexer s;
     Parser(Lexer s){ this.s=s; }
 
 }

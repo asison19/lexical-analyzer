@@ -16,7 +16,9 @@ parser code {:
 
 /* define how to connect to the scanner! */
 // init with {: s.init(); :};
-scan with {: return s.yylex(); :};
+
+// scan with {: return s.yylex(); :};
+scan with {: return s.next_token(); :};
 
 /* Terminals (tokens returned by the scanner). */
 terminal        TRUE, FALSE, BOOLEAN, CLASS, DOUBLE, ELSE, EXTENDS, FOR, IF; // TODO ERROR IS POSSIBLY HERE?

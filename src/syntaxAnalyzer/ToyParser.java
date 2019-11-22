@@ -696,7 +696,7 @@ public class ToyParser extends java_cup.runtime.lr_parser {
   public java_cup.runtime.Symbol scan()
     throws java.lang.Exception
     {
- return s.yylex(); 
+ return s.next_token(); 
     }
 
 
