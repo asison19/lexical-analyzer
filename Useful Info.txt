@@ -1,0 +1,16 @@
+LALR tester
+http://jsmachines.sourceforge.net/machines/lalr1.html
+
+int abc;
+INT ID SEMICOLON
+
+program -> decl declplus
+declplus -> decl declplus
+declplus -> ''
+decl -> variabledecl
+variabledecl -> variable SEMICOLON
+variable -> type ID
+type -> INT
+
+// this is value stack?
+System.out.println((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek());

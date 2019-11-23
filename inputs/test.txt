@@ -1,4 +1,3 @@
-double abc;
-int a_;
-double b__;
-int c___;
+int abc;
+int cde;
+double q;

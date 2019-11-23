@@ -38,7 +38,7 @@ public class Main {
 		*/
 		ToyLexer lexer = new ToyLexer(reader);
 		ToyParser parser = new ToyParser(lexer);
-		parser.debug_stack();
+		parser.production_table();
 		try {
 			parser.parse();
 		} catch (Exception e) {

@@ -766,22 +766,22 @@ try {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { System.out.print("id" + " "); trie.insert(yytext()); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ID);
+            { trie.insert(yytext()); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ID);
             } 
             // fall through
           case 54: break;
           case 2: 
-            { System.out.print("intconstant" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INTCONSTANT);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INTCONSTANT);
             } 
             // fall through
           case 55: break;
           case 3: 
-            { System.out.print("minus" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MINUS);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MINUS);
             } 
             // fall through
           case 56: break;
           case 4: 
-            { System.out.print("period" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PERIOD);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PERIOD);
             } 
             // fall through
           case 57: break;
@@ -796,237 +796,237 @@ try {
             // fall through
           case 59: break;
           case 7: 
-            { System.out.print("division" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DIVISION);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DIVISION);
             } 
             // fall through
           case 60: break;
           case 8: 
-            { System.out.print("multipication" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MULTIPLICATION);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MULTIPLICATION);
             } 
             // fall through
           case 61: break;
           case 9: 
-            { System.out.print("plus" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PLUS);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PLUS);
             } 
             // fall through
           case 62: break;
           case 10: 
-            { System.out.print("mod" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MOD);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.MOD);
             } 
             // fall through
           case 63: break;
           case 11: 
-            { System.out.print("less" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LESS);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LESS);
             } 
             // fall through
           case 64: break;
           case 12: 
-            { System.out.print("greater" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.GREATER);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.GREATER);
             } 
             // fall through
           case 65: break;
           case 13: 
-            { System.out.print("assignop" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ASSIGNOP);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ASSIGNOP);
             } 
             // fall through
           case 66: break;
           case 14: 
-            { System.out.print("not" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NOT);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NOT);
             } 
             // fall through
           case 67: break;
           case 15: 
-            { System.out.print("comma" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.COMMA);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.COMMA);
             } 
             // fall through
           case 68: break;
           case 16: 
-            { System.out.print("semicolon" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.SEMICOLON);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.SEMICOLON);
             } 
             // fall through
           case 69: break;
           case 17: 
-            { System.out.print("leftparen" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTPAREN);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTPAREN);
             } 
             // fall through
           case 70: break;
           case 18: 
-            { System.out.print("rightparen" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTPAREN);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTPAREN);
             } 
             // fall through
           case 71: break;
           case 19: 
-            { System.out.print("leftbracket" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTBRACKET);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTBRACKET);
             } 
             // fall through
           case 72: break;
           case 20: 
-            { System.out.print("rightbracket" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTBRACKET);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTBRACKET);
             } 
             // fall through
           case 73: break;
           case 21: 
-            { System.out.print("leftbrace" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTBRACE);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LEFTBRACE);
             } 
             // fall through
           case 74: break;
           case 22: 
-            { System.out.print("rightbrace" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTBRACE);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RIGHTBRACE);
             } 
             // fall through
           case 75: break;
           case 23: 
-            { System.out.print("doubleconstant" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DOUBLECONSTANT);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DOUBLECONSTANT);
             } 
             // fall through
           case 76: break;
           case 24: 
-            { System.out.print("stringconstant" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.STRINGCONSTANT);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.STRINGCONSTANT);
             } 
             // fall through
           case 77: break;
           case 25: 
-            { t_flag = TokenDefinitions.IF; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IF);
+            { t_flag = TokenDefinitions.IF; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IF);
             } 
             // fall through
           case 78: break;
           case 26: 
-            { System.out.print("lessequal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LESSEQUAL);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.LESSEQUAL);
             } 
             // fall through
           case 79: break;
           case 27: 
-            { System.out.print("greaterequal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.GREATEREQUAL);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.GREATEREQUAL);
             } 
             // fall through
           case 80: break;
           case 28: 
-            { System.out.print("equal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.EQUAL);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.EQUAL);
             } 
             // fall through
           case 81: break;
           case 29: 
-            { System.out.print("notequal" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NOTEQUAL);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NOTEQUAL);
             } 
             // fall through
           case 82: break;
           case 30: 
-            { System.out.print("and" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.AND);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.AND);
             } 
             // fall through
           case 83: break;
           case 31: 
-            { System.out.print("or" + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.OR);
+            { return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.OR);
             } 
             // fall through
           case 84: break;
           case 32: 
-            { t_flag = TokenDefinitions.FOR; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.FOR);
+            { t_flag = TokenDefinitions.FOR; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.FOR);
             } 
             // fall through
           case 85: break;
           case 33: 
-            { t_flag = TokenDefinitions.NEW; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEW);
+            { t_flag = TokenDefinitions.NEW; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEW);
             } 
             // fall through
           case 86: break;
           case 34: 
-            { t_flag = TokenDefinitions.INT; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INT);
+            { t_flag = TokenDefinitions.INT; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INT);
             } 
             // fall through
           case 87: break;
           case 35: 
-            { t_flag = TokenDefinitions.BOOLEANCONSTANT; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ID);
+            { t_flag = TokenDefinitions.BOOLEANCONSTANT;return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ID);
             } 
             // fall through
           case 88: break;
           case 36: 
-            { t_flag = TokenDefinitions.THIS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.THIS);
+            { t_flag = TokenDefinitions.THIS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.THIS);
             } 
             // fall through
           case 89: break;
           case 37: 
-            { t_flag = TokenDefinitions.ELSE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ELSE);
+            { t_flag = TokenDefinitions.ELSE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ELSE);
             } 
             // fall through
           case 90: break;
           case 38: 
-            { t_flag = TokenDefinitions.NULL; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NULL);
+            { t_flag = TokenDefinitions.NULL; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NULL);
             } 
             // fall through
           case 91: break;
           case 39: 
-            { t_flag = TokenDefinitions.VOID; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.VOID);
+            { t_flag = TokenDefinitions.VOID; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.VOID);
             } 
             // fall through
           case 92: break;
           case 40: 
-            { t_flag = TokenDefinitions.BOOLEANCONSTANT; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEANCONSTANT);
+            { t_flag = TokenDefinitions.BOOLEANCONSTANT; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEANCONSTANT);
             } 
             // fall through
           case 93: break;
           case 41: 
-            { t_flag = TokenDefinitions.BREAK; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BREAK);
+            { t_flag = TokenDefinitions.BREAK; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BREAK);
             } 
             // fall through
           case 94: break;
           case 42: 
-            { t_flag = TokenDefinitions.CLASS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.CLASS);
+            { t_flag = TokenDefinitions.CLASS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.CLASS);
             } 
             // fall through
           case 95: break;
           case 43: 
-            { t_flag = TokenDefinitions.WHILE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.WHILE);
+            { t_flag = TokenDefinitions.WHILE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.WHILE);
             } 
             // fall through
           case 96: break;
           case 44: 
-            { t_flag = TokenDefinitions.RETURN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RETURN);
+            { t_flag = TokenDefinitions.RETURN; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RETURN);
             } 
             // fall through
           case 97: break;
           case 45: 
-            { t_flag = TokenDefinitions.READLN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.READLN);
+            { t_flag = TokenDefinitions.READLN; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.READLN);
             } 
             // fall through
           case 98: break;
           case 46: 
-            { t_flag = TokenDefinitions.DOUBLE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DOUBLE);
+            { t_flag = TokenDefinitions.DOUBLE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DOUBLE);
             } 
             // fall through
           case 99: break;
           case 47: 
-            { t_flag = TokenDefinitions.STRING; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.STRING);
+            { t_flag = TokenDefinitions.STRING; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.STRING);
             } 
             // fall through
           case 100: break;
           case 48: 
-            { t_flag = TokenDefinitions.EXTENDS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.EXTENDS);
+            { t_flag = TokenDefinitions.EXTENDS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.EXTENDS);
             } 
             // fall through
           case 101: break;
           case 49: 
-            { t_flag = TokenDefinitions.BOOLEAN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEAN);
+            { t_flag = TokenDefinitions.BOOLEAN;  return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEAN);
             } 
             // fall through
           case 102: break;
           case 50: 
-            { t_flag = TokenDefinitions.PRINTLN; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PRINTLN);
+            { t_flag = TokenDefinitions.PRINTLN; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PRINTLN);
             } 
             // fall through
           case 103: break;
           case 51: 
-            { t_flag = TokenDefinitions.NEWARRAY; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEWARRAY);
+            { t_flag = TokenDefinitions.NEWARRAY; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEWARRAY);
             } 
             // fall through
           case 104: break;
           case 52: 
-            { t_flag = TokenDefinitions.INTERFACE; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INTERFACE);
+            { t_flag = TokenDefinitions.INTERFACE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INTERFACE);
             } 
             // fall through
           case 105: break;
           case 53: 
-            { t_flag = TokenDefinitions.IMPLEMENTS; System.out.print(yytext() + " "); return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IMPLEMENTS);
+            { t_flag = TokenDefinitions.IMPLEMENTS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IMPLEMENTS);
             } 
             // fall through
           case 106: break;
