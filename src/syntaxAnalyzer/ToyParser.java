@@ -702,7 +702,8 @@ public class ToyParser extends java_cup.runtime.lr_parser {
 
     // Connect this parser to a scanner!
     ToyLexer s;
-    ToyParser(ToyLexer s){ this.s=s; }
+	@SuppressWarnings("deprecation")
+    public ToyParser(ToyLexer s){ this.s=s; }
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -733,7 +734,7 @@ class CUP$ToyParser$actions {
           case 0: // program ::= decl declplus 
             {
               Object RESULT =null;
-
+		 System.out.println("Program Right hand side.");
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -810,7 +811,7 @@ class CUP$ToyParser$actions {
           case 8: // variabledecl ::= variable SEMICOLON 
             {
               Object RESULT =null;
-
+		 System.out.println("variabledecl"); 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("variabledecl",2, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -819,7 +820,7 @@ class CUP$ToyParser$actions {
           case 9: // variable ::= type ID 
             {
               Object RESULT =null;
-
+		 System.out.println("variable"); 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("variable",3, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -828,7 +829,7 @@ class CUP$ToyParser$actions {
           case 10: // type ::= INT 
             {
               Object RESULT =null;
-
+		 System.out.println("TYPE INT"); 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("type",4, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -837,7 +838,7 @@ class CUP$ToyParser$actions {
           case 11: // type ::= DOUBLE 
             {
               Object RESULT =null;
-
+		 System.out.println("TYPE DOUBLE"); 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("type",4, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -846,7 +847,7 @@ class CUP$ToyParser$actions {
           case 12: // type ::= BOOLEAN 
             {
               Object RESULT =null;
-
+		 System.out.println("TYPE BOOLEAN"); 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("type",4, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -855,7 +856,7 @@ class CUP$ToyParser$actions {
           case 13: // type ::= STRING 
             {
               Object RESULT =null;
-
+		 System.out.println("TYPE STRING"); 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("type",4, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -864,7 +865,7 @@ class CUP$ToyParser$actions {
           case 14: // type ::= type LEFTBRACKET RIGHTBRACKET ID 
             {
               Object RESULT =null;
-
+		 System.out.println("type {} ID"); 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("type",4, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-3)), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -873,7 +874,7 @@ class CUP$ToyParser$actions {
           case 15: // type ::= ID 
             {
               Object RESULT =null;
-
+		 System.out.println("type ID"); 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("type",4, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;

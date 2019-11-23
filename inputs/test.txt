@@ -1,9 +1,4 @@
 double abc;
-//int _id;
-//double _id_;
-//int _i_i;
-//double ___;
 int a_;
 double b__;
 int c___;
-//double __r;

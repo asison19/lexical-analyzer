@@ -11,7 +11,8 @@ class ToyParser;
 parser code {:
     // Connect this parser to a scanner!
     ToyLexer s;
-    ToyParser(ToyLexer s){ this.s=s; }
+	@SuppressWarnings("deprecation")
+    public ToyParser(ToyLexer s){ this.s=s; }
 :}
 
 /* define how to connect to the scanner! */
@@ -29,7 +30,7 @@ terminal	    NOT, ASSIGNOP, COMMA, SEMICOLON, PERIOD, LEFTPAREN, RIGHTPAREN, LEF
 terminal	    LEFTBRACE, RIGHTBRACE, INTCONSTANT, ID, STRINGCONSTANT, DOUBLECONSTANT, BOOLEANCONSTANT; // these have been uppercased in the grammar rules section
 
 /* Non terminals */
-non terminal            program, decl, variabledecl, variable, type, functiondecl, formals, classdecl;
+non terminal        program, decl, variabledecl, variable, type, functiondecl, formals, classdecl;
 non terminal		field, interfacedecl, prototype, stmtblock, stmt, ifstmt, whilestmt, forstmt;
 non terminal		breakstmt, returnstmt, printstmt, expr, lvalue, call, actuals, constant;
 non terminal	 	declplus, variablecommplus, idcommplus, exprcommplus, fieldstar, prototypestar, variabledeclstar, stmtstar; // ALL OF THE NON TERMINALS TO FIX ISSUES
@@ -46,71 +47,92 @@ precedence left NOT;
 precedence left LEFTBRACKET, PERIOD;
 precedence left ELSE; // FIXES SR DANGLING ELSE PROBLEM
 
-/* The grammar rules */
-program ::= decl declplus
+/****************************** The grammar rules ******************************/
+//Production # 0101 // TODO name production rules, print out shift and reduce when shifting and reducing
+program 		::= decl declplus {: System.out.println("Program Right hand side.");:}
 ;
-declplus ::= decl declplus // FIXES '+' PROBLEM
-	   |
+
+//Production # 0201 0202
+declplus 		::= decl declplus // FIXES '+' PROBLEM
+				|
 ;
-decl ::= variabledecl
-	| functiondecl
-	| classdecl
-	| interfacedecl
+
+decl 			::= variabledecl
+				| functiondecl
+				| classdecl
+				| interfacedecl
 ;
-variabledecl ::= variable SEMICOLON
+
+variabledecl 	::= variable SEMICOLON {: System.out.println("variabledecl"); :}
 ;
-variable ::= type ID
+
+variable 		::= type ID {: System.out.println("variable"); :}
 ;
-type ::= INT
-	| DOUBLE
-	| BOOLEAN
-	| STRING
-	| type LEFTBRACKET RIGHTBRACKET ID
-	| ID
+
+type 			::= INT 							{: System.out.println("TYPE INT"); :}
+				| DOUBLE 							{: System.out.println("TYPE DOUBLE"); :}
+				| BOOLEAN 							{: System.out.println("TYPE BOOLEAN"); :}
+				| STRING 							{: System.out.println("TYPE STRING"); :}
+				| type LEFTBRACKET RIGHTBRACKET ID 	{: System.out.println("type {} ID"); :}
+				| ID 								{: System.out.println("type ID"); :}
 ;
-functiondecl ::= type ID LEFTPAREN formals RIGHTPAREN stmtblock
-		| VOID ID LEFTPAREN formals RIGHTPAREN stmtblock
+
+functiondecl 	::= type ID LEFTPAREN formals RIGHTPAREN stmtblock
+				| VOID ID LEFTPAREN formals RIGHTPAREN stmtblock
 ;
-formals ::= variable variablecommplus
-	   |
+
+formals 		::= variable variablecommplus
+				|
 ;
-variablecommplus ::= COMMA variable variablecommplus // FIXES '+,' PROBLEM
-		    |
+
+variablecommplus 	::= COMMA variable variablecommplus // FIXES '+,' PROBLEM
+					|
 ;
-classdecl ::= CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE // FIXES '<>' PROBLEM
-	     | CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE RIGHTBRACE
-	     | CLASS ID EXTENDS ID LEFTBRACE fieldstar RIGHTBRACE
-	     | CLASS ID EXTENDS ID LEFTBRACE RIGHTBRACE
-	     | CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE
-	     | CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE RIGHTBRACE
-	     | CLASS ID LEFTBRACE fieldstar RIGHTBRACE
-	     | CLASS ID LEFTBRACE RIGHTBRACE
+
+classdecl 		::= CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE // FIXES '<>' PROBLEM
+				| CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE RIGHTBRACE
+				| CLASS ID EXTENDS ID LEFTBRACE fieldstar RIGHTBRACE
+				| CLASS ID EXTENDS ID LEFTBRACE RIGHTBRACE
+				| CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE
+				| CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE RIGHTBRACE
+				| CLASS ID LEFTBRACE fieldstar RIGHTBRACE
+				| CLASS ID LEFTBRACE RIGHTBRACE
 ;
+
 fieldstar ::= field fieldstar // FIXES '*' PROBLEM
 ;
+
 idcommplus ::= COMMA ID idcommplus // FIXES '+,' PROBLEM
 	      |
 ;
+
 field ::= variabledecl
 	| functiondecl
 ;
+
 interfacedecl ::= INTERFACE ID LEFTBRACE prototypestar RIGHTBRACE
 		  | INTERFACE ID LEFTBRACE RIGHTBRACE
 ;
+
 prototypestar ::= prototype prototypestar // FIXED '*' PROBLEM
 ;
+
 prototype ::= type ID LEFTPAREN formals RIGHTPAREN SEMICOLON
 	     | VOID ID LEFTPAREN formals RIGHTPAREN SEMICOLON
 ;
+
 stmtblock ::= LEFTBRACE variabledeclstar stmtstar RIGHTBRACE
 	     | LEFTBRACE stmtstar RIGHTBRACE
 	     | LEFTBRACE variabledeclstar RIGHTBRACE
 	     | LEFTBRACE RIGHTBRACE
 ;
+
 variabledeclstar ::= variabledecl variabledeclstar // FIXED '*' PROBLEM
 ;
+
 stmtstar ::= stmt stmtstar // FIXED '*' PROBLEM
 ;
+
 stmt ::= expr SEMICOLON // FIXES '<>' PROBLEM
 	| SEMICOLON
 	| ifstmt
@@ -121,26 +143,34 @@ stmt ::= expr SEMICOLON // FIXES '<>' PROBLEM
 	| printstmt
 	| stmtblock
 ;
+
 ifstmt ::= IF LEFTPAREN expr RIGHTPAREN stmt ELSE stmt // FIXES '<>' PROBLEM
 	  | IF LEFTPAREN expr RIGHTPAREN stmt
 ;
+
 whilestmt ::= WHILE LEFTPAREN expr RIGHTPAREN stmt
 ;
+
 forstmt ::= FOR LEFTPAREN expr SEMICOLON expr SEMICOLON expr RIGHTPAREN stmt // FIXES '<>' PROBLEM
 	   | FOR LEFTPAREN expr SEMICOLON expr SEMICOLON RIGHTPAREN stmt
 	   | FOR LEFTPAREN SEMICOLON expr SEMICOLON expr RIGHTPAREN stmt
 	   | FOR LEFTPAREN SEMICOLON expr SEMICOLON RIGHTPAREN stmt
 ;
+
 breakstmt ::= BREAK SEMICOLON
 ;
+
 returnstmt ::= RETURN expr SEMICOLON // FIXES '<>' PROBLEM
 	     | RETURN SEMICOLON
 ;
+
 printstmt ::= PRINTLN LEFTPAREN expr exprcommplus RIGHTPAREN SEMICOLON
 ;
+
 exprcommplus ::= COMMA expr exprcommplus // FIXES '+,' PROBLEM
 	       |
 ;
+
 expr ::= lvalue ASSIGNOP expr
 	| constant
 	| lvalue
@@ -166,17 +196,21 @@ expr ::= lvalue ASSIGNOP expr
 	| NEW LEFTPAREN ID RIGHTPAREN
 	| NEWARRAY LEFTPAREN INTCONSTANT COMMA type RIGHTPAREN
 ;
+
 lvalue ::= ID LEFTBRACKET expr RIGHTBRACKET // FIXED SR AND RR ISSUES HERE
 	  | ID PERIOD ID
 	  | lvalue LEFTBRACKET expr RIGHTBRACKET
 	  | lvalue PERIOD ID
 ;
+
 call ::= ID LEFTPAREN actuals RIGHTPAREN
 	| ID PERIOD ID LEFTPAREN actuals RIGHTPAREN
 ;
+
 actuals ::= expr exprcommplus
 	   |
 ;
+
 constant ::= INTCONSTANT
 	    | DOUBLECONSTANT
 	    | STRINGCONSTANT
