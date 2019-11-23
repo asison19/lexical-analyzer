@@ -735,9 +735,11 @@ class CUP$ToyParser$actions {
 		int dleft = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).value;
-		 System.out.println("[reduce decl]" + "[reduce declplus]"); RESULT = d; 
+		int d2left = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()).left;
+		int d2right = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()).right;
+		Object d2 = (Object)((java_cup.runtime.Symbol) CUP$ToyParser$stack.peek()).value;
+		 System.out.print("[reduce " + d + "]" + "[reduce " + d2 + "]"); RESULT = 0; 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("program",0, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
-              System.out.println((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek());
             }
           return CUP$ToyParser$result;
 
@@ -762,7 +764,10 @@ class CUP$ToyParser$actions {
 		int dleft = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).left;
 		int dright = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).right;
 		Object d = (Object)((java_cup.runtime.Symbol) CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).value;
-		 System.out.println("[reduce decl] [reduce declplus]"); RESULT = d; 
+		int d2left = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()).left;
+		int d2right = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()).right;
+		Object d2 = (Object)((java_cup.runtime.Symbol) CUP$ToyParser$stack.peek()).value;
+		 System.out.print("[reduce " + d + "] " + "[reduce " + d2 + "]"); RESULT = 1; 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("declplus",24, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -771,9 +776,8 @@ class CUP$ToyParser$actions {
           case 3: // declplus ::= 
             {
               Object RESULT =null;
-		 System.out.println("[reduce 0]"); 
+		 RESULT = 2; 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("declplus",24, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
-              
             }
           return CUP$ToyParser$result;
 
@@ -784,7 +788,7 @@ class CUP$ToyParser$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()).right;
 		Object v = (Object)((java_cup.runtime.Symbol) CUP$ToyParser$stack.peek()).value;
-		 System.out.println("[reduce decl]"); RESULT = v; System.out.println((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek());System.out.println("result: " + v);
+		 System.out.print("[reduce " + v + "]" ); RESULT = 3; 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("decl",1, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -823,7 +827,7 @@ class CUP$ToyParser$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).right;
 		Object v = (Object)((java_cup.runtime.Symbol) CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).value;
-		 System.out.println("[reduce variable] " + "SEMICOLON [shift]"); RESULT = v; 
+		 System.out.print("[reduce " + v + "]" + "\nSEMICOLON [shift]\n"); RESULT = 4; 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("variabledecl",2, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -835,7 +839,7 @@ class CUP$ToyParser$actions {
 		int tleft = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).left;
 		int tright = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).right;
 		Object t = (Object)((java_cup.runtime.Symbol) CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).value;
-		 System.out.println("[reduce type] " + "ID [shift]"); RESULT = t; 
+		 System.out.println("ID" + "[reduce " + t + "] " + "[shift]"); RESULT = 5; 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("variable",3, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -847,7 +851,7 @@ class CUP$ToyParser$actions {
 		int nleft = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()).left;
 		int nright = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()).right;
 		Object n = (Object)((java_cup.runtime.Symbol) CUP$ToyParser$stack.peek()).value;
-		 System.out.println("INT [shift]"); RESULT = n; 
+		 System.out.println("INT [shift]"); RESULT = 6; 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("type",4, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;
@@ -856,7 +860,7 @@ class CUP$ToyParser$actions {
           case 11: // type ::= DOUBLE 
             {
               Object RESULT =null;
-		 System.out.println("DOUBLE [shift]"); System.out.println((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek());
+		 System.out.println("DOUBLE [shift]"); 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("type",4, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;

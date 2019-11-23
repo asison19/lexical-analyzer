@@ -49,27 +49,27 @@ precedence left ELSE; // FIXES SR DANGLING ELSE PROBLEM
 
 /****************************** The grammar rules ******************************/
 //Production # 0101 // TODO name production rules?, print out shift and reduce when shifting and reducing // CUP$ToyParser$act_num this counts as grammar rule?
-program 		::= decl:d declplus 	{: System.out.println("[reduce decl]" + "[reduce declplus]" + d); RESULT = d; :}
+program 		::= decl:d declplus:d2 	{: System.out.print("[reduce " + d + "]" + "[reduce " + d2 + "]"); RESULT = 0; :}
 ;
 
 //Production # 0201 0202
-declplus 		::= decl:d declplus 	{: System.out.println("[reduce decl] [reduce declplus]"); RESULT = d; :}// FIXES '+' PROBLEM
-				|					{: System.out.println("[reduce 0]"); :} // TODO this is 0?
+declplus 		::= decl:d declplus:d2 	{: System.out.print("[reduce " + d + "] " + "[reduce " + d2 + "]"); RESULT = 1; :}// FIXES '+' PROBLEM
+				|						{: RESULT = 2; :} 
 ;
 
-decl 			::= variabledecl:v {: System.out.println("[reduce decl]"); RESULT = v; :}
+decl 			::= variabledecl:v 		{: System.out.print("[reduce " + v + "]" ); RESULT = 3; :}
 				| functiondecl
 				| classdecl
 				| interfacedecl
 ;
 
-variabledecl 	::= variable:v SEMICOLON {: System.out.println("[reduce variable] " + "SEMICOLON [shift]"); RESULT = v; :}
+variabledecl 	::= variable:v SEMICOLON {: System.out.print("[reduce " + v + "]" + "\nSEMICOLON [shift]\n"); RESULT = 4; :}
 ;
 
-variable 		::= type:t ID {: System.out.println("[reduce type] " + "ID [shift]"); RESULT = t; :}
+variable 		::= type:t ID 			{: System.out.println("ID " + "[reduce " + t + "] " + "[shift]"); RESULT = 5; :}
 ;
 
-type 			::= INT:n 							{: System.out.println("INT [shift]"); RESULT = n; :}
+type 			::= INT:n 							{: System.out.println("INT [shift]"); RESULT = 6; :}
 				| DOUBLE 							{: System.out.println("DOUBLE [shift]"); :}
 				| BOOLEAN 							{: System.out.println("BOOLEAN [shift]"); :}
 				| STRING 							{: System.out.println("STRING [shift]"); :}
