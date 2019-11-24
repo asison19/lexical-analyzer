@@ -1,1 +1,2 @@
-int abc;
+int [] abc;
+abc abc;

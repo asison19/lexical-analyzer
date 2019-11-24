@@ -118,39 +118,5 @@ public class ToyParserSym {
   "DOUBLECONSTANT",
   "BOOLEANCONSTANT"
   };
-
-  /* non terminals */
-  static final int classdecl = 7;
-  static final int field = 8;
-  static final int interfacedecl = 9;
-  static final int expr = 19;
-  static final int constant = 23;
-  static final int decl = 1;
-  static final int type = 4;
-  static final int variablecommplus = 25;
-  static final int idcommplus = 26;
-  static final int forstmt = 15;
-  static final int breakstmt = 16;
-  static final int stmtblock = 11;
-  static final int whilestmt = 14;
-  static final int program = 0;
-  static final int returnstmt = 17;
-  static final int declplus = 24;
-  static final int variabledeclstar = 30;
-  static final int prototype = 10;
-  static final int formals = 6;
-  static final int prototypestar = 29;
-  static final int exprcommplus = 27;
-  static final int ifstmt = 13;
-  static final int variable = 3;
-  static final int stmtstar = 31;
-  static final int fieldstar = 28;
-  static final int actuals = 22;
-  static final int call = 21;
-  static final int functiondecl = 5;
-  static final int lvalue = 20;
-  static final int stmt = 12;
-  static final int variabledecl = 2;
-  static final int printstmt = 18;
 }
 
