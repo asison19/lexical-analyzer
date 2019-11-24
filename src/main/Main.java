@@ -47,7 +47,7 @@ public class Main {
 		}
 		
 		
-		System.out.println("\n********** End of lexical analysis **********");
+		System.out.println("\n********** End of syntax analysis **********");
 		// System.out.println("There were " + count +" tokens in the file:\n" + infile);
 		// lexer.outputTrie();
 	}

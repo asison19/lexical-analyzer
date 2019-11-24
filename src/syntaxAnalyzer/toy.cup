@@ -8,11 +8,31 @@ import lexicalAnalyzer.*; // Project 1
 
 class ToyParser;
 
+action code{:
+	// User Generated Code
+
+	// output the reductions and their production numbers
+	// this assumes the Object is an Integer and is used when RESULT
+	// is being used to hold the production number.
+	private String reduction(Object... reductions) {
+		String str = "";
+		for(Object i: reductions) {
+			str += "[reduce " + i + "]";
+		}
+		
+		return str;
+	}
+:}
+
 parser code {:
-    // Connect this parser to a scanner!
+    // User Generated Code
+	
+	
     ToyLexer s;
 	@SuppressWarnings("deprecation")
     public ToyParser(ToyLexer s){ this.s=s; }
+	
+	
 :}
 
 /* define how to connect to the scanner! */
@@ -48,172 +68,207 @@ precedence left LEFTBRACKET, PERIOD;
 precedence left ELSE; // FIXES SR DANGLING ELSE PROBLEM
 
 /****************************** The grammar rules ******************************/
-//Production # 0101 // TODO name production rules?, print out shift and reduce when shifting and reducing // CUP$ToyParser$act_num this counts as grammar rule?
-program 		::= decl:d declplus:d2 	{: System.out.print("[reduce " + d + "]" + "[reduce " + d2 + "]"); RESULT = 0; :}
+// In this program, RESULT is an object of type java.lang.Integer, and holds the value of the production number
+// 
+// The RESULT variable refers directly to the value of the non-terminal to which a rule reduces
+// Information take from CUP documentation here: http://www2.cs.tum.edu/projects/cup/docs.php
+
+// Production # 0101 // CUP$ToyParser$act_num this counts as grammar rule?
+program 		::= decl:d declplus:d2 				{: RESULT = 101; System.out.print(reduction(d,d2)); :}
 ;
 
-//Production # 0201 0202
-declplus 		::= decl:d declplus:d2 	{: System.out.print("[reduce " + d + "] " + "[reduce " + d2 + "]"); RESULT = 1; :}// FIXES '+' PROBLEM
-				|						{: RESULT = 2; :} 
+// Production # 0201 0202
+declplus 		::= decl:d declplus:d2 				{: RESULT = 201; System.out.print(reduction(d,d2)); :}// FIXES '+' PROBLEM
+				|									{: RESULT = 202; :} 
 ;
 
-decl 			::= variabledecl:v 		{: System.out.print("[reduce " + v + "]" ); RESULT = 3; :}
-				| functiondecl
-				| classdecl
-				| interfacedecl
+// Production # 0301 0302 0303
+decl 			::= variabledecl:v 					{: RESULT = 301; System.out.print(reduction(v)); :}
+				| functiondecl:f					{: RESULT = 302; System.out.print(reduction(f)); :}
+				| classdecl:c						{: RESULT = 303;  System.out.print(reduction(c));:}
+				| interfacedecl:i					{: RESULT = 304; System.out.print(reduction(i)); :}
 ;
 
-variabledecl 	::= variable:v SEMICOLON {: System.out.print("[reduce " + v + "]" + "\nSEMICOLON [shift]\n"); RESULT = 4; :}
+// Production # 0401
+variabledecl 	::= variable:v SEMICOLON 			{: RESULT = 401; System.out.print(reduction(v) + "\nSEMICOLON [shift]\n"); :}
 ;
 
-variable 		::= type:t ID 			{: System.out.println("ID " + "[reduce " + t + "] " + "[shift]"); RESULT = 5; :}
+// Production # 0501
+variable 		::= type:t ID 						{: RESULT = 501; System.out.println("ID " + reduction(t)+ "[shift]"); :}
 ;
 
-type 			::= INT:n 							{: System.out.println("INT [shift]"); RESULT = 6; :}
-				| DOUBLE 							{: System.out.println("DOUBLE [shift]"); :}
-				| BOOLEAN 							{: System.out.println("BOOLEAN [shift]"); :}
-				| STRING 							{: System.out.println("STRING [shift]"); :}
-				| type LEFTBRACKET RIGHTBRACKET 	{: System.out.println("LEFTBRACKET [shift]\n" + "RIGHTBRACKET [shift]\n"); :}
-				| ID 								{: System.out.println("ID [shift]"); :}
+// Production # 0601
+type 			::= INT:n 							{: RESULT = 601; System.out.println("INT " + "[shift]"); :}
+				| DOUBLE 							{: RESULT = 602; System.out.println("DOUBLE [shift]"); :}
+				| BOOLEAN 							{: RESULT = 603; System.out.println("BOOLEAN [shift]"); :}
+				| STRING 							{: RESULT = 604; System.out.println("STRING [shift]"); :}
+				| type:t LEFTBRACKET RIGHTBRACKET 	{: RESULT = 605; System.out.println(reduction(t) + "LEFTBRACKET [shift]\n" + "RIGHTBRACKET [shift]\n"); :}
+				| ID 								{: RESULT = 606; System.out.println("ID [shift]"); :}
 ;
 
-functiondecl 	::= type ID LEFTPAREN formals RIGHTPAREN stmtblock
-				| VOID ID LEFTPAREN formals RIGHTPAREN stmtblock
+// Production # 07
+functiondecl 	::= type ID LEFTPAREN formals RIGHTPAREN stmtblock	{: RESULT = 701; :}
+				| VOID ID LEFTPAREN formals RIGHTPAREN stmtblock	{: RESULT = 702; :}
 ;
 
-formals 		::= variable variablecommplus
-				|
+// Production # 08
+formals 		::= variable variablecommplus		{: RESULT = 801; :}
+				|									{: RESULT = 802; :}
 ;
 
-variablecommplus 	::= COMMA variable variablecommplus // FIXES '+,' PROBLEM
-					|
+// Production # 09
+variablecommplus 	::= COMMA variable variablecommplus {: RESULT = 901; :}// FIXES '+,' PROBLEM
+					|									{: RESULT = 902; :}
 ;
 
-classdecl 		::= CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE // FIXES '<>' PROBLEM
-				| CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE RIGHTBRACE
-				| CLASS ID EXTENDS ID LEFTBRACE fieldstar RIGHTBRACE
-				| CLASS ID EXTENDS ID LEFTBRACE RIGHTBRACE
-				| CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE
-				| CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE RIGHTBRACE
-				| CLASS ID LEFTBRACE fieldstar RIGHTBRACE
-				| CLASS ID LEFTBRACE RIGHTBRACE
+// Production # 10
+classdecl 		::= CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE {: RESULT = 1001; :}// FIXES '<>' PROBLEM
+				| CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus LEFTBRACE RIGHTBRACE				{: RESULT = 1002; :}
+				| CLASS ID EXTENDS ID LEFTBRACE fieldstar RIGHTBRACE							{: RESULT = 1003; :}
+				| CLASS ID EXTENDS ID LEFTBRACE RIGHTBRACE										{: RESULT = 1004; :}
+				| CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE fieldstar RIGHTBRACE				{: RESULT = 1005; :}
+				| CLASS ID IMPLEMENTS ID idcommplus LEFTBRACE RIGHTBRACE						{: RESULT = 1006; :}
+				| CLASS ID LEFTBRACE fieldstar RIGHTBRACE										{: RESULT = 1007; :}
+				| CLASS ID LEFTBRACE RIGHTBRACE													{: RESULT = 1008; :}
 ;
 
-fieldstar ::= field fieldstar // FIXES '*' PROBLEM
+// Production # 11
+fieldstar ::= field fieldstar 			{: RESULT = 1101; :}// FIXES '*' PROBLEM
 ;
 
-idcommplus ::= COMMA ID idcommplus // FIXES '+,' PROBLEM
-	      |
+// Production # 12
+idcommplus ::= COMMA ID idcommplus 		{: RESULT = 1201; :}// FIXES '+,' PROBLEM
+	      |								{: RESULT = 1202; :}
 ;
 
-field ::= variabledecl
-	| functiondecl
+// Production # 13
+field ::= variabledecl					{: RESULT = 1301; :}
+	| functiondecl						{: RESULT = 1302; :}
 ;
 
-interfacedecl ::= INTERFACE ID LEFTBRACE prototypestar RIGHTBRACE
-		  | INTERFACE ID LEFTBRACE RIGHTBRACE
+// Production # 14
+interfacedecl ::= INTERFACE ID LEFTBRACE prototypestar RIGHTBRACE		{: RESULT = 1401; :}
+		  | INTERFACE ID LEFTBRACE RIGHTBRACE							{: RESULT = 1402; :}
 ;
 
-prototypestar ::= prototype prototypestar // FIXED '*' PROBLEM
+// Production # 15
+prototypestar ::= prototype prototypestar 								{: RESULT = 1501; :} // FIXED '*' PROBLEM
 ;
 
-prototype ::= type ID LEFTPAREN formals RIGHTPAREN SEMICOLON
-	     | VOID ID LEFTPAREN formals RIGHTPAREN SEMICOLON
+// Production # 16
+prototype ::= type ID LEFTPAREN formals RIGHTPAREN SEMICOLON			{: RESULT = 1601; :}
+	     | VOID ID LEFTPAREN formals RIGHTPAREN SEMICOLON				{: RESULT = 1602; :}
 ;
 
-stmtblock ::= LEFTBRACE variabledeclstar stmtstar RIGHTBRACE
-	     | LEFTBRACE stmtstar RIGHTBRACE
-	     | LEFTBRACE variabledeclstar RIGHTBRACE
-	     | LEFTBRACE RIGHTBRACE
+// Production # 17
+stmtblock ::= LEFTBRACE variabledeclstar stmtstar RIGHTBRACE			{: RESULT = 1701; :}
+	     | LEFTBRACE stmtstar RIGHTBRACE								{: RESULT = 1702; :}
+	     | LEFTBRACE variabledeclstar RIGHTBRACE						{: RESULT = 1703; :}
+	     | LEFTBRACE RIGHTBRACE											{: RESULT = 1704; :}
 ;
 
-variabledeclstar ::= variabledecl variabledeclstar // FIXED '*' PROBLEM
+// Production # 18 // FIXED '*' PROBLEM
+variabledeclstar ::= variabledecl variabledeclstar 						{: RESULT = 1801; :} 
 ;
 
-stmtstar ::= stmt stmtstar // FIXED '*' PROBLEM
+// Production # 19 // FIXED '*' PROBLEM
+stmtstar ::= stmt stmtstar 												{: RESULT = 1901; :} 
 ;
 
-stmt ::= expr SEMICOLON // FIXES '<>' PROBLEM
-	| SEMICOLON
-	| ifstmt
-	| whilestmt
-	| forstmt
-	| breakstmt
-	| returnstmt
-	| printstmt
-	| stmtblock
+// Production # 20 // FIXES '<>' PROBLEM
+stmt ::= expr SEMICOLON 												{: RESULT = 2001; :} 
+	| SEMICOLON			 												{: RESULT = 2002; :} 
+	| ifstmt			 												{: RESULT = 2003; :} 
+	| whilestmt			 												{: RESULT = 2004; :} 
+	| forstmt			 												{: RESULT = 2005; :} 
+	| breakstmt			 												{: RESULT = 2006; :} 
+	| returnstmt			 											{: RESULT = 2007; :} 
+	| printstmt			 												{: RESULT = 2008; :} 
+	| stmtblock			 												{: RESULT = 2009; :} 
 ;
 
-ifstmt ::= IF LEFTPAREN expr RIGHTPAREN stmt ELSE stmt // FIXES '<>' PROBLEM
-	  | IF LEFTPAREN expr RIGHTPAREN stmt
+// Production # 21 // FIXES '<>' PROBLEM
+ifstmt ::= IF LEFTPAREN expr RIGHTPAREN stmt ELSE stmt 					{: RESULT = 2101; :} 
+	  | IF LEFTPAREN expr RIGHTPAREN stmt								{: RESULT = 2102; :} 
 ;
 
-whilestmt ::= WHILE LEFTPAREN expr RIGHTPAREN stmt
+// Production # 22
+whilestmt ::= WHILE LEFTPAREN expr RIGHTPAREN stmt						{: RESULT = 2201; :} 
 ;
 
-forstmt ::= FOR LEFTPAREN expr SEMICOLON expr SEMICOLON expr RIGHTPAREN stmt // FIXES '<>' PROBLEM
-	   | FOR LEFTPAREN expr SEMICOLON expr SEMICOLON RIGHTPAREN stmt
-	   | FOR LEFTPAREN SEMICOLON expr SEMICOLON expr RIGHTPAREN stmt
-	   | FOR LEFTPAREN SEMICOLON expr SEMICOLON RIGHTPAREN stmt
+// Production # 23 // FIXES '<>' PROBLEM
+forstmt ::= FOR LEFTPAREN expr SEMICOLON expr SEMICOLON expr RIGHTPAREN stmt 	{: RESULT = 2301; :} 
+	   | FOR LEFTPAREN expr SEMICOLON expr SEMICOLON RIGHTPAREN stmt			{: RESULT = 2302; :} 
+	   | FOR LEFTPAREN SEMICOLON expr SEMICOLON expr RIGHTPAREN stmt			{: RESULT = 2303; :} 
+	   | FOR LEFTPAREN SEMICOLON expr SEMICOLON RIGHTPAREN stmt					{: RESULT = 2304; :} 
 ;
 
-breakstmt ::= BREAK SEMICOLON
+// Production # 24
+breakstmt ::= BREAK SEMICOLON						{: RESULT = 2401; :} 
 ;
 
-returnstmt ::= RETURN expr SEMICOLON // FIXES '<>' PROBLEM
-	     | RETURN SEMICOLON
+// Production # 25 // FIXES '<>' PROBLEM
+returnstmt ::= RETURN expr SEMICOLON 				{: RESULT = 2501; :} 
+	     | RETURN SEMICOLON							{: RESULT = 2502; :} 
 ;
 
-printstmt ::= PRINTLN LEFTPAREN expr exprcommplus RIGHTPAREN SEMICOLON
+// Production # 26
+printstmt ::= PRINTLN LEFTPAREN expr exprcommplus RIGHTPAREN SEMICOLON			{: RESULT = 2601; :} 
 ;
 
-exprcommplus ::= COMMA expr exprcommplus // FIXES '+,' PROBLEM
-	       |
+// Production # 27 // FIXES '+,' PROBLEM
+exprcommplus ::= COMMA expr exprcommplus 			{: RESULT = 2701; :} 
+	       |										{: RESULT = 2702; :} 
 ;
 
-expr ::= lvalue ASSIGNOP expr
-	| constant
-	| lvalue
-	| THIS
-	| call
-	| LEFTPAREN expr RIGHTPAREN
-	| expr PLUS expr
-	| expr MINUS expr
-	| expr MULTIPLICATION expr
-	| expr DIVISION expr
-	| expr MOD expr
-	| MINUS expr
-	| expr LESS expr
-	| expr LESSEQUAL expr
-	| expr GREATER expr
-	| expr GREATEREQUAL expr
-	| expr EQUAL expr
-	| expr NOTEQUAL expr
-	| expr AND expr
-	| expr OR expr
-	| NOT expr
-	| READLN LEFTPAREN RIGHTPAREN
-	| NEW LEFTPAREN ID RIGHTPAREN
-	| NEWARRAY LEFTPAREN INTCONSTANT COMMA type RIGHTPAREN
+// Production # 28
+expr ::= lvalue ASSIGNOP expr									{: RESULT = 2801; :} 
+	| constant													{: RESULT = 2802; :} 
+	| lvalue													{: RESULT = 2803; :} 
+	| THIS														{: RESULT = 2804; :} 
+	| call														{: RESULT = 2805; :} 
+	| LEFTPAREN expr RIGHTPAREN									{: RESULT = 2806; :} 
+	| expr PLUS expr											{: RESULT = 2807; :} 
+	| expr MINUS expr											{: RESULT = 2808; :} 
+	| expr MULTIPLICATION expr									{: RESULT = 2809; :} 
+	| expr DIVISION expr										{: RESULT = 2810; :} 
+	| expr MOD expr												{: RESULT = 2811; :} 
+	| MINUS expr												{: RESULT = 2812; :} 
+	| expr LESS expr											{: RESULT = 2813; :} 
+	| expr LESSEQUAL expr										{: RESULT = 2814; :} 
+	| expr GREATER expr											{: RESULT = 2815; :} 
+	| expr GREATEREQUAL expr									{: RESULT = 2816; :} 
+	| expr EQUAL expr											{: RESULT = 2817; :} 
+	| expr NOTEQUAL expr										{: RESULT = 2818; :} 
+	| expr AND expr												{: RESULT = 2819; :} 
+	| expr OR expr												{: RESULT = 2820; :} 
+	| NOT expr													{: RESULT = 2821; :} 
+	| READLN LEFTPAREN RIGHTPAREN								{: RESULT = 2822; :} 
+	| NEW LEFTPAREN ID RIGHTPAREN								{: RESULT = 2823; :} 
+	| NEWARRAY LEFTPAREN INTCONSTANT COMMA type RIGHTPAREN		{: RESULT = 2824; :} 
 ;
 
-lvalue ::= ID LEFTBRACKET expr RIGHTBRACKET // FIXED SR AND RR ISSUES HERE
-	  | ID PERIOD ID
-	  | lvalue LEFTBRACKET expr RIGHTBRACKET
-	  | lvalue PERIOD ID
+// Production # 29 // FIXED SR AND RR ISSUES HERE
+lvalue ::= ID LEFTBRACKET expr RIGHTBRACKET 					{: RESULT = 2901; :} 
+	  | ID PERIOD ID											{: RESULT = 2902; :} 
+	  | lvalue LEFTBRACKET expr RIGHTBRACKET					{: RESULT = 2903; :} 
+	  | lvalue PERIOD ID										{: RESULT = 2904; :} 
 ;
 
-call ::= ID LEFTPAREN actuals RIGHTPAREN
-	| ID PERIOD ID LEFTPAREN actuals RIGHTPAREN
+// Production # 30
+call ::= ID LEFTPAREN actuals:a RIGHTPAREN						{: RESULT = 3001; System.out.print("ID [shift]\nLEFTPAREN [shift]" + reduction(a) + "RIGHTPARENT [shift]\n"); :} 
+	| ID PERIOD ID LEFTPAREN actuals:a RIGHTPAREN				{: RESULT = 3002; System.out.print("ID [shift]\nPERIOD [shift]\nID [shift]\nLEFTPAREN [shift]\n" + reduction(a) + "RIGHTPAREN [shift]\n"); :} 
 ;
 
-actuals ::= expr exprcommplus
-	   |
+// Production # 31
+actuals ::= expr:e1 exprcommplus:e2								{: RESULT = 3101; System.out.print(reduction(e1,e2)); :} 
+	   |														{: RESULT = 3102; :} 
 ;
 
-constant ::= INTCONSTANT
-	    | DOUBLECONSTANT
-	    | STRINGCONSTANT
-	    | BOOLEANCONSTANT
-	    | NULL
+// Production # 32
+constant ::= INTCONSTANT										{: RESULT = 3201; System.out.println("INTCONSTANT [shift]"); :} 
+	    | DOUBLECONSTANT										{: RESULT = 3202; System.out.println("DOUBLECONSTANT [shift]"); :} 
+	    | STRINGCONSTANT										{: RESULT = 3203; System.out.println("STRINGCONSTANT [shift]"); :} 
+	    | BOOLEANCONSTANT										{: RESULT = 3204; System.out.println("BOOLEANCONSTANT [shift]"); :} 
+	    | NULL													{: RESULT = 3205; System.out.println("NULL [shift]"); :} 
 ;
