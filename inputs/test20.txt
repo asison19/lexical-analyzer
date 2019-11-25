@@ -1,7 +1,7 @@
 class foo extends bar implements farm, field, pasture{
 	int the;
 	boolean cow;
-	void no (int two) {
+	void no (int two,int one) {
 		int goes;
 	}
 

@@ -1,5 +1,5 @@
-# Lexical Analyzer  
-This program reads an input or text file, and tokenizes it according to the lexical conventions of the Toy programming language. 
+# Lexical and Syntax Analyzer  
+This program reads an input or text file, tokenizes it and checks for proper syntax according to the lexical and syntax conventions of the Toy programming language. 
 
 # Authors  
 [Andrew Sison](https://github.com/asison19)  
@@ -9,18 +9,18 @@ This program reads an input or text file, and tokenizes it according to the lexi
 First download or git clone the repository.  
 To install, run the compile.bat file to compile the .java files. Alternatively, you can compile it using your terminal 
 of choice. To do so, change directory to the "src" directory and type:  
-javac -cp . main/Main.java  
+"javac -cp ".;java-cup-11b.jar" main/Main.java"
 
 The jflex lexical specification file is located in "src/lexicalAnalyzer", along with the java file it creates.  
 To create the specification file, we used JFlex version 1.7.0 with JDK 1.8.  
 
 ## Usage  
 To run the program, open a terminal and go to the "src" directory. Type  
-"java main/Main"  
+"$ java -cp ".;java-cup-11b.jar" main/Main"  
 to run the default test file, or  
-"java main/Main *fileName*"  
+"$ java -cp ".;java-cup-11b.jar" main/Main *fileName*"  
 to test another input file. 
-The terminal will then output the tokenized input file, as well as the Trie Table containing the identifiers.
+The terminal will then output the shift and reduce actions required to check the syntax of the input file.
 
 ## Troubleshooting
 If there is a weird character on the top of the produced java file from the jflex spec, such as ï»¿, save endcoding as UTF-8.  

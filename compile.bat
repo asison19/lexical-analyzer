@@ -1,3 +1,3 @@
 @echo off
 cd src
-javac -cp . main/Main.java
+javac -cp ".;java-cup-11b.jar" main/Main.java
