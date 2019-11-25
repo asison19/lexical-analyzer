@@ -1,4 +1,1 @@
-void f() 
-{
-	this;
-}
+int abc;

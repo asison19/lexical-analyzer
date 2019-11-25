@@ -65,7 +65,7 @@ non terminal	 	declplus, variablecommplus, idcommplus, exprcommplus, fieldstar, 
 non terminal 		lvaluenotid;
 
 /* Precedences */
-precedence left ID;
+
 precedence left ASSIGNOP;
 precedence left OR;
 precedence left AND;
@@ -74,8 +74,10 @@ precedence left LESS, LESSEQUAL, GREATER, GREATEREQUAL;
 precedence left PLUS, MINUS;
 precedence left MULTIPLICATION, DIVISION, MOD;
 precedence left NOT;
+precedence left ID;
 precedence left LEFTBRACKET, PERIOD;
 precedence left ELSE; // FIXES SR DANGLING ELSE PROBLEM
+
 
 /****************************** The grammar rules ******************************/
 // In this program, RESULT is an object of type java.lang.Integer, and holds the value of the production number
@@ -242,7 +244,7 @@ exprcommplus ::= COMMA expr:e1 exprcommplus:e2 						{: RESULT = 2701; System.ou
 ;
 
 // Production # 28
-expr ::= lvalue:l ASSIGNOP expr:e									// {: RESULT = 2801; System.out.print(reduction(l)+shift("ASSIGNOP")+reduction(e)); :} 
+expr ::= lvalue:l ASSIGNOP expr:e									{: RESULT = 2801; System.out.print(reduction(l)+shift("ASSIGNOP")+reduction(e)); :} 
 	| constant:c													{: RESULT = 2802; System.out.print(reduction(c)); :} 
 	// | lvalue:l														{: RESULT = 2803; System.out.print(reduction(l)); :}	// removed to fix reduce reduce error 
 	| THIS															{: RESULT = 2804; System.out.print(shift("THIS")); :} 
@@ -271,8 +273,7 @@ expr ::= lvalue:l ASSIGNOP expr:e									// {: RESULT = 2801; System.out.print(
 ;
 
 // Production # 29 // FIXED SR AND RR ISSUES HERE
-lvalue ::= lvalue:l PERIOD ID										{: RESULT = 2901; System.out.print(reduction(l) + shift("PERIOD", "ID")); :} 
-		 | ID														{: RESULT = 2902; System.out.print(shift("ID")); :}
+lvalue ::= ID														{: RESULT = 2902; System.out.print(shift("ID")); :}
 		 | lvaluenotid:l											{: RESULT = 2903; System.out.print(reduction(l)); :}
 ;
 
@@ -297,4 +298,5 @@ constant ::= INTCONSTANT										{: RESULT = 3201; System.out.println("INTCONST
 // Production # 33 // added to fix reduce reduce error with lvalue and type to ID
 lvaluenotid ::=  lvalue:l LEFTBRACKET expr:e RIGHTBRACKET		{: RESULT = 3301; System.out.print(reduction(l) + shift("LEFTBRACKET") + reduction(e) + shift("RIGHTBRACKET")); :}
 				| lvaluenotid:l LEFTBRACKET expr:e RIGHTBRACKET	{: RESULT = 3302; System.out.print(reduction(l) + shift("LEFTBRACKET") + reduction(e) + shift("RIGHTBRACKET")); :}
+				| lvalue:l PERIOD ID							{: RESULT = 3303; System.out.print(reduction(l) + shift("PERIOD", "ID")); :} 
 ;
