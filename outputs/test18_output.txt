@@ -1,0 +1,41 @@
+No inputed file detected, using default file:
+D:\eclipse\java-oxygen\eclipse-workspace\lexical-analyzer\bin\..\inputs\test18.txt
+
+********** Start of Syntax Analysis **********
+
+INT [shift]
+[reduce 601] 
+ID [shift]
+
+[reduce 501] 
+SEMICOLON [shift]
+[reduce 401] 
+DOUBLE [shift]
+INTCONSTANT [shift]
+[reduce 3201] 
+[reduce null] 
+SEMICOLON [shift]
+[reduce 2001] 
+
+LEFTBRACE [shift]
+[reduce 1902] 
+RIGHTBRACE [shift]
+[reduce 602] 
+ID [shift]
+LEFTPAREN [shift]
+[reduce 802] 
+RIGHTPAREN [shift]
+[reduce 1702] 
+[reduce 701] 
+[reduce 1302] 
+[reduce 1301] [reduce 1102] 
+CLASS [shift]
+ID [shift]
+LEFTBRACE [shift]
+[reduce 1101] 
+RIGHTBRACE [shift]
+[reduce 1007] 
+[reduce 303] [reduce 202] 
+[accept]
+
+********** End of syntax analysis **********

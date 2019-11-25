@@ -1,3 +1,5 @@
+// for lexer testing only
+
 interface Sam{
   public void test();
 }

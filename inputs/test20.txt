@@ -1,0 +1,14 @@
+class foo extends bar implements farm, field, pasture{
+	int the;
+	boolean cow;
+	void no (int two) {
+		int goes;
+	}
+
+	void yes (boolean three) {
+		int moo;
+	}
+	
+	String MOO;
+	double moo;
+}

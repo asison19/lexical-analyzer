@@ -1,0 +1,9 @@
+class scrub extends book
+{
+   void tool()
+   { 
+	readln();
+	new(car);
+	break;
+    }
+}

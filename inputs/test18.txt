@@ -1,0 +1,4 @@
+class One {
+	int oneInt;
+	double f() { abc.oneInt=3; }
+}

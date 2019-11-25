@@ -168,7 +168,8 @@ interfacedecl ::= INTERFACE ID LEFTBRACE prototypestar:p RIGHTBRACE		{: RESULT =
 ;
 
 // Production # 15
-prototypestar ::= prototype:p1 prototypestar:p2 								{: RESULT = 1501; System.out.print(reduction(p1,p2)); :} // FIXED '*' PROBLEM
+prototypestar ::= prototype:p1 prototypestar:p2 						{: RESULT = 1501; System.out.print(reduction(p1,p2)); :} // FIXED '*' PROBLEM
+			| prototype:p1												{: RESULT = 1502; System.out.print(reduction(p1)); :}
 ;
 
 // Production # 16
