@@ -5,6 +5,7 @@ D:\eclipse\java-oxygen\eclipse-workspace\lexical-analyzer\bin\..\inputs\test4.tx
 
 
 ID [shift]
+ID [shift]
 PERIOD [shift]
 ID [shift]
 LEFTPAREN [shift]

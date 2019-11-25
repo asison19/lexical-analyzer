@@ -108,7 +108,7 @@ variabledecl 	::= variable:v SEMICOLON 			{: RESULT = 401; System.out.print(redu
 
 // Production # 0501
 variable 		::= type:t ID 						{: RESULT = 501; System.out.print(reduction(t)+ "ID [shift]\n"); :}
-				| ID ID
+				| ID ID								{: RESULT = 502; System.out.print(shift("ID","ID")); :}// added to fix reduce reduce error between lvalue and type
 ;
 
 // Production # 0601
@@ -117,7 +117,7 @@ type 			::= INT:n 							{: RESULT = 601; System.out.print(shift("INT")); :}
 				| BOOLEAN 							{: RESULT = 603; System.out.print("BOOLEAN [shift]\n"); :}
 				| STRING 							{: RESULT = 604; System.out.print("STRING [shift]\n"); :}
 				| type:t LEFTBRACKET RIGHTBRACKET 	{: RESULT = 605; System.out.print(reduction(t) + "LEFTBRACKET [shift]\n" + "RIGHTBRACKET [shift]\n"); :}
-				// | ID 								{: RESULT = 606; System.out.print("ID [shift]\n"); :}
+				// | ID 								{: RESULT = 606; System.out.print("ID [shift]\n"); :} // removed to fix reduce reduce error between lvalue and type
 ;
 
 // Production # 07
@@ -240,7 +240,7 @@ exprcommplus ::= COMMA expr:e1 exprcommplus:e2 						{: RESULT = 2701; System.ou
 // Production # 28
 expr ::= lvalue:l ASSIGNOP expr:e									// {: RESULT = 2801; System.out.print(reduction(l)+shift("ASSIGNOP")+reduction(e)); :} 
 	| constant:c													{: RESULT = 2802; System.out.print(reduction(c)); :} 
-	// | lvalue:l														{: RESULT = 2803; System.out.print(reduction(l)); :} 
+	// | lvalue:l														{: RESULT = 2803; System.out.print(reduction(l)); :}	// removed to fix reduce reduce error 
 	| THIS															{: RESULT = 2804; System.out.print(shift("THIS")); :} 
 	| call:c														{: RESULT = 2805; System.out.print(reduction(c)); :} 
 	| LEFTPAREN expr:e RIGHTPAREN									{: RESULT = 2806; System.out.print(shift("LEFTPAREN") + reduction(e) + shift("RIGHTPAREN")); :} 
@@ -262,17 +262,14 @@ expr ::= lvalue:l ASSIGNOP expr:e									// {: RESULT = 2801; System.out.print(
 	| READLN LEFTPAREN RIGHTPAREN									{: RESULT = 2822; System.out.print(shift("READLN","LEFTPAREN","RIGHTPAREN")); :} 
 	| NEW LEFTPAREN ID RIGHTPAREN									{: RESULT = 2823; System.out.print(shift("NEW","LEFTPAREN","ID","RIGHTPAREN")); :} 
 	| NEWARRAY LEFTPAREN INTCONSTANT COMMA type:t RIGHTPAREN		{: RESULT = 2824; System.out.print(shift("NEWARRAY","LEFTPAREN","INTCONSTANT","COMMA") + reduction(t) + shift("RIGHTPAREN")); :} 
-	| lvaluenotid
-	| ID
+	| lvaluenotid:l													{: RESULT = 2825; System.out.print(reduction(l)); :}
+	| ID															{: RESULT = 2825; System.out.print(shift("ID")); :}
 ;
 
 // Production # 29 // FIXED SR AND RR ISSUES HERE
-lvalue ::= // ID LEFTBRACKET expr:e RIGHTBRACKET 					{: RESULT = 2901; System.out.print(shift("ID","LEFTBRACKET") + reduction(e)); :} 
-		 // | ID PERIOD ID											{: RESULT = 2902; System.out.print(shift("ID","PERIOD","ID")); :} 
-		 // | lvalue:l LEFTBRACKET expr:e RIGHTBRACKET				{: RESULT = 2903; System.out.print(reduction(l) + shift("LEFTBRACKET") + reduction(e) + shift("RIGHTBRACKET")); :} 
-		 | lvalue:l PERIOD ID										{: RESULT = 2904; System.out.print(reduction(l) + shift("PERIOD", "ID")); :} 
-		 | ID
-		 | lvaluenotid
+lvalue ::= lvalue:l PERIOD ID										{: RESULT = 2901; System.out.print(reduction(l) + shift("PERIOD", "ID")); :} 
+		 | ID														{: RESULT = 2902; System.out.print(shift("ID")); :}
+		 | lvaluenotid:l											{: RESULT = 2903; System.out.print(reduction(l)); :}
 ;
 
 // Production # 30
@@ -293,7 +290,7 @@ constant ::= INTCONSTANT										{: RESULT = 3201; System.out.println("INTCONST
 	    | NULL													{: RESULT = 3205; System.out.println("NULL [shift]"); :} 
 ;
 
-lvaluenotid ::=  lvalue:l LEFTBRACKET expr:e RIGHTBRACKET
-				// | lvalue:l PERIOD ID
-				| lvaluenotid LEFTBRACKET expr:e RIGHTBRACKET
+// Production # 33 // added to fix reduce reduce error with lvalue and type to ID
+lvaluenotid ::=  lvalue:l LEFTBRACKET expr:e RIGHTBRACKET		{: RESULT = 3301; System.out.print(reduction(l) + shift("LEFTBRACKET") + reduction(e) + shift("RIGHTBRACKET")); :}
+				| lvaluenotid:l LEFTBRACKET expr:e RIGHTBRACKET	{: RESULT = 3302; System.out.print(reduction(l) + shift("LEFTBRACKET") + reduction(e) + shift("RIGHTBRACKET")); :}
 ;

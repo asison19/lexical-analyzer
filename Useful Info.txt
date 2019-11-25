@@ -33,3 +33,6 @@ decl -> functiondecl
 
 // this is value stack?
 System.out.println((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek());
+
+help for lvalue reduce reduce error
+https://stackoverflow.com/questions/26968665/bison-shift-reduce-conflict-tiger-compiler
