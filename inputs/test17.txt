@@ -1,0 +1,10 @@
+interface one { boolean yes (boolean no); }
+class scrub extends book
+{
+   void tool()
+    { 
+	readln();
+	new(car);
+	break;
+    }
+}
