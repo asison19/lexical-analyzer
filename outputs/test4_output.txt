@@ -1,14 +1,31 @@
+No inputed file detected, using default file:
+D:\eclipse\java-oxygen\eclipse-workspace\lexical-analyzer\bin\..\inputs\test4.txt
+
+********** Start of Syntax Analysis **********
 
 
+ID [shift]
+PERIOD [shift]
+ID [shift]
+LEFTPAREN [shift]
+[reduce 3102] 
+RIGHTPAREN [shift]
+[reduce 3002] 
 
-Syntax error
-instead expected token classes are [LEFTPAREN, LEFTBRACKET, ID]
-[reject]
+
+[reduce null] 
+SEMICOLON [shift]
+LEFTBRACE [shift]
+[reduce 1902] 
+RIGHTBRACE [shift]
+VOID [shift]
+ID [shift]
+LEFTPAREN [shift]
+[reduce 802] 
+RIGHTPAREN [shift]
+[reduce 1702] 
+[reduce 702] 
+[reduce 302] [reduce 202] 
+[accept]
 
 ********** End of syntax analysis **********
-Couldn't repair and continue parse
-java.lang.Exception: Can't recover from previous error(s)
-	at java_cup.runtime.lr_parser.report_fatal_error(lr_parser.java:392)
-	at java_cup.runtime.lr_parser.unrecovered_syntax_error(lr_parser.java:539)
-	at java_cup.runtime.lr_parser.parse(lr_parser.java:731)
-	at main.Main.main(Main.java:35)
