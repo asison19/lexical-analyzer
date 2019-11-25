@@ -14,6 +14,9 @@ of choice. To do so, change directory to the "src" directory and type:
 The jflex lexical specification file is located in "src/lexicalAnalyzer", along with the java file it creates.  
 To create the specification file, we used JFlex version 1.7.0 with JDK 1.8.  
 
+The CUP syntax specification file is located in "src/syntaxAnalyzer" along with the java files it creates.
+To create the specification file, we used CUP 0.11b.
+
 ## Usage  
 To run the program, open a terminal and go to the "src" directory. Type  
 "$ java -cp ".;java-cup-11b.jar" main/Main"  
@@ -28,11 +31,15 @@ Input (.in) files of the Toy "code" that needs to be compiled needs to be conver
 ANSI, UTF-8-BOM, UCS-2-BE-BOM, UCS-2-LE-BOM  
 Both ANSI, and UTF-8 can work with text (.txt) files.  
 
-
-## Screenshots  
+## Screenshots
+"test1.txt" file.
+![image5](screenshots/image5.png)  
+Default "test20.txt" file.
+![image6](screenshots/image6.png)   
+## Old Lexer Screenshots  
 Default "testAll.txt" file.  
 ![image1](screenshots/image1.png)  
-![image2](screenshots/image2.png)  
+![image2](screenshots/image2.png)    
 Testing "Sample.txt" file.  
 ![image3](screenshots/image3.png)  
 ![image4](screenshots/image4.png)  
