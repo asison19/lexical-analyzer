@@ -1,0 +1,17 @@
+No inputed file detected, using default file:
+D:\eclipse\java-oxygen\eclipse-workspace\lexical-analyzer\bin\..\inputs\test9.txt
+
+********** Start of Syntax Analysis **********
+
+
+Syntax error
+instead expected token classes are [LEFTPAREN, LEFTBRACKET]
+Couldn't repair and continue parse
+java.lang.Exception: Can't recover from previous error(s)
+	at java_cup.runtime.lr_parser.report_fatal_error(lr_parser.java:392)
+	at java_cup.runtime.lr_parser.unrecovered_syntax_error(lr_parser.java:539)
+	at java_cup.runtime.lr_parser.parse(lr_parser.java:731)
+	at main.Main.main(Main.java:35)
+[reject]
+
+********** End of syntax analysis **********

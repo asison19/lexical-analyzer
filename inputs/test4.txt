@@ -1,0 +1,5 @@
+void f() 
+{
+	front = in.nextLine();
+
+}

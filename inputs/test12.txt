@@ -1,0 +1,4 @@
+class One {
+	int oneInt;
+	double f() { this.oneInt=3; }
+}

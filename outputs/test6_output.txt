@@ -1,0 +1,20 @@
+********** Start of Syntax Analysis **********
+INT [shift]
+[reduce 601] 
+LEFTBRACKET [shift]
+RIGHTBRACKET [shift]
+[reduce 605] 
+LEFTBRACKET [shift]
+RIGHTBRACKET [shift]
+[reduce 605] 
+LEFTBRACKET [shift]
+RIGHTBRACKET [shift]
+[reduce 605] 
+ID [shift]
+[reduce 501] 
+SEMICOLON [shift]
+[reduce 401] 
+[reduce 301] [reduce 202] 
+[accept]
+
+********** End of syntax analysis **********

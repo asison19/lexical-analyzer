@@ -1,0 +1,7 @@
+void f(double x) 
+{
+	// in function
+
+	front = in.nextLine;
+
+}

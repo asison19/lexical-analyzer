@@ -12,5 +12,24 @@ variabledecl -> variable SEMICOLON
 variable -> type ID
 type -> INT
 
+test1.txt
+VOID ID LEFTPAREN DOUBLE ID COMMA DOUBLE ID RIGHTPAREN LEFTBRACE RIGHTBRACE
+DOUBLE ID DOUBLE ID COMMA LEFTBRACE RIGHTBRACE VOID ID LEFTPAREN RIGHTPAREN
+
+program -> decl declplus
+declplus -> decl declplus
+declplus -> ''
+decl -> variabledecl
+variabledecl -> variable SEMICOLON
+variable -> type ID
+type -> INT
+type -> DOUBLE
+variablecommplus -> ''
+variablecommplus -> COMMA variable variablecommplus
+formals -> variable variablecommplus
+stmtblock -> LEFTBRACE RIGHTBRACE
+functiondecl ->VOID ID LEFTPAREN formals RIGHTPAREN stmtblock
+decl -> functiondecl
+
 // this is value stack?
 System.out.println((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek());

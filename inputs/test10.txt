@@ -1,0 +1,6 @@
+class foobar {
+	boolean b;
+	userDefinedClassType f() {}
+	double d;
+	string g() {}
+}

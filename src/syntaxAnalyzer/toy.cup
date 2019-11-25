@@ -19,7 +19,6 @@ action code{:
 		for(Object i: reductions) {
 			str += "[reduce " + i + "] ";
 		}
-		
 		return str + "\n";
 	}
 	
@@ -35,12 +34,10 @@ action code{:
 
 parser code {:
     // User Generated Code
-	
-	
+
     ToyLexer s;
 	@SuppressWarnings("deprecation")
     public ToyParser(ToyLexer s){ this.s=s; }
-	
 	
 :}
 
@@ -65,6 +62,7 @@ non terminal		breakstmt, returnstmt, printstmt, expr, lvalue, call, actuals, con
 non terminal	 	declplus, variablecommplus, idcommplus, exprcommplus, fieldstar, prototypestar, variabledeclstar, stmtstar; // ALL OF THE NON TERMINALS TO FIX ISSUES
 
 /* Precedences */
+precedence left ID;
 precedence left ASSIGNOP;
 precedence left OR;
 precedence left AND;
@@ -84,13 +82,6 @@ precedence left ELSE; // FIXES SR DANGLING ELSE PROBLEM
 //
 // Production # entered in manually using the following format:
 // xxyy, where xx is for the non terminal's number, and yy is the nonterminal's productions.
-//
-// TODO? leaving as is makes it easier to refer back to this spec file but,
-// we can use CUP$ToyParser$act_num for RESULT instead
-// by finding and replacing 
-// RESULT = [0-9]*; 
-// as
-// RESULT = CUP$ToyParser$act_num;
 // 
 
 // Production # 0101 
@@ -118,8 +109,8 @@ variable 		::= type:t ID 						{: RESULT = 501; System.out.print(reduction(t)+ "
 ;
 
 // Production # 0601
-type 			::= INT:n 							{: RESULT = 601; System.out.print("INT [shift]\n"); :}
-				| DOUBLE 							{: RESULT = 602; System.out.print("DOUBLE [shif]\n"); :}
+type 			::= INT:n 							{: RESULT = 601; System.out.print(shift("INT")); :}
+				| DOUBLE 							{: RESULT = 602; System.out.print("DOUBLE [shift]\n"); :}
 				| BOOLEAN 							{: RESULT = 603; System.out.print("BOOLEAN [shift]\n"); :}
 				| STRING 							{: RESULT = 604; System.out.print("STRING [shift]\n"); :}
 				| type:t LEFTBRACKET RIGHTBRACKET 	{: RESULT = 605; System.out.print(reduction(t) + "LEFTBRACKET [shift]\n" + "RIGHTBRACKET [shift]\n"); :}
@@ -128,7 +119,7 @@ type 			::= INT:n 							{: RESULT = 601; System.out.print("INT [shift]\n"); :}
 
 // Production # 07
 functiondecl 	::= type:t ID LEFTPAREN formals:f RIGHTPAREN stmtblock:s	{: RESULT = 701; System.out.print(reduction(t) + shift("ID","LEFTPAREN") + reduction(f) + "RIGHTPAREN [shift]\n" + reduction(s)); :}
-				| VOID ID LEFTPAREN formals:f RIGHTPAREN stmtblock:s		{: RESULT = 702; System.out.print("VOID [shift]\nID [shift]\nLEFTPAREN [shift]\n" + reduction(f) + "RIGHTPAREN [shift]\n" + reduction(s)); :}
+				| VOID ID LEFTPAREN formals:f RIGHTPAREN stmtblock:s		{: RESULT = 702; System.out.print(shift("VOID","ID","LEFTPAREN") + reduction(f) + shift("RIGHTPAREN") + reduction(s)); :}
 ;
 
 // Production # 08
@@ -158,7 +149,7 @@ fieldstar ::= field:f1 fieldstar:f2 			{: RESULT = 1101; System.out.print(reduct
 
 // Production # 12
 idcommplus ::= COMMA ID idcommplus:i 		{: RESULT = 1201; System.out.print(shift("COMMA", "ID") + reduction(i)); :}// FIXES '+,' PROBLEM
-	      |								{: RESULT = 1202; :}
+	      |									{: RESULT = 1202; :}
 ;
 
 // Production # 13
@@ -181,18 +172,20 @@ prototype ::= type:t ID LEFTPAREN formals:f RIGHTPAREN SEMICOLON			{: RESULT = 1
 ;
 
 // Production # 17
-stmtblock ::= LEFTBRACE variabledeclstar:v stmtstar:s RIGHTBRACE		{: RESULT = 1701; System.out.print(reduction("LEFTBRACE") + shift(v,s) + reduction("RIGHTBRACE")); :}
-	     | LEFTBRACE stmtstar:s RIGHTBRACE								{: RESULT = 1702; System.out.print(reduction("LEFTBRACE") + shift(s) + reduction("RIGHTBRACE")); :}
-	     | LEFTBRACE variabledeclstar:v RIGHTBRACE						{: RESULT = 1703; System.out.print(reduction("LEFTBRACE") + shift(v) + reduction("RIGHTBRACE")); :}
-	     | LEFTBRACE RIGHTBRACE											{: RESULT = 1704; System.out.print(reduction("LEFTBRACE", "RIGHTBRACE"));:}
+stmtblock ::= LEFTBRACE variabledeclstar:v stmtstar:s RIGHTBRACE		{: RESULT = 1701; System.out.print(shift("LEFTBRACE") + reduction(v,s) + shift("RIGHTBRACE")); :}
+	      | LEFTBRACE stmtstar:s RIGHTBRACE								{: RESULT = 1702; System.out.print(shift("LEFTBRACE") + reduction(s) + shift("RIGHTBRACE")); :}
+		  | LEFTBRACE variabledeclstar:v RIGHTBRACE						{: RESULT = 1703; System.out.print(shift("LEFTBRACE") + reduction(v) + shift("RIGHTBRACE")); :}
+	      | LEFTBRACE RIGHTBRACE											{: RESULT = 1704; System.out.print(shift("LEFTBRACE", "RIGHTBRACE"));:}
 ;
 
 // Production # 18 // FIXED '*' PROBLEM
 variabledeclstar ::= variabledecl:v1 variabledeclstar:v2 						{: RESULT = 1801; System.out.print(reduction(v1,v2)); :} 
+			| variabledecl:v1 															{: RESULT = 1802; :}
 ;
 
 // Production # 19 // FIXED '*' PROBLEM
-stmtstar ::= stmt:s1 stmtstar:s2 												{: RESULT = 1901; System.out.print(reduction(s1,s2)); :} 
+stmtstar ::= stmt:s1 stmtstar:s2 												{: RESULT = 1901; System.out.print(reduction(s1,s2)); :}
+			| stmt:s1																	{: RESULT = 1902; :}
 ;
 
 // Production # 20 // FIXES '<>' PROBLEM
@@ -217,7 +210,7 @@ whilestmt ::= WHILE LEFTPAREN expr:e RIGHTPAREN stmt:s						{: RESULT = 2201; Sy
 ;
 
 // Production # 23 // FIXES '<>' PROBLEM
-forstmt ::= FOR LEFTPAREN expr:e1 SEMICOLON expr:e2 SEMICOLON expr:e3 RIGHTPAREN stmt:s 	{: RESULT = 2301; System.out.print(shift("FOR","LEFTPAREN") + reduction(e1) + shift("SEMICOLON") + reduction(e2) + shift("SEMICOLON") + reduction(e3) + shift("RIGHTPAREN") + shift(s)); :} 
+forstmt ::= FOR LEFTPAREN expr:e1 SEMICOLON expr:e2 SEMICOLON expr:e3 RIGHTPAREN stmt:s 	{: RESULT = 2301; System.out.print(shift("FOR","LEFTPAREN") + reduction(e1) + shift("SEMICOLON") + reduction(e2) + shift("SEMICOLON") + reduction(e3) + shift("RIGHTPAREN") + reduction(s)); :} 
 	      | FOR LEFTPAREN expr:e1 SEMICOLON expr:e2 SEMICOLON RIGHTPAREN stmt:s				{: RESULT = 2302; System.out.print(shift("FOR","LEFTPAREN") + reduction(e1) + shift("SEMICOLON") + reduction(e2) + shift("SEMICOLON", "RIGHTPAREN") + shift(s)); :} 
 	      | FOR LEFTPAREN SEMICOLON expr:e1 SEMICOLON expr:e2 RIGHTPAREN stmt:s				{: RESULT = 2303; System.out.print(shift("FOR","LEFTPAREN","SEMICOLON") + reduction(e1) + shift("SEMICOLON") + reduction(e2) + shift("RIGHTPAREN") + shift(s)); :} 
 	      | FOR LEFTPAREN SEMICOLON expr:e1 SEMICOLON RIGHTPAREN stmt:s						{: RESULT = 2304; System.out.print(shift("FOR","LEFTPAREN","SEMICOLON") + reduction(e1) + shift("SEMICOLON", "RIGHTPAREN") + reduction(s)); :} 
@@ -270,9 +263,9 @@ expr ::= lvalue:l ASSIGNOP expr:e									{: RESULT = 2801; System.out.print(red
 
 // Production # 29 // FIXED SR AND RR ISSUES HERE
 lvalue ::= ID LEFTBRACKET expr:e RIGHTBRACKET 					{: RESULT = 2901; System.out.print(shift("ID","LEFTBRACKET") + reduction(e)); :} 
-	  | ID PERIOD ID											{: RESULT = 2902; System.out.print(shift("ID","PERIOD","ID")); :} 
-	  | lvalue:l LEFTBRACKET expr:e RIGHTBRACKET				{: RESULT = 2903; System.out.print(reduction(l) + shift("LEFTBRACKET") + reduction(e) + shift("RIGHTBRACKET")); :} 
-	  | lvalue:l PERIOD ID										{: RESULT = 2904; System.out.print(reduction(l) + shift("PERIOD", "ID")); :} 
+		 | ID PERIOD ID											{: RESULT = 2902; System.out.print(shift("ID","PERIOD","ID")); :} 
+		 | lvalue:l LEFTBRACKET expr:e RIGHTBRACKET				{: RESULT = 2903; System.out.print(reduction(l) + shift("LEFTBRACKET") + reduction(e) + shift("RIGHTBRACKET")); :} 
+		 | lvalue:l PERIOD ID										{: RESULT = 2904; System.out.print(reduction(l) + shift("PERIOD", "ID")); :} 
 ;
 
 // Production # 30

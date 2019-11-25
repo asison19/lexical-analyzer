@@ -1,0 +1,4 @@
+void f(){
+	result = 5.times(4);
+
+}

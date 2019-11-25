@@ -28,27 +28,17 @@ public class Main {
 			reader = new FileReader(infile);
 		}
 		
-		// Actual lexical analysis
-		/*ToyLexer lexer = new ToyLexer(reader);
-		int count = 0;
-		System.out.println("\n********** Start of lexical analysis **********");
-		do {
-			count++;
-		} while (lexer.next_token().sym != 0); // 0 being EOF symbol
-		*/
 		ToyLexer lexer = new ToyLexer(reader);
 		ToyParser parser = new ToyParser(lexer);
-		parser.production_table();
+		System.out.println("********** Start of Syntax Analysis **********");
 		try {
 			parser.parse();
+			System.out.println("[accept]");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("[reject]"); // TODO this goes elsewhere when rejecting input?
+			System.out.println("[reject]"); 
 		}
 		
-		
 		System.out.println("\n********** End of syntax analysis **********");
-		// System.out.println("There were " + count +" tokens in the file:\n" + infile);
-		// lexer.outputTrie();
 	}
 }

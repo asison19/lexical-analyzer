@@ -1,0 +1,11 @@
+********** Start of Syntax Analysis **********
+DOUBLE [shift]
+[reduce 602] 
+ID [shift]
+[reduce 501] 
+SEMICOLON [shift]
+[reduce 401] 
+[reduce 301] [reduce 202] 
+[accept]
+
+********** End of syntax analysis **********

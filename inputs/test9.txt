@@ -1,0 +1,6 @@
+void f() {
+	//in function
+	if (h>w) g=h;
+	else h=g;
+	double a;
+}

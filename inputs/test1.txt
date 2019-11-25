@@ -1,0 +1,1 @@
+void f(double x, double y) { }

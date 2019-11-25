@@ -1,0 +1,4 @@
+void f() {
+	//in function
+	for( ; ; ) x = 1;
+}
