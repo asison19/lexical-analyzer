@@ -32,10 +32,11 @@ ANSI, UTF-8-BOM, UCS-2-BE-BOM, UCS-2-LE-BOM
 Both ANSI, and UTF-8 can work with text (.txt) files.  
 
 ## Screenshots
-"test1.txt" file.
+"test1.txt" file.  
 ![image5](screenshots/image5.png)  
-Default "test20.txt" file.
-![image6](screenshots/image6.png)   
+Default "test20.txt" file.  
+![image6](screenshots/image6.png)  
+ 
 ## Old Lexer Screenshots  
 Default "testAll.txt" file.  
 ![image1](screenshots/image1.png)  
