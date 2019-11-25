@@ -10,17 +10,16 @@ ID [shift]
 [reduce 501] 
 SEMICOLON [shift]
 [reduce 401] 
-ID [shift]
 
 LEFTBRACE [shift]
 RIGHTBRACE [shift]
-[reduce 606] 
+ID [shift]
 ID [shift]
 LEFTPAREN [shift]
 [reduce 802] 
 RIGHTPAREN [shift]
 [reduce 1704] 
-[reduce 701] 
+[reduce 703] 
 DOUBLE [shift]
 [reduce 602] 
 ID [shift]
@@ -28,16 +27,27 @@ ID [shift]
 [reduce 501] 
 SEMICOLON [shift]
 [reduce 401] 
-ID [shift]
 
 LEFTBRACE [shift]
 RIGHTBRACE [shift]
-Syntax error
-Couldn't repair and continue parse
-java.lang.Exception: Can't recover from previous error(s)
-	at java_cup.runtime.lr_parser.report_fatal_error(lr_parser.java:392)
-	at java_cup.runtime.lr_parser.unrecovered_syntax_error(lr_parser.java:539)
-	at java_cup.runtime.lr_parser.parse(lr_parser.java:731)
-	at main.Main.main(Main.java:35)
-instead expected token classes are [STRING, VOID, INT, ID]
-[reject]
+ID [shift]
+ID [shift]
+LEFTPAREN [shift]
+[reduce 802] 
+RIGHTPAREN [shift]
+[reduce 1704] 
+[reduce 703] 
+[reduce 1302] 
+[reduce 1301] [reduce 1102] 
+[reduce 1302] [reduce 1101] 
+[reduce 1301] [reduce 1101] 
+CLASS [shift]
+ID [shift]
+LEFTBRACE [shift]
+[reduce 1101] 
+RIGHTBRACE [shift]
+[reduce 1007] 
+[reduce 303] [reduce 202] 
+[accept]
+
+********** End of syntax analysis **********

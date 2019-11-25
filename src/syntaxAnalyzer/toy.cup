@@ -111,7 +111,7 @@ variable 		::= type:t ID 						{: RESULT = 501; System.out.print(reduction(t)+ "
 				| ID ID								{: RESULT = 502; System.out.print(shift("ID","ID")); :}// added to fix reduce reduce error between lvalue and type
 ;
 
-// Production # 0601
+// Production # 0601 // TODO ID LEFTBRACKET+ RIGHTBRACKET+
 type 			::= INT:n 							{: RESULT = 601; System.out.print(shift("INT")); :}
 				| DOUBLE 							{: RESULT = 602; System.out.print("DOUBLE [shift]\n"); :}
 				| BOOLEAN 							{: RESULT = 603; System.out.print("BOOLEAN [shift]\n"); :}
@@ -123,6 +123,7 @@ type 			::= INT:n 							{: RESULT = 601; System.out.print(shift("INT")); :}
 // Production # 07
 functiondecl 	::= type:t ID LEFTPAREN formals:f RIGHTPAREN stmtblock:s	{: RESULT = 701; System.out.print(reduction(t) + shift("ID","LEFTPAREN") + reduction(f) + "RIGHTPAREN [shift]\n" + reduction(s)); :}
 				| VOID ID LEFTPAREN formals:f RIGHTPAREN stmtblock:s		{: RESULT = 702; System.out.print(shift("VOID","ID","LEFTPAREN") + reduction(f) + shift("RIGHTPAREN") + reduction(s)); :}
+				| ID ID LEFTPAREN formals:f RIGHTPAREN stmtblock:s			{: RESULT = 703; System.out.print(shift("ID","ID","LEFTPAREN") + reduction(f) + shift("RIGHTPAREN") + reduction(s)); :}
 ;
 
 // Production # 08
@@ -148,6 +149,7 @@ classdecl 		::= CLASS ID EXTENDS ID IMPLEMENTS ID idcommplus:i LEFTBRACE fieldst
 
 // Production # 11
 fieldstar ::= field:f1 fieldstar:f2 			{: RESULT = 1101; System.out.print(reduction(f1,f2)); :}// FIXES '*' PROBLEM
+			| field:f1							{: RESULT = 1102; System.out.print(reduction(f1)); :}
 ;
 
 // Production # 12
@@ -183,12 +185,12 @@ stmtblock ::= LEFTBRACE variabledeclstar:v stmtstar:s RIGHTBRACE		{: RESULT = 17
 
 // Production # 18 // FIXED '*' PROBLEM
 variabledeclstar ::= variabledecl:v1 variabledeclstar:v2 						{: RESULT = 1801; System.out.print(reduction(v1,v2)); :} 
-			| variabledecl:v1 															{: RESULT = 1802; :}
+			| variabledecl:v1 													{: RESULT = 1802; System.out.print(reduction(v1)); :}
 ;
 
 // Production # 19 // FIXED '*' PROBLEM
 stmtstar ::= stmt:s1 stmtstar:s2 												{: RESULT = 1901; System.out.print(reduction(s1,s2)); :}
-			| stmt:s1																	{: RESULT = 1902; :}
+			| stmt:s1															{: RESULT = 1902; System.out.print(reduction(s1)); :}
 ;
 
 // Production # 20 // FIXES '<>' PROBLEM
