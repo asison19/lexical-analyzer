@@ -74,7 +74,7 @@ precedence left LESS, LESSEQUAL, GREATER, GREATEREQUAL;
 precedence left PLUS, MINUS;
 precedence left MULTIPLICATION, DIVISION, MOD;
 precedence left NOT;
-precedence left ID;
+// precedence left ID;
 precedence left LEFTBRACKET, PERIOD;
 precedence left ELSE; // FIXES SR DANGLING ELSE PROBLEM
 
@@ -99,15 +99,15 @@ declplus 		::= decl:d declplus:d2 				{: RESULT = 201; System.out.print(reductio
 ;
 
 // Production # 0301 0302 0303
-decl 			::= variabledecl:v 					{: RESULT = 301; System.out.print(reduction(v)); :}
+decl 			::= variable:v SEMICOLON  			{: RESULT = 301; System.out.print(reduction(v)); :}
 				| functiondecl:f					{: RESULT = 302; System.out.print(reduction(f)); :}
 				| classdecl:c						{: RESULT = 303; System.out.print(reduction(c)); :}
 				| interfacedecl:i					{: RESULT = 304; System.out.print(reduction(i)); :}
 ;
 
-// Production # 0401
-variabledecl 	::= variable:v SEMICOLON 			{: RESULT = 401; System.out.print(reduction(v) + shift("SEMICOLON")); :}
-;
+// Production # 0401 // removed to solve S/R variable and variabledeclstar under ID
+//variabledecl 	::= variable:v SEMICOLON 			{: RESULT = 401; System.out.print(reduction(v) + shift("SEMICOLON")); :}
+//;
 
 // Production # 0501
 variable 		::= type:t ID 						{: RESULT = 501; System.out.print(reduction(t)+ "ID [shift]\n"); :}
@@ -161,8 +161,8 @@ idcommplus ::= COMMA ID idcommplus:i 		{: RESULT = 1201; System.out.print(shift(
 ;
 
 // Production # 13
-field ::= variabledecl:v					{: RESULT = 1301; System.out.print(reduction(v)); :}
-	| functiondecl:f						{: RESULT = 1302; System.out.print(reduction(f)); :}
+field ::= variable:v SEMICOLON // variabledecl:v		{: RESULT = 1301; System.out.print(reduction(v)); :}
+	| functiondecl:f									{: RESULT = 1302; System.out.print(reduction(f)); :}
 ;
 
 // Production # 14
@@ -187,9 +187,9 @@ stmtblock ::= LEFTBRACE variabledeclstar:v stmtstar:s RIGHTBRACE		{: RESULT = 17
 	      | LEFTBRACE RIGHTBRACE											{: RESULT = 1704; System.out.print(shift("LEFTBRACE", "RIGHTBRACE"));:}
 ;
 
-// Production # 18 // FIXED '*' PROBLEM
-variabledeclstar ::= variabledecl:v1 variabledeclstar:v2 						{: RESULT = 1801; System.out.print(reduction(v1,v2)); :} 
-			| variabledecl:v1 													{: RESULT = 1802; System.out.print(reduction(v1)); :}
+// Production # 18 // FIXED '*' PROBLEM // made right recursive to fix S/R conflict
+variabledeclstar ::= variabledeclstar:v1 variable:v2 SEMICOLON  		{: RESULT = 1801; System.out.print(reduction(v1,v2)); :} 
+			| variable:v SEMICOLON // variabledecl:v1 					{: RESULT = 1802; System.out.print(reduction(v1)); :}
 ;
 
 // Production # 19 // FIXED '*' PROBLEM

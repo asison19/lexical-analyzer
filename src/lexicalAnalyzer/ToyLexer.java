@@ -6,7 +6,6 @@ Andrew Sison, and Zach Martin.
 */
 // User Code
 package lexicalAnalyzer;
-import token.*;
 import syntaxAnalyzer.*;
 
 import java.io.FileNotFoundException;
@@ -886,7 +885,7 @@ try {
             // fall through
           case 77: break;
           case 25: 
-            { t_flag = TokenDefinitions.IF; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IF);
+            { t_flag = ToyParserSym.IF; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IF);
             } 
             // fall through
           case 78: break;
@@ -921,112 +920,112 @@ try {
             // fall through
           case 84: break;
           case 32: 
-            { t_flag = TokenDefinitions.FOR; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.FOR);
+            { t_flag = ToyParserSym.FOR; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.FOR);
             } 
             // fall through
           case 85: break;
           case 33: 
-            { t_flag = TokenDefinitions.NEW; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEW);
+            { t_flag = ToyParserSym.NEW; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEW);
             } 
             // fall through
           case 86: break;
           case 34: 
-            { t_flag = TokenDefinitions.INT; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INT);
+            { t_flag = ToyParserSym.INT; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INT);
             } 
             // fall through
           case 87: break;
           case 35: 
-            { t_flag = TokenDefinitions.BOOLEANCONSTANT;return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ID);
+            { t_flag = ToyParserSym.BOOLEANCONSTANT;return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ID);
             } 
             // fall through
           case 88: break;
           case 36: 
-            { t_flag = TokenDefinitions.THIS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.THIS);
+            { t_flag = ToyParserSym.THIS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.THIS);
             } 
             // fall through
           case 89: break;
           case 37: 
-            { t_flag = TokenDefinitions.ELSE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ELSE);
+            { t_flag = ToyParserSym.ELSE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.ELSE);
             } 
             // fall through
           case 90: break;
           case 38: 
-            { t_flag = TokenDefinitions.NULL; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NULL);
+            { t_flag = ToyParserSym.NULL; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NULL);
             } 
             // fall through
           case 91: break;
           case 39: 
-            { t_flag = TokenDefinitions.VOID; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.VOID);
+            { t_flag = ToyParserSym.VOID; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.VOID);
             } 
             // fall through
           case 92: break;
           case 40: 
-            { t_flag = TokenDefinitions.BOOLEANCONSTANT; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEANCONSTANT);
+            { t_flag = ToyParserSym.BOOLEANCONSTANT; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEANCONSTANT);
             } 
             // fall through
           case 93: break;
           case 41: 
-            { t_flag = TokenDefinitions.BREAK; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BREAK);
+            { t_flag = ToyParserSym.BREAK; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BREAK);
             } 
             // fall through
           case 94: break;
           case 42: 
-            { t_flag = TokenDefinitions.CLASS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.CLASS);
+            { t_flag = ToyParserSym.CLASS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.CLASS);
             } 
             // fall through
           case 95: break;
           case 43: 
-            { t_flag = TokenDefinitions.WHILE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.WHILE);
+            { t_flag = ToyParserSym.WHILE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.WHILE);
             } 
             // fall through
           case 96: break;
           case 44: 
-            { t_flag = TokenDefinitions.RETURN; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RETURN);
+            { t_flag = ToyParserSym.RETURN; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.RETURN);
             } 
             // fall through
           case 97: break;
           case 45: 
-            { t_flag = TokenDefinitions.READLN; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.READLN);
+            { t_flag = ToyParserSym.READLN; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.READLN);
             } 
             // fall through
           case 98: break;
           case 46: 
-            { t_flag = TokenDefinitions.DOUBLE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DOUBLE);
+            { t_flag = ToyParserSym.DOUBLE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.DOUBLE);
             } 
             // fall through
           case 99: break;
           case 47: 
-            { t_flag = TokenDefinitions.STRING; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.STRING);
+            { t_flag = ToyParserSym.STRING; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.STRING);
             } 
             // fall through
           case 100: break;
           case 48: 
-            { t_flag = TokenDefinitions.EXTENDS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.EXTENDS);
+            { t_flag = ToyParserSym.EXTENDS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.EXTENDS);
             } 
             // fall through
           case 101: break;
           case 49: 
-            { t_flag = TokenDefinitions.BOOLEAN;  return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEAN);
+            { t_flag = ToyParserSym.BOOLEAN;  return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.BOOLEAN);
             } 
             // fall through
           case 102: break;
           case 50: 
-            { t_flag = TokenDefinitions.PRINTLN; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PRINTLN);
+            { t_flag = ToyParserSym.PRINTLN; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.PRINTLN);
             } 
             // fall through
           case 103: break;
           case 51: 
-            { t_flag = TokenDefinitions.NEWARRAY; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEWARRAY);
+            { t_flag = ToyParserSym.NEWARRAY; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.NEWARRAY);
             } 
             // fall through
           case 104: break;
           case 52: 
-            { t_flag = TokenDefinitions.INTERFACE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INTERFACE);
+            { t_flag = ToyParserSym.INTERFACE; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.INTERFACE);
             } 
             // fall through
           case 105: break;
           case 53: 
-            { t_flag = TokenDefinitions.IMPLEMENTS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IMPLEMENTS);
+            { t_flag = ToyParserSym.IMPLEMENTS; return new java_cup.runtime.Symbol(syntaxAnalyzer.ToyParserSym.IMPLEMENTS);
             } 
             // fall through
           case 106: break;
