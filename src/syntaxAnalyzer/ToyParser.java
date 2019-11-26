@@ -1202,7 +1202,7 @@ class CUP$ToyParser$actions {
 		int vleft = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).left;
 		int vright = ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).right;
 		Object v = (Object)((java_cup.runtime.Symbol) CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)).value;
-
+		 RESULT = 1301; System.out.print(reduction(v)); 
               CUP$ToyParser$result = parser.getSymbolFactory().newSymbol("field",8, ((java_cup.runtime.Symbol)CUP$ToyParser$stack.elementAt(CUP$ToyParser$top-1)), ((java_cup.runtime.Symbol)CUP$ToyParser$stack.peek()), RESULT);
             }
           return CUP$ToyParser$result;

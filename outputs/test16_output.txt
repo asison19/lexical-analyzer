@@ -1,10 +1,11 @@
+No inputed file detected, using default file:
+D:\eclipse\java-oxygen\eclipse-workspace\lexical-analyzer\bin\..\inputs\test16.txt
+
 ********** Start of Syntax Analysis **********
 DOUBLE [shift]
 [reduce 602] 
 ID [shift]
 [reduce 501] 
-SEMICOLON [shift]
-[reduce 401] 
 [reduce 301] [reduce 202] 
 [accept]
 

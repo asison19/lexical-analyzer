@@ -74,7 +74,7 @@ precedence left LESS, LESSEQUAL, GREATER, GREATEREQUAL;
 precedence left PLUS, MINUS;
 precedence left MULTIPLICATION, DIVISION, MOD;
 precedence left NOT;
-// precedence left ID;
+precedence left ID;
 precedence left LEFTBRACKET, PERIOD;
 precedence left ELSE; // FIXES SR DANGLING ELSE PROBLEM
 
@@ -161,7 +161,7 @@ idcommplus ::= COMMA ID idcommplus:i 		{: RESULT = 1201; System.out.print(shift(
 ;
 
 // Production # 13
-field ::= variable:v SEMICOLON // variabledecl:v		{: RESULT = 1301; System.out.print(reduction(v)); :}
+field ::= variable:v SEMICOLON 							{: RESULT = 1301; System.out.print(reduction(v)); :}
 	| functiondecl:f									{: RESULT = 1302; System.out.print(reduction(f)); :}
 ;
 

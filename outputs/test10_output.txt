@@ -8,8 +8,6 @@ BOOLEAN [shift]
 ID [shift]
 
 [reduce 501] 
-SEMICOLON [shift]
-[reduce 401] 
 
 LEFTBRACE [shift]
 RIGHTBRACE [shift]
@@ -25,8 +23,6 @@ DOUBLE [shift]
 ID [shift]
 
 [reduce 501] 
-SEMICOLON [shift]
-[reduce 401] 
 
 LEFTBRACE [shift]
 RIGHTBRACE [shift]
